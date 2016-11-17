@@ -1,0 +1,4 @@
+language: ruby
+rvm:
+  - 2.3.2
+# sudo: false Leaving this commented out, as we may need this to install the correct python version etc.
