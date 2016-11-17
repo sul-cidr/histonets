@@ -16,6 +16,9 @@ Run the application
 $ rails s
 ```
 
+## Project Status
+[![codecov](https://codecov.io/gh/sul-cidr/histonets/branch/master/graph/badge.svg)](https://codecov.io/gh/sul-cidr/histonets)
+
 ## Running the tests
 
 Run the tests
