@@ -97,3 +97,14 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+if ENV['COVERAGE'] || ENV['CI']
+  require 'simplecov'
+  require 'codecov' if ENV['CI']
+
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+  SimpleCov.start do
+    add_filter '/spec/'
+  end
+  SimpleCov.coverage_dir 'public/coverage'
+end
