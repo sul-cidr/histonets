@@ -9,6 +9,13 @@ Install the Ruby dependencies
 $ bundle install
 ```
 
+Histonets uses [riiif](https://github.com/curationexperts/riiif) for [IIIF image api](http://iiif.io/api/image/2.1/) support. This requires `imagemagick`. To install on OSX:
+
+```sh
+# With options for pdf, tiff, and jp2 respectively (not necessarily needed)
+$ brew install imagemagick --with-ghostscript --with-tiff --with-jp2
+```
+
 ## Running the application
 
 Run the application

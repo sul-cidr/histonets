@@ -122,6 +122,8 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    riiif (0.4.1)
+      rails (> 3.2.0)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -192,6 +194,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
+  riiif
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
   sqlite3
