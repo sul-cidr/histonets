@@ -39,6 +39,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'
   gem 'codecov', :require => false
+  gem 'teaspoon-jasmine'
 end
 
 group :development do

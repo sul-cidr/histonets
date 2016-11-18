@@ -1,0 +1,2 @@
+
+task default: [:teaspoon, :spec]
