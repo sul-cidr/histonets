@@ -1,4 +1,5 @@
 # histonets
+[![Build Status](https://travis-ci.org/sul-cidr/histonets.svg?branch=master)](https://travis-ci.org/sul-cidr/histonets) | [![codecov](https://codecov.io/gh/sul-cidr/histonets/branch/master/graph/badge.svg)](https://codecov.io/gh/sul-cidr/histonets)
 
 Histonets is an application to convert images of scanned maps into digital networks.
 
@@ -22,9 +23,6 @@ Run the application
 ```sh
 $ rails s
 ```
-
-## Project Status
-[![codecov](https://codecov.io/gh/sul-cidr/histonets/branch/master/graph/badge.svg)](https://codecov.io/gh/sul-cidr/histonets)
 
 ## Running the tests
 
