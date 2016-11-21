@@ -26,3 +26,6 @@ config/environments/*.local.yml
 
 # for rubocop local
 .rubocop-https*
+
+# Ignore node_modules
+node_modules

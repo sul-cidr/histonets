@@ -1,0 +1,16 @@
+{
+  "name": "histonets",
+  "version": "0.0.0",
+  "main": "",
+  "repository": "git@github.com:sul-cidr/histonets.git",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^3.10.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.7.1"
+  }
+}
