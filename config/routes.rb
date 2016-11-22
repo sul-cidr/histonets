@@ -5,5 +5,8 @@ Rails.application.routes.draw do
   mount Riiif::Engine => '/image-service', as: 'riiif'
 
   # Resourceful routes for CollectionTemplates
-  resources :collection_templates, only: [:new, :create, :show, :index]
+  resources :collection_templates, only: [:new, :create, :show, :index, :destroy] do
+    resources :build,
+              only: [:show, :update], controller: 'collection_templates/build'
+  end
 end
