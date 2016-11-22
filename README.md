@@ -10,6 +10,15 @@ Install the Ruby dependencies
 $ bundle install
 ```
 
+Install node, npm, and yarn
+```sh
+# Installing Node and npm see: https://nodejs.org/en/download/ or
+$ brew install node
+
+# Installing yarn
+$ npm install -g yarn
+```
+
 Histonets uses [riiif](https://github.com/curationexperts/riiif) for [IIIF image api](http://iiif.io/api/image/2.1/) support. This requires `imagemagick`. To install on OSX:
 
 ```sh
@@ -29,4 +38,9 @@ $ rails s
 Run the tests
 ```sh
 $ bundle exec rake
+```
+
+Run the JavaScript linting
+```sh
+$ node_modules/.bin/eslint ./
 ```
