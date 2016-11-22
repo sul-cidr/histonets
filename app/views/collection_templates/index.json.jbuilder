@@ -1,0 +1,1 @@
+json.array! @collection_templates, partial: 'collection_templates/collection_template', as: :collection_template
