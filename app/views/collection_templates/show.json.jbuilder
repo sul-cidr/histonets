@@ -1,0 +1,1 @@
+json.partial! "collection_templates/collection_template", collection_template: @collection_template

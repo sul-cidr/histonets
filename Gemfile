@@ -34,6 +34,8 @@ gem 'config'
 
 gem 'riiif' # IIIF image server
 
+gem 'wicked' # For step by step form creation
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -44,6 +46,8 @@ end
 
 group :test do
   gem 'factory_girl_rails', '~> 4.0'
+  gem 'rails-controller-testing'
+  gem 'capybara'
 end
 
 group :development do

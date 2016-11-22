@@ -1,0 +1,13 @@
+Select an image
+
+<%= form_for @collection_template, method: :put, url: wizard_path do |f| %>
+  <% if f.object.errors.any? %>
+    <div class="error_messages">
+      <% f.object.errors.full_messages.each do |error| %>
+        <p><%= error %></p>
+      <% end %>
+    </div>
+  <% end %>
+  <%= f.collection_select :image_id, @collection_template.collection.images, :id, :file_name %>
+  <%= f.submit 'Next Step' %>
+<% end %>

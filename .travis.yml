@@ -1,4 +1,6 @@
 language: ruby
 rvm:
   - 2.3.2
+before_script:
+  - RAILS_ENV=test bundle exec rake db:migrate
 # sudo: false Leaving this commented out, as we may need this to install the correct python version etc.

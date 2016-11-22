@@ -1,0 +1,13 @@
+Select a collection
+
+<%= form_for @collection_template, method: :put, url: wizard_path do |f| %>
+  <% if f.object.errors.any? %>
+    <div class="error_messages">
+      <% f.object.errors.full_messages.each do |error| %>
+        <p><%= error %></p>
+      <% end %>
+    </div>
+  <% end %>
+  <%= f.collection_select :collection_id, Collection.all, :id, :name %>
+  <%= f.submit 'Next Step' %>
+<% end %>

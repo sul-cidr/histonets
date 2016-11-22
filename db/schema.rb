@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161121190141) do
+ActiveRecord::Schema.define(version: 20161122140745) do
+
+  create_table "collection_templates", force: :cascade do |t|
+    t.integer  "collection_id"
+    t.text     "crop_bounds"
+    t.text     "image_clean"
+    t.text     "image_paths"
+    t.text     "image_graph"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "image_id"
+    t.index ["collection_id"], name: "index_collection_templates_on_collection_id"
+    t.index ["image_id"], name: "index_collection_templates_on_image_id"
+  end
 
   create_table "collections", force: :cascade do |t|
     t.string   "name"
