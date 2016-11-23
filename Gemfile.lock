@@ -41,6 +41,11 @@ GEM
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
     arel (7.1.4)
+    autoprefixer-rails (6.5.3)
+      execjs
+    bootstrap (4.0.0.alpha5)
+      autoprefixer-rails (>= 6.0.3)
+      sass (>= 3.4.19)
     builder (3.2.2)
     byebug (9.0.6)
     capybara (2.10.1)
@@ -212,6 +217,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap (>= 4.0.0.alpha5, < 5)
   byebug
   capybara
   codecov
