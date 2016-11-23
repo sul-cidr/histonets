@@ -8,6 +8,6 @@ Select a collection
       <% end %>
     </div>
   <% end %>
-  <%= f.collection_select :collection_id, Collection.all, :id, :name %>
-  <%= f.submit 'Next Step' %>
+  <%= f.collection_select :collection_id, Collection.all, :id, :name, {}, {class: 'custom-select'} %>
+  <%= f.submit 'Next Step', class: 'btn btn-primary' %>
 <% end %>
