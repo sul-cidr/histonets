@@ -36,6 +36,13 @@ gem 'riiif' # IIIF image server
 
 gem 'wicked' # For step by step form creation
 
+gem 'bootstrap', '>= 4.0.0.alpha5', '< 5'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0' # Required for tooltips/popover for twbs
+end
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

@@ -8,6 +8,6 @@ Select an image
       <% end %>
     </div>
   <% end %>
-  <%= f.collection_select :image_id, @collection_template.collection.images, :id, :file_name %>
-  <%= f.submit 'Next Step' %>
+  <%= f.collection_select :image_id, @collection_template.collection.images, :id, :file_name, {}, {class: 'custom-select'} %>
+  <%= f.submit 'Next Step', class: 'btn btn-primary' %>
 <% end %>
