@@ -26,6 +26,12 @@ Histonets uses [riiif](https://github.com/curationexperts/riiif) for [IIIF image
 $ brew install imagemagick --with-ghostscript --with-tiff --with-jp2
 ```
 
+Install the [Python library `histonets`](https://github.com/sul-cidr/histonets-cv). Developers may want to install this into a [virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/).
+
+```sh
+$ pip install -r requirements.txt
+```
+
 ## Running the application
 
 Run the application
