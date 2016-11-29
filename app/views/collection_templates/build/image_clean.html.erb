@@ -1,0 +1,18 @@
+Clean image
+
+<%= form_for @collection_template, method: :put, url: wizard_path do |f| %>
+  <% if f.object.errors.any? %>
+    <div class="error_messages">
+      <% f.object.errors.full_messages.each do |error| %>
+        <p><%= error %></p>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.fields_for :image_clean do |builder| %>
+      <%= builder.label :image_clean, 'Contrast' %>
+      <%= builder.range_field :contrast, in: -100..100 %>
+    <% end %>
+  </div>
+  <%= f.submit 'Next Step', class: 'btn btn-primary' %>
+<% end %>

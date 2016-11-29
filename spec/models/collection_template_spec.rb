@@ -10,4 +10,15 @@ RSpec.describe CollectionTemplate, type: :model do
   it 'can have an image' do
     expect(create(:collection_template_with_image).image).to be_an Image
   end
+  describe '.form_steps' do
+    it 'has implemented steps' do
+      expect(described_class.form_steps).to contain_exactly(
+        *%w(
+          select_collection
+          select_image
+          image_clean
+        )
+      )
+    end
+  end
 end

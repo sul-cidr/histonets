@@ -40,6 +40,8 @@ class CollectionTemplates::BuildController < ApplicationController
                              [:collection_id]
                            when 'select_image'
                              [:image_id]
+                           when 'image_clean'
+                             { image_clean: [:contrast] }
                            end
     params.require(:collection_template)
           .permit(permitted_attributes).merge(form_step: step)
