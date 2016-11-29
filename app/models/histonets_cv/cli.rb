@@ -8,6 +8,16 @@ module HistonetsCv
 
     delegate :logger, to: :Rails
 
+    attr_reader :file_name
+
+    def initialize(file_name = '')
+      @file_name = file_name
+    end
+
+    def contrast(value)
+      execute("contrast #{value} #{input} #{output('contrast')}")
+    end
+
     def help
       execute('--help')
     end
@@ -22,6 +32,16 @@ module HistonetsCv
       benchmark("Histonet excecuted #{command}") do
         `histonets #{command}`
       end
+    end
+
+    def input
+      "file://#{Settings.IMAGE_PATH}/#{file_name}"
+    end
+
+    def output(action)
+      "-o #{Settings.IMAGE_PATH}/"\
+      "#{File.basename(file_name, File.extname(file_name))}_#{action}_tmp"\
+      "#{File.extname(file_name)}"
     end
   end
 end
