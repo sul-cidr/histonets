@@ -13,6 +13,8 @@ RSpec.describe 'Collection Template Builder', type: :feature do
       click_link 'Build a Collection Template'
       click_button 'Next Step'
       click_button 'Next Step'
+      expect(page).to have_css 'body', text: 'Clean image'
+      click_button 'Next Step'
       # Just a basic show page with some json rendered
       expect(page).to have_css 'body', text: '{"id":'
     end
@@ -20,6 +22,7 @@ RSpec.describe 'Collection Template Builder', type: :feature do
       expect do
         visit new_collection_template_path
         click_link 'Build a Collection Template'
+        click_button 'Next Step'
         click_button 'Next Step'
         click_button 'Next Step'
       end.to change { CollectionTemplate.count }.by(1)
