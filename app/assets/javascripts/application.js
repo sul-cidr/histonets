@@ -15,4 +15,7 @@
 //= require turbolinks
 //= require tether
 //= require bootstrap-sprockets
+//= require react-with-addons
+//= require redux
+//= require react-redux
 //= require_tree .
