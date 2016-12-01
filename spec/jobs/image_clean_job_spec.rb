@@ -10,7 +10,7 @@ RSpec.describe ImageCleanJob, type: :job do
   describe '#perform' do
     let(:collection_template) do
       create(:collection_template_with_image,
-             image_clean: '{"contrast"=>"42"}')
+             image_clean: { 'contrast' => '42' })
     end
     it 'calls the HistonetsCv::Cli contrast' do
       expect(cli_instance).to receive(:contrast).with('42')

@@ -8,9 +8,7 @@ class ImageCleanJob < ApplicationJob
   def perform(collection_template)
     # TODO: The ImageClean object will provide a better serialization here. This
     # is a stopgap
-    contrast = JSON.parse(
-      collection_template.image_clean.gsub('=>', ':')
-    )['contrast']
+    contrast = collection_template.image_clean['contrast']
     HistonetsCv::Cli.new(collection_template.image.file_name).contrast(contrast)
   end
 end
