@@ -42,6 +42,8 @@ class CollectionTemplates::BuildController < ApplicationController
                              [:image_id]
                            when 'image_clean'
                              { image_clean: [:contrast] }
+                           when 'crop_image'
+                             [:crop_bounds]
                            end
     params.require(:collection_template)
           .permit(permitted_attributes).merge(form_step: step)

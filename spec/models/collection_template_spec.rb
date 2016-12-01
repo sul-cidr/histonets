@@ -16,6 +16,7 @@ RSpec.describe CollectionTemplate, type: :model do
         *%w(
           select_collection
           select_image
+          crop_image
           image_clean
         )
       )
