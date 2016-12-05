@@ -26,6 +26,15 @@ class CollectionTemplate < ApplicationRecord
 
   attr_accessor :form_step
 
+  def image_clean_to_formal_json
+    image_clean.map { |k, v| { action: k, options: { value: v.to_i } } }.to_json
+  end
+
+  def cleaned_image
+    "#{image.file_name_no_extension}_"\
+    "#{Digest::MD5.hexdigest(image_clean_to_formal_json)}_tmp"
+  end
+
   # TODO: Add step by step validations here
   # Step by step validations
   # An example

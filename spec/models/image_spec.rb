@@ -19,4 +19,14 @@ RSpec.describe Image, type: :model do
         .to eq 'awesome.jpg'
     end
   end
+  describe '#file_name_no_extension' do
+    it 'returns the filename without an extension' do
+      expect(create(:image).file_name_no_extension).to match(/eddie[0-9]*/)
+    end
+  end
+  describe '#extension' do
+    it 'returns the filename extension' do
+      expect(create(:image).extension).to eq '.jpg'
+    end
+  end
 end
