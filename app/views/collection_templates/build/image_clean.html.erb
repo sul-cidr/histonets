@@ -8,11 +8,25 @@ Clean image
       <% end %>
     </div>
   <% end %>
-  <div class="form-group">
-    <%= f.fields_for :image_clean do |builder| %>
-      <%= builder.label :image_clean, 'Contrast' %>
-      <%= builder.range_field :contrast, in: 0..200 %>
-    <% end %>
-  </div>
+  <%= f.fields_for :image_clean do |builder| %>
+    <div class="form-group row">
+      <%= builder.label :image_clean, 'Contrast', class: 'col-sm-2 col-form-label' %>
+      <div class="col-sm-10">
+        <%= builder.range_field :contrast, in: 0..200 %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= builder.label :image_clean, 'Brightness', class: 'col-sm-2 col-form-label' %>
+      <div class="col-sm-10">
+        <%= builder.range_field :brightness, in: 0..200 %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= builder.label :image_clean, 'Smooth', class: 'col-sm-2 col-form-label' %>
+      <div class="col-sm-10">
+        <%= builder.range_field :smooth, in: 0..100, value: 0 %>
+      </div>
+    </div>
+  <% end %>
   <%= f.submit 'Next Step', class: 'btn btn-primary' %>
 <% end %>

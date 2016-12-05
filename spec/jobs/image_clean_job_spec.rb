@@ -13,7 +13,8 @@ RSpec.describe ImageCleanJob, type: :job do
              image_clean: { 'contrast' => '42' })
     end
     it 'calls the HistonetsCv::Cli contrast' do
-      expect(cli_instance).to receive(:contrast).with('42')
+      expect(cli_instance).to receive(:pipeline)
+        .with('[{"action":"contrast","options":{"value":42}}]')
       subject.perform(collection_template)
     end
   end

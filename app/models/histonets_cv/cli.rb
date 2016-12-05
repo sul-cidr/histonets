@@ -18,6 +18,15 @@ module HistonetsCv
       execute("contrast #{value} #{input} #{output('contrast')}")
     end
 
+    def brightness(value)
+      execute("brightness #{value} #{input} #{output('brightness')}")
+    end
+
+    def pipeline(actions)
+      execute("pipeline '#{actions}' #{input} "\
+        "#{output(Digest::MD5.hexdigest(actions))}")
+    end
+
     def help
       execute('--help')
     end
@@ -29,6 +38,7 @@ module HistonetsCv
     private
 
     def execute(command)
+      logger.info("Executing command #{command}")
       benchmark("Histonet excecuted #{command}") do
         `histonets #{command}`
       end
@@ -38,9 +48,9 @@ module HistonetsCv
       "file://#{Settings.IMAGE_PATH}/#{file_name}"
     end
 
-    def output(action)
+    def output(hash)
       "-o #{Settings.IMAGE_PATH}/"\
-      "#{File.basename(file_name, File.extname(file_name))}_#{action}_tmp"\
+      "#{File.basename(file_name, File.extname(file_name))}_#{hash}_tmp"\
       "#{File.extname(file_name)}"
     end
   end

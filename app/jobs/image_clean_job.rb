@@ -6,9 +6,7 @@ class ImageCleanJob < ApplicationJob
   queue_as :default
 
   def perform(collection_template)
-    # TODO: The ImageClean object will provide a better serialization here. This
-    # is a stopgap
-    contrast = collection_template.image_clean['contrast']
-    HistonetsCv::Cli.new(collection_template.image.file_name).contrast(contrast)
+    HistonetsCv::Cli.new(collection_template.image.file_name)
+                    .pipeline(collection_template.image_clean_to_formal_json)
   end
 end
