@@ -7,6 +7,8 @@ class CollectionTemplate < ApplicationRecord
   belongs_to :image, optional: true
   has_many :image_templates
 
+  serialize :image_clean, Hash
+
   cattr_accessor :form_steps do
     %w(
       select_collection
