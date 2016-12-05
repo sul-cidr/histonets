@@ -11,7 +11,7 @@ Clean image
   <div class="form-group">
     <%= f.fields_for :image_clean do |builder| %>
       <%= builder.label :image_clean, 'Contrast' %>
-      <%= builder.range_field :contrast, in: -100..100 %>
+      <%= builder.range_field :contrast, in: 0..200 %>
     <% end %>
   </div>
   <%= f.submit 'Next Step', class: 'btn btn-primary' %>
