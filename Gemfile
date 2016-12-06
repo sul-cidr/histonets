@@ -42,6 +42,8 @@ gem 'bootstrap', '>= 4.0.0.alpha5', '< 5'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0' # Required for tooltips/popover for twbs
+  gem 'rails-assets-leaflet-iiif', '~> 1.0'
+  gem 'rails-assets-leaflet', '~> 1.0'
 end
 
 gem 'sidekiq'
