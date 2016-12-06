@@ -54,12 +54,14 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'codecov', :require => false
   gem 'teaspoon-jasmine'
+  gem 'poltergeist'
 end
 
 group :test do
   gem 'factory_girl_rails', '~> 4.0'
   gem 'rails-controller-testing'
   gem 'capybara'
+  gem 'database_cleaner'
 end
 
 group :development do
