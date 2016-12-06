@@ -15,12 +15,12 @@ class CollectionTemplate < ApplicationRecord
       select_image
       crop_image
       image_clean
+      create_image_templates
     )
   end
 
   ##
   # TODO: Unimplemented form steps to add:
-  # create_image_templates
   # create_image_paths
   # view_image_graph
 
