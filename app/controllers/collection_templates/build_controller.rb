@@ -45,7 +45,12 @@ class CollectionTemplates::BuildController < ApplicationController
                            when 'select_image'
                              [:image_id]
                            when 'image_clean'
-                             { image_clean: [:contrast, :brightness, :smooth] }
+                             {
+                               image_clean: [
+                                 :denoise, :equalize, :brightness, :contrast,
+                                 :smooth
+                               ]
+                             }
                            when 'crop_image'
                              [:crop_bounds]
                            end
