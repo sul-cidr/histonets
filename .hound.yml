@@ -4,6 +4,7 @@ ruby:
 
 scss:
   enabled: true
+  config_file: .scss-lint.yml
 
 eslint:
   enabled: true
