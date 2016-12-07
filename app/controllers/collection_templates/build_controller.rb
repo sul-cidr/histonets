@@ -48,7 +48,7 @@ class CollectionTemplates::BuildController < ApplicationController
                              {
                                image_clean: [
                                  :denoise, :equalize, :brightness, :contrast,
-                                 :smooth
+                                 :smooth, :posterize
                                ]
                              }
                            when 'crop_image'
