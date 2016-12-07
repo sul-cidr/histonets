@@ -1,3 +1,4 @@
+/* global window, React, ReactDOM */
 // Teaspoon includes some support files, but you can use anything from your own support path too.
 // require support/jasmine-jquery-1.7.0
 // require support/jasmine-jquery-2.0.0
@@ -30,3 +31,6 @@
 // the configuration and use this file as a manifest.
 //
 // For more information: http://github.com/modeset/teaspoon
+window.React = React;
+window.TestUtils = React.addons.TestUtils;
+window.ReactDOM = ReactDOM;

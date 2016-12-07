@@ -14,6 +14,7 @@ RSpec.describe CollectionTemplate, type: :model do
     it 'has implemented steps' do
       expect(described_class.form_steps).to contain_exactly(
         *%w(
+          create_image_templates
           select_collection
           select_image
           crop_image
