@@ -10,9 +10,15 @@ Clean image
   <% end %>
   <%= f.fields_for :image_clean do |builder| %>
     <div class="form-group row">
-      <%= builder.label :image_clean, 'Contrast', class: 'col-sm-2 col-form-label' %>
+      <%= builder.label :image_clean, 'Denoise', class: 'col-sm-2 col-form-label' %>
       <div class="col-sm-10">
-        <%= builder.range_field :contrast, in: 0..200 %>
+        <%= builder.range_field :denoise, in: 0..100, value: 0 %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= builder.label :image_clean, 'Equalize', class: 'col-sm-2 col-form-label' %>
+      <div class="col-sm-10">
+        <%= builder.range_field :equalize, in: 0..100, value: 0 %>
       </div>
     </div>
     <div class="form-group row">
@@ -22,9 +28,21 @@ Clean image
       </div>
     </div>
     <div class="form-group row">
+      <%= builder.label :image_clean, 'Contrast', class: 'col-sm-2 col-form-label' %>
+      <div class="col-sm-10">
+        <%= builder.range_field :contrast, in: 0..200 %>
+      </div>
+    </div>
+    <div class="form-group row">
       <%= builder.label :image_clean, 'Smooth', class: 'col-sm-2 col-form-label' %>
       <div class="col-sm-10">
         <%= builder.range_field :smooth, in: 0..100, value: 0 %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= builder.label :image_clean, 'Posterize (no-op)', class: 'col-sm-2 col-form-label' %>
+      <div class="col-sm-10">
+        <%= builder.range_field :posterize, in: 0..100, value: 0 %>
       </div>
     </div>
   <% end %>
