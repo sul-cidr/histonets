@@ -10,3 +10,7 @@ image_files = Rails.root.join(Settings.IMAGE_PATH, '*.{jpg, tif, tiff, png}')
 Dir.glob(image_files)
   .reject{ |f| f[/.*_tmp.*/] }
   .map { |path| Image.from_file_path(path) }
+
+collection = Collection.find_or_create_by!(name: 'Default Collection')
+collection.images = Image.all
+collection.save!
