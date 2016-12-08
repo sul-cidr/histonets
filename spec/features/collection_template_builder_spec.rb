@@ -5,8 +5,8 @@ require 'rails_helper'
 RSpec.describe 'Collection Template Builder', type: :feature do
   describe 'step by step building' do
     before do
-      images = create_list(:image, 5)
-      create(:collection, images: images)
+      image = create(:image, file_name: 'eddie.jpg')
+      create(:collection, images: [image])
     end
     it 'renders and creates consecutive form steps' do
       visit new_collection_template_path
