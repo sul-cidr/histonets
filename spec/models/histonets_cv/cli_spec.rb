@@ -3,6 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe HistonetsCv::Cli, type: :model do
+  subject { described_class.new('yolo.jpg') }
+  context 'incorrect usage' do
+    it 'raises an error' do
+      expect { subject.contrast("'yolo'") }
+        .to raise_error(
+          HistonetsCv::Exceptions::CliError, /yolo is not a valid integer/
+        )
+    end
+  end
   describe '#contrast' do
     subject { described_class.new('yolo.jpg') }
     it 'executes the contrast command with arguments' do
