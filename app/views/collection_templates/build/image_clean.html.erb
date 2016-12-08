@@ -8,6 +8,8 @@ Clean image
       <% end %>
     </div>
   <% end %>
+  <% # Add in a hidden field just so that the BuildController stays happy %>
+  <%= f.hidden_field :id, value: @collection_template.id %>
   <%= react_component('ToggleSlider', { 
     object: f.object_name, attribute: 'image_clean', type: 'denoise'
   }) %>
