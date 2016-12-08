@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'open3'
 module HistonetsCv
   ##
   # Ruby class to invoke Python cli application
@@ -40,7 +40,12 @@ module HistonetsCv
     def execute(command)
       logger.info("Executing command #{command}")
       benchmark("Histonet excecuted #{command}") do
-        `histonets #{command}`
+        stdout, stdeerr, status = Open3.capture3("histonets #{command}")
+        unless status.success?
+          raise HistonetsCv::Exceptions::CliError, 'Unable to execute command '\
+          "histonets \"#{command}\" \n#{stdeerr}"
+        end
+        stdout
       end
     end
 
