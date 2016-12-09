@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>collection Templates</h1>
+<h1>
+  <%= t 'collection_template.title' %>
+</h1>
 
 <table>
   <thead>
@@ -13,8 +15,8 @@
     <% @collection_templates.each do |collection_template| %>
       <tr>
         <td><%= collection_template.to_s %></td>
-        <td><%= link_to 'Show', collection_template %></td>
-        <td><%= link_to 'Destroy', collection_template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('crud.show'), collection_template %></td>
+        <td><%= link_to t('crud.destroy'), collection_template, method: :delete, data: { confirm: t('crud.confirm') } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New collection Template', new_collection_template_path %>
+<%= link_to t('collection_template.new'), new_collection_template_path %>

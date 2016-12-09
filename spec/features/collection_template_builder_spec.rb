@@ -15,7 +15,7 @@ RSpec.describe 'Collection Template Builder', type: :feature do
       click_button 'Next Step'
       expect(page).to have_css 'body', text: 'Crop Area of Interest'
       click_button 'Next Step'
-      expect(page).to have_css 'body', text: 'Clean image'
+      expect(page).to have_css 'body', text: 'Clean Image'
       click_button 'Next Step'
       click_button 'Next Step'
       # Just a basic show page with some json rendered

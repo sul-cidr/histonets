@@ -1,4 +1,4 @@
-Select a collection
+<%= t 'select_collection.title' %>
 
 <%= form_for @collection_template, method: :put, url: wizard_path do |f| %>
   <% if f.object.errors.any? %>
@@ -9,5 +9,5 @@ Select a collection
     </div>
   <% end %>
   <%= f.collection_select :collection_id, Collection.all, :id, :name, {}, {class: 'custom-select'} %>
-  <%= f.submit 'Next Step', class: 'btn btn-primary' %>
+  <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>

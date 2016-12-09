@@ -1,4 +1,4 @@
-<h1>Crop Area of Interest</h1>
+<h1><%= t 'crop_image.title' %></h1>
 <%= form_for @collection_template, method: :put, url: wizard_path do |f| %>
   <% if f.object.errors.any? %>
     <div class="error_messages">
@@ -10,5 +10,5 @@
   <div class="form-group">
     <%= f.text_field :crop_bounds %>
   </div>
-  <%= f.submit 'Next Step', class: 'btn btn-primary' %>
+  <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>

@@ -1,4 +1,4 @@
-Clean image
+<%= t 'image_clean.title' %>
 
 <%= form_for @collection_template, method: :put, url: wizard_path do |f| %>
   <% if f.object.errors.any? %>
@@ -28,7 +28,7 @@ Clean image
   <%= react_component('ToggleSlider', { 
     object: f.object_name, attribute: 'image_clean', type: 'posterize'
   }) %>
-  <%= f.submit 'Next Step', class: 'btn btn-primary' %>
+  <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>
 
 <%= react_component('LeafletIiif', {
