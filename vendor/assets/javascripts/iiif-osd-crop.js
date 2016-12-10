@@ -586,7 +586,7 @@
 	  function render(state) {
 	    if (!selectionBox) {
 	      selectionBox = buildSelectionBox();
-	      canvas.appendChild(selectionBox);
+	      canvas.parentNode.appendChild(selectionBox);
 	      bindSelectionEvents(selectionBox);
 	      update(selectionBox, state);
 	    } else {
@@ -643,13 +643,9 @@
 	    // receiving them. The "click-to-zoom"
 	    // function in OSD is constructed from
 	    // the mouseup and mousedown events.
-	    selectionBox.addEventListener('click', function(e) {
-	      e.stopPropagation();
-	      e.preventDefault();
-	    });
 
 	    selectionBox.addEventListener('mousedown', handleDragStart);
-	    canvas.addEventListener('mouseup', handleDragStop);
+	    canvas.parentNode.addEventListener('mouseup', handleDragStop);
 	  }
 
 	  function handleDragStop(e) {
@@ -658,7 +654,7 @@
 
 	    listener = undefined;
 	    interaction = undefined;
-	    canvas.removeEventListener('mousemove', mouseMoved);
+	    canvas.parentNode.removeEventListener('mousemove', mouseMoved);
 	  }
 
 	  function handleDragStart(event) {
@@ -671,7 +667,7 @@
 	    } else {
 	      listener = new Resize(state, currentDragHandle, settings);
 	    }
-	    canvas.addEventListener('mousemove', mouseMoved);
+	    canvas.parentNode.addEventListener('mousemove', mouseMoved);
 	  }
 
 	  function mouseMoved(event) {
