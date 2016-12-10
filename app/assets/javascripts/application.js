@@ -12,6 +12,8 @@
 //
 //= require leaflet
 //= require leaflet-iiif
+//= require openseadragon
+//= require iiif-osd-crop
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks

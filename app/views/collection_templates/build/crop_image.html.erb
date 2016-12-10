@@ -7,20 +7,9 @@
       <% end %>
     </div>
   <% end %>
-  <div id="osdCanvas" style="width:400px; height:400px;"></div>
-  <div class="form-group">
-    <%= f.text_field :crop_bounds %>
-  </div>
-  <%= f.submit 'Next Step', class: 'btn btn-primary' %>
+  <% # Add in a hidden field just so that the BuildController stays happy %>
+  <%= f.hidden_field :id, value: @collection_template.id %>
+  <%= react_component('CropImage', {
+    region: [0,0,300,300], imagePath: Riiif::Engine.routes.url_helpers.info_path(@collection_template.image.file_name_no_extension)
+  }) %>
 <% end %>
-<script>
- var imageId = (function() {
-   var baseName = '<%= @collection_template.image.file_name %>';
-   return baseName.slice(0, -4); // slices off ".jpg". Should replace with accessor in model/controller.
- })();
-
- imageURL = '/image-service/' + imageId + '/info.json'; // should replace with dynamic path fed by model accessor.
- region = <%= @collection_template.crop_bounds %>
-
-</script>
-<%= javascript_include_tag "crop_image/crop_image" %>
