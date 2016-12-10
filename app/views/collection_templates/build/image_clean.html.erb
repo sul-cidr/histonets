@@ -8,11 +8,29 @@ Clean image
       <% end %>
     </div>
   <% end %>
-  <div class="form-group">
-    <%= f.fields_for :image_clean do |builder| %>
-      <%= builder.label :image_clean, 'Contrast' %>
-      <%= builder.range_field :contrast, in: -100..100 %>
-    <% end %>
-  </div>
+  <% # Add in a hidden field just so that the BuildController stays happy %>
+  <%= f.hidden_field :id, value: @collection_template.id %>
+  <%= react_component('ToggleSlider', { 
+    object: f.object_name, attribute: 'image_clean', type: 'denoise'
+  }) %>
+  <%= react_component('ToggleSlider', { 
+    object: f.object_name, attribute: 'image_clean', type: 'equalize'
+  }) %>
+  <%= react_component('ToggleSlider', { 
+    value: 100, max: 200, object: f.object_name, attribute: 'image_clean', type: 'brightness'
+  }) %>
+  <%= react_component('ToggleSlider', { 
+    value: 100, max: 200, object: f.object_name, attribute: 'image_clean', type: 'contrast'
+  }) %>
+  <%= react_component('ToggleSlider', { 
+    object: f.object_name, attribute: 'image_clean', type: 'smooth'
+  }) %>
+  <%= react_component('ToggleSlider', { 
+    object: f.object_name, attribute: 'image_clean', type: 'posterize'
+  }) %>
   <%= f.submit 'Next Step', class: 'btn btn-primary' %>
 <% end %>
+
+<%= react_component('LeafletIiif', {
+  iiifImage: Riiif::Engine.routes.url_helpers.info_path(@collection_template.image.file_name_no_extension)
+}) %>
