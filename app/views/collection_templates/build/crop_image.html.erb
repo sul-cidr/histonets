@@ -7,8 +7,9 @@
       <% end %>
     </div>
   <% end %>
-  <div class="form-group">
-    <%= f.text_field :crop_bounds %>
-  </div>
-  <%= f.submit 'Next Step', class: 'btn btn-primary' %>
+  <% # Add in a hidden field just so that the BuildController stays happy %>
+  <%= f.hidden_field :id, value: @collection_template.id %>
+  <%= react_component('CropImage', {
+    region: [0,0,300,300], imagePath: Riiif::Engine.routes.url_helpers.info_path(@collection_template.image.file_name_no_extension)
+  }) %>
 <% end %>

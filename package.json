@@ -5,7 +5,9 @@
   "repository": "git@github.com:sul-cidr/histonets.git",
   "author": "",
   "license": "Apache-2.0",
-  "dependencies": {},
+  "dependencies": {
+    "iiif-cropper": "^0.1.0"
+  },
   "devDependencies": {
     "eslint": "^3.10.2",
     "eslint-config-airbnb": "^13.0.0",
