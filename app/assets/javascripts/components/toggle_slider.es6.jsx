@@ -71,6 +71,7 @@ class ToggleSlider extends React.Component {
             </label>
           </fieldset>
         </div>
+        {this.props.children}
       </div>
     );
   }
@@ -83,6 +84,7 @@ ToggleSlider.propTypes = {
   attribute: React.PropTypes.string.isRequired,
   type: React.PropTypes.string.isRequired,
   value: React.PropTypes.number,
+  children: React.PropTypes.element,
 };
 
 ToggleSlider.defaultProps = {

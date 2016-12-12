@@ -25,10 +25,8 @@
   <%= react_component('ToggleSlider', {
     object: f.object_name, attribute: 'image_clean', type: 'smooth'
   }) %>
-  <%= react_component('ToggleSlider', {
-    object: f.object_name, attribute: 'image_clean', type: 'posterize'
-  }) %>
-  <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
+  <%= react_component('PosterizeForm', object: f.object_name, attribute: 'image_clean', type: 'posterize') %>
+  <%= f.submit 'Next Step', class: 'btn btn-primary' %>
 <% end %>
 
 <%= render 'collection_templates/cropped_image' %>
