@@ -2,7 +2,9 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Collection Template Builder', type: :feature do
+# TODO: Remove js: true if possible so suite runs faster. Currently
+# required by crop image
+RSpec.describe 'Collection Template Builder', type: :feature, js: true do
   describe 'step by step building' do
     before do
       image = create(:image, file_name: 'eddie.jpg')
