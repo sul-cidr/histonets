@@ -1,8 +1,8 @@
-Create image templates
+<%= t 'image_templates.title' %>
 
 <%= form_for @collection_template, method: :put, url: wizard_path do |f| %>
   <%= f.hidden_field(:image_paths) %>
-  <%= f.submit 'Next Step', class: 'btn btn-primary' %>
+  <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>
 
 <%= react_component('LeafletIiif', {

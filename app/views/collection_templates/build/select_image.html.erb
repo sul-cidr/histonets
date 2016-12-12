@@ -1,4 +1,4 @@
-Select an image
+<%= t 'select_image.title' %>
 
 <%= form_for @collection_template, method: :put, url: wizard_path do |f| %>
   <% if f.object.errors.any? %>
@@ -9,5 +9,5 @@ Select an image
     </div>
   <% end %>
   <%= f.collection_select :image_id, @collection_template.collection.images, :id, :file_name, {}, {class: 'custom-select'} %>
-  <%= f.submit 'Next Step', class: 'btn btn-primary' %>
+  <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>
