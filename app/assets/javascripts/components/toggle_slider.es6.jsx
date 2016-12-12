@@ -48,6 +48,9 @@ class ToggleSlider extends React.Component {
           />
         </div>
         <div className="col-sm-2">
+          {this.state.value}
+        </div>
+        <div className="col-sm-2">
           <fieldset>
             <label className="switch-light switch-material" htmlFor={`${this.customLabel()}_enabled`}>
               <input
