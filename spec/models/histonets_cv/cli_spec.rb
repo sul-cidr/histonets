@@ -45,8 +45,7 @@ RSpec.describe HistonetsCv::Cli, type: :model do
     it 'executes the pipeline command with json arguments' do
       expect(subject).to receive(:execute)
         .with("pipeline '#{arguments}' file://spec/fixtures/images/yolo.jpg "\
-              '-o spec/fixtures/images/yolo_'\
-              "#{Digest::MD5.hexdigest(arguments)}_tmp.jpg")
+              '-o spec/fixtures/images/yolo__tmp.jpg')
       subject.pipeline(arguments)
     end
   end

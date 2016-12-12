@@ -14,6 +14,6 @@ RSpec.describe 'Crop image', type: :feature, js: true do
   it 'has image viewer (no way to check for canvas image) and saves crop' do
     expect(page).to have_css '.openseadragon-canvas'
     click_button 'Next Step'
-    expect(CollectionTemplate.last.crop_bounds).to eq('-2093,355,1613,806')
+    expect(CollectionTemplate.last.crop_bounds).to eq('504,1008,1008,1008')
   end
 end

@@ -22,9 +22,9 @@ module HistonetsCv
       execute("brightness #{value} #{input} #{output('brightness')}")
     end
 
-    def pipeline(actions)
-      execute("pipeline '#{actions}' #{input} "\
-        "#{output(Digest::MD5.hexdigest(actions))}")
+    def pipeline(actions, image_url = nil, output_hash = '')
+      execute("pipeline '#{actions}' #{input(image_url)} "\
+        "#{output(output_hash)}")
     end
 
     def help
@@ -49,8 +49,12 @@ module HistonetsCv
       end
     end
 
-    def input
-      "file://#{Settings.IMAGE_PATH}/#{file_name}"
+    def input(image_url = nil)
+      if image_url.present?
+        image_url
+      else
+        "file://#{Settings.IMAGE_PATH}/#{file_name}"
+      end
     end
 
     def output(hash)

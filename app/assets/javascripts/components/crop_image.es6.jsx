@@ -29,6 +29,8 @@ class CropImage extends React.Component {
     });
 
     this.osdCanvas.iiifCrop();
+    // These are strange region values, but set it up to work with something.
+    this.osdCanvas.cropper.setRegion(0.25, 0.25, 0.25, 0.25);
   }
 
   submitRegion() {

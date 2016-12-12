@@ -13,10 +13,8 @@ RSpec.describe 'Image clean', type: :feature, js: true do
     click_button 'Next Step'
   end
   describe 'image viewer' do
-    it 'has tiled images' do
-      expect(page).to have_css '[data-react-class="LeafletIiif"]'
-      expect(page)
-        .to have_css '.leaflet-tile-container img[src*="/image-service/eddie"]'
+    it 'has cropped image' do
+      expect(page).to have_css 'img[src*="image-service/eddie/"]'
     end
   end
   describe 'image clean form' do
