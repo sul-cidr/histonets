@@ -1,9 +1,14 @@
 import { RadioGroup, RadioButton } from 'react-toolbox/lib/radio';
 
 class RadioSet extends React.Component {
-  state = {
-    value: 'kmeans',
-  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedOption: 'kmeans',
+    };
+    this.handleOptionChange = this.handleOptionChange.bind(this);
+  }
 
   handlechange = (value) => {
     this.setState({ value });
