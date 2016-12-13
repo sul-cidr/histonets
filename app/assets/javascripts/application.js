@@ -12,6 +12,7 @@
 //
 //= require leaflet
 //= require leaflet-iiif
+//= require leaflet-areaselect
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
