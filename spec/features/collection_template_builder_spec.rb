@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Collection Template Builder', type: :feature do
+RSpec.describe 'Collection Template Builder', type: :feature, js: true do
   describe 'step by step building' do
     before do
       image = create(:image, file_name: 'eddie.jpg')

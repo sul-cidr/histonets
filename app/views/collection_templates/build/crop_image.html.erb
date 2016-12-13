@@ -11,10 +11,10 @@
     <% # Add in a hidden field just so that the BuildController stays happy %>
     <%= f.hidden_field :id, value: @collection_template.id %>
     <%= react_component('IiifCropper', {
-      iiifImage: Riiif::Engine.routes.url_helpers.info_path(
-        @collection_template.image.file_name_no_extension
-      ),
-      cropperName: 'collection_template[crop_bounds]'
+        iiifImage: Riiif::Engine.routes.url_helpers.info_path(
+          @collection_template.image.file_name_no_extension
+        ),
+        cropperName: 'collection_template[crop_bounds]'
     }) %>
   </div>
   <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>

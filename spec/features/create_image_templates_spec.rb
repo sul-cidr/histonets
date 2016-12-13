@@ -13,9 +13,7 @@ RSpec.describe 'Create image templates', type: :feature, js: true do
     click_button 'Next Step'
     click_button 'Next Step'
   end
-  it 'has image viewer with tiled images' do
-    expect(page).to have_css '[data-react-class="LeafletIiif"]'
-    expect(page)
-      .to have_css '.leaflet-tile-container img[src*="/image-service/eddie_"]'
+  it 'has image cropped image' do
+    expect(page).to have_css 'img'
   end
 end
