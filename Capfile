@@ -9,6 +9,7 @@ require 'dlss/capistrano'
 require 'capistrano/passenger'
 require 'capistrano/sidekiq'
 require 'capistrano/rvm'
+require 'capistrano/rails'
 
 require 'capistrano/scm/git'
 install_plugin Capistrano::SCM::Git
