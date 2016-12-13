@@ -30,10 +30,11 @@ class LeafletIiif extends React.Component {
 
     map.addLayer(iiifLayer);
 
-    this.setState({ map });
+    this.setState({ map, iiifLayer });
 
     iiifLayer.on('load', () => {
       this.setState({ iiifLoaded: true });
+      this.props.onLoad(this.state);
     });
   }
 
@@ -43,11 +44,18 @@ class LeafletIiif extends React.Component {
       return null;
     }
     return (
-      <div id="map" ref={(c) => { this.leafletContainer = c; }} style={mapStyle} />
+      <div>
+        <div id="map" ref={(c) => { this.leafletContainer = c; }} style={mapStyle} />
+      </div>
     );
   }
 }
 
 LeafletIiif.propTypes = {
   iiifImage: React.PropTypes.string.isRequired,
+  onLoad: React.PropTypes.func,
+};
+
+LeafletIiif.defaultProps = {
+  onLoad: () => {},
 };
