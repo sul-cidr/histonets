@@ -41,7 +41,27 @@ class CollectionTemplate < ApplicationRecord
 
   def cleaned_image
     "#{image.file_name_no_extension}_"\
-    "#{Digest::MD5.hexdigest(image_clean_to_formal_json)}_tmp"
+    "#{fingerprinted_name}_tmp"
+  end
+
+  def fingerprinted_name
+    Digest::MD5.hexdigest(
+      [
+        image.file_name,
+        image_clean_to_formal_json,
+        cropped_image
+      ].join(' ')
+    )
+  end
+
+  def cropped_image
+    return '' unless crop_bounds.present?
+    "#{Settings.HOST_URL}"\
+    "#{Riiif::Engine.routes.url_helpers.image_path(
+      image.file_name_no_extension,
+      region: crop_bounds,
+      size: 'full'
+    )}"
   end
 
   # TODO: Add step by step validations here
