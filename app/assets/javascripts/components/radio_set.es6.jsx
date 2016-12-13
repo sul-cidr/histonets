@@ -20,10 +20,12 @@ class RadioSet extends React.Component {
           <p>Method</p>
         </div>
         <div className="col-sm-4">
-          <fieldset
+          <div
+            className="btn-group"
             disabled={!this.props.enabled}
+            data-toggle="buttons"
           >
-            <label htmlFor="posterize_method">
+            <label htmlFor="posterize_method" className="btn btn-primary active">
               <input
                 type="radio"
                 value="kmeans"
@@ -32,7 +34,7 @@ class RadioSet extends React.Component {
               />
               Kmeans
             </label>
-            <label htmlFor="posterize_method">
+            <label htmlFor="posterize_method" className="btn btn-primary">
               <input
                 type="radio"
                 value="linear"
@@ -41,7 +43,7 @@ class RadioSet extends React.Component {
               />
               Linear
             </label>
-          </fieldset>
+          </div>
         </div>
       </div>
     );
@@ -49,7 +51,7 @@ class RadioSet extends React.Component {
 }
 
 RadioSet.propTypes = {
-  enabled: React.PropTypes.boolean,
+  enabled: React.PropTypes.bool,
 };
 
 RadioSet.defaultProps = {

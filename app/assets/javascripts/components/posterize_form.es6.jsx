@@ -1,19 +1,34 @@
+/* global ToggleSlider, RadioSet */
+
 class PosterizeForm extends React.Component {
-  render () {
+  constructor(props) {
+    super(props);
+    this.state = { enabled: false };
+    this.handleEnableChange = this.handleEnableChange.bind(this);
+  }
+
+  handleEnableChange(toggleState) {
+    this.setState({ enabled: toggleState });
+  }
+
+  render() {
     if (!this.props) {
-      return;
+      return null;
     }
     return (
       <div>
         <ToggleSlider
           {...this.props}
-          ref={(toggleSlider) => { this.state = toggleSlider; }}
+          handleEnableChange={this.handleEnableChange}
         />
-        <RadioSet enabled={this.refs.toggleSlider}/>
+        <RadioSet enabled={this.state.enabled} />
       </div>
-    )
+    );
   }
 }
 
 PosterizeForm.propTypes = {
+};
+
+PosterizeForm.defaultProps = {
 };
