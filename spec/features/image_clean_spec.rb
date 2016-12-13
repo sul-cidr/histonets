@@ -25,6 +25,8 @@ RSpec.describe 'Image clean', type: :feature, js: true do
     end
     it 'enabling and moving range sends through option' do
       expect(page).to have_css 'input[type="range"]'
+      expect(page).to have_css '[data-react-class="ToggleSlider"] div',
+                               text: '100'
       find('[for="collection_template_image_clean_contrast_enabled"]').click
       # Check that default is there first
       expect(page).to have_xpath '//input[@id="'\
