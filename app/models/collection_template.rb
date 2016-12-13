@@ -27,7 +27,16 @@ class CollectionTemplate < ApplicationRecord
   attr_accessor :form_step
 
   def image_clean_to_formal_json
-    image_clean.map { |k, v| { action: k, options: { value: v.to_i } } }.to_json
+    pipeline_params = []
+    image_clean.each do |k, v|
+      if k.to_s == 'posterize'
+        pipeline_params.push(action: k, options:
+          { colors: v.to_i, method: 'kmeans' })
+      else
+        pipeline_params.push(action: k, options: { value: v.to_i })
+      end
+    end
+    pipeline_params.to_json
   end
 
   def cleaned_image
