@@ -5,6 +5,8 @@ ruby:
 scss:
   enabled: true
   config_file: .scss-lint.yml
+  exclude:
+    - 'vendor/assets/stylesheets/**'
 
 eslint:
   enabled: true
