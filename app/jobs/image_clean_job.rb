@@ -7,6 +7,10 @@ class ImageCleanJob < ApplicationJob
 
   def perform(collection_template)
     HistonetsCv::Cli.new(collection_template.image.file_name)
-                    .pipeline(collection_template.image_clean_to_formal_json)
+                    .pipeline(
+                      collection_template.image_clean_to_formal_json,
+                      collection_template.cropped_image,
+                      collection_template.fingerprinted_name
+                    )
   end
 end

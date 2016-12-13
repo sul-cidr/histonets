@@ -40,12 +40,14 @@ RSpec.describe CollectionTemplate, type: :model do
     subject do
       create(
         :collection_template_with_image,
+        image: create(:image, file_name: 'eddie.jpg'),
+        crop_bounds: [0, 0, 100, 100],
         image_clean: { contrast: 40, brightness: 22 }
       )
     end
     it 'returns the cleaned image file_name' do
       expect(subject.cleaned_image)
-        .to match(/eddie[0-9]*_ccb65591c6884ca90a0b88ba9ca2ec13_tmp/)
+        .to match(/eddie[0-9]*_95303c32a53b1c41358dcb0b8d2bc9ae_tmp/)
     end
   end
 end
