@@ -12,7 +12,7 @@ set :deploy_to, "#{fetch(:home_directory)}/#{fetch(:application)}"
 set :linked_files, %w{config/database.yml}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{config/targets log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{config/targets config/settings log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # Default value for keep_releases is 5
 set :keep_releases, 5
