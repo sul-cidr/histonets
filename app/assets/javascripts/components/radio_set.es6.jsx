@@ -13,6 +13,18 @@ class RadioSet extends React.Component {
     this.setState({ value });
   };
 
+  labelClasses() {
+    const buttonClasses = 'btn btn-primary';
+    if (!this.props.enabled) {
+      return `${buttonClasses} disabled`;
+    }
+    return buttonClasses;
+  }
+
+  activeClasses() {
+    return `${this.labelClasses()} active`;
+  }
+
   render() {
     return (
       <div className="form-group row">
@@ -25,7 +37,7 @@ class RadioSet extends React.Component {
             disabled={!this.props.enabled}
             data-toggle="buttons"
           >
-            <label htmlFor="posterize_method" className="btn btn-primary active">
+            <label htmlFor="posterize_method" className={this.activeClasses()}>
               <input
                 type="radio"
                 value="kmeans"
@@ -34,7 +46,7 @@ class RadioSet extends React.Component {
               />
               Kmeans
             </label>
-            <label htmlFor="posterize_method" className="btn btn-primary">
+            <label htmlFor="posterize_method" className={this.labelClasses()}>
               <input
                 type="radio"
                 value="linear"
