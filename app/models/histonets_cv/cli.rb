@@ -31,6 +31,13 @@ module HistonetsCv
         "#{output(fingerprint)}")
     end
 
+    ##
+    # @param [String] fingerprint
+    # @param [String] image_url url to an image to process
+    def enhance(fingerprint, image_url = nil)
+      execute("enhance #{input(image_url)} #{output(fingerprint)}")
+    end
+
     def help
       execute('--help')
     end

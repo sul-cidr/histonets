@@ -14,6 +14,7 @@ class CollectionTemplate < ApplicationRecord
       select_collection
       select_image
       crop_image
+      auto_clean
       image_clean
       create_image_templates
     )
@@ -48,6 +49,7 @@ class CollectionTemplate < ApplicationRecord
     Digest::MD5.hexdigest(
       [
         image.file_name,
+        auto_clean,
         image_clean_to_formal_json,
         cropped_image
       ].join(' ')

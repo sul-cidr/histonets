@@ -10,6 +10,10 @@ class CollectionTemplates::BuildController < ApplicationController
 
   # GET /collection_templates/:collection_template_id/build/:id
   def show
+    case step
+    when 'image_clean'
+      skip_step if @collection_template.auto_clean
+    end
     render_wizard
   end
 
@@ -17,6 +21,8 @@ class CollectionTemplates::BuildController < ApplicationController
   def update
     @collection_template.update(collection_template_params(step))
     case step
+    when 'auto_clean'
+      ImageEnhanceJob.new.perform(@collection_template)
     when 'image_clean'
       ImageCleanJob.new.perform(@collection_template)
     end
@@ -44,6 +50,10 @@ class CollectionTemplates::BuildController < ApplicationController
                              [:collection_id]
                            when 'select_image'
                              [:image_id]
+                           when 'crop_image'
+                             [:crop_bounds]
+                           when 'auto_clean'
+                             [:auto_clean]
                            when 'image_clean'
                              {
                                image_clean: [
@@ -51,8 +61,6 @@ class CollectionTemplates::BuildController < ApplicationController
                                  :smooth, :posterize
                                ]
                              }
-                           when 'crop_image'
-                             [:crop_bounds]
                            end
     params.require(:collection_template)
           .permit(permitted_attributes).merge(form_step: step)
