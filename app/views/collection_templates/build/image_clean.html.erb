@@ -31,7 +31,4 @@
   <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>
 
-<div>
-  <h3>Cropped Image</h3>
-  <%= image_tag @collection_template.cropped_image %>
-</div>
+<%= render 'collection_templates/cropped_image' %>

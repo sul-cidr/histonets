@@ -41,3 +41,4 @@ en:
     show: 'Show'
     destroy: 'Destroy'
     confirm: 'Are you sure?'
+  cropped_image: 'Cropped Image'
