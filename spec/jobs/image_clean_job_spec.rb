@@ -19,7 +19,7 @@ RSpec.describe ImageCleanJob, type: :job do
         .with(
           '[{"action":"contrast","options":{"value":42}}]',
           'http://localhost:1337/image-service/eddie/0,0,100,100/full/0/default.jpg',
-          'ad66e867e9125bb5759813c628f7ab18'
+          '633219bbc6c560b58d55a1f4960e56cd'
         )
       subject.perform(collection_template)
     end

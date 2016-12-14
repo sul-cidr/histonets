@@ -23,6 +23,9 @@ en:
   navigation:
     back: 'Back'
     next_step: 'Next Step'
+  auto_clean:
+    title: 'Automatic or Manual Image Cleaning'
+    label: 'Automatically clean images?'
   image_templates:
     title: 'Create Image Templates'
   select_collection:
@@ -41,3 +44,4 @@ en:
     show: 'Show'
     destroy: 'Destroy'
     confirm: 'Are you sure?'
+  cropped_image: 'Cropped Image'

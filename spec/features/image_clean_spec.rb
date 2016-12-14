@@ -12,26 +12,40 @@ RSpec.describe 'Image clean', type: :feature, js: true do
     click_button 'Next Step'
     click_button 'Next Step'
   end
-  describe 'image clean form' do
-    it 'all sliders are disabled' do
-      expect(page).to have_css 'input[type="range"][disabled]', count: 6
-    end
-    it 'enabling and moving range sends through option' do
-      expect(page).to have_css 'input[type="range"]'
-      expect(page).to have_css '[data-react-class="ToggleSlider"] div',
-                               text: '100'
-      find('[for="collection_template_image_clean_contrast_enabled"]').click
-      # Check that default is there first
-      expect(page).to have_xpath '//input[@id="'\
-        'collection_template_image_clean_contrast"][@value=100]'
-      ##
-      # FIXME: We have an issue where a range set that isn't the max goes to the
-      # max anyways. So setting the max here and leaving a comment for
-      # transparency
-      find(:xpath, '//input[@id="collection_template_image_clean_contrast"]')
-        .set 200
+  context 'manual cleaning' do
+    before do
       click_button 'Next Step'
-      expect(CollectionTemplate.last.image_clean).to eq('contrast' => '200')
+    end
+    describe 'image clean form' do
+      it 'all sliders are disabled' do
+        expect(page).to have_css 'input[type="range"][disabled]', count: 6
+      end
+      it 'enabling and moving range sends through option' do
+        expect(page).to have_css 'input[type="range"]'
+        expect(page).to have_css '[data-react-class="ToggleSlider"] div',
+                                 text: '100'
+        find('[for="collection_template_image_clean_contrast_enabled"]').click
+        # Check that default is there first
+        expect(page).to have_xpath '//input[@id="'\
+          'collection_template_image_clean_contrast"][@value=100]'
+        ##
+        # FIXME: We have an issue where a range set that isn't the max goes to
+        # the max anyways. So setting the max here and leaving a comment for
+        # transparency
+        find(:xpath, '//input[@id="collection_template_image_clean_contrast"]')
+          .set 200
+        click_button 'Next Step'
+        expect(CollectionTemplate.last.image_clean).to eq('contrast' => '200')
+      end
+    end
+  end
+  context 'auto cleaning' do
+    before do
+      check 'collection_template_auto_clean'
+      click_button 'Next Step'
+    end
+    it 'saves and sets auto_clean' do
+      expect(CollectionTemplate.last.auto_clean).to be true
     end
   end
 end

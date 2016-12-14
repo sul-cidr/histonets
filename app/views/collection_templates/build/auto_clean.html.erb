@@ -1,0 +1,21 @@
+<h1><%= t 'auto_clean.title' %></h1>
+<%= form_for @collection_template, method: :put, url: wizard_path do |f| %>
+  <% if f.object.errors.any? %>
+    <div class="error_messages">
+      <% f.object.errors.full_messages.each do |error| %>
+        <p><%= error %></p>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <div class="form-check">
+      <%= f.label :auto_clean, class: 'form-check-label' do %>
+        <%= f.check_box :auto_clean, class: 'form-check-input', checked_value: true %>
+        <%= t 'auto_clean.label' %>
+      <% end %>
+    </div>
+  </div>
+  <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
+<% end %>
+
+<%= render 'collection_templates/cropped_image' %>
