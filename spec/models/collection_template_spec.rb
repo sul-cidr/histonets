@@ -41,13 +41,57 @@ RSpec.describe CollectionTemplate, type: :model do
   describe '#cleaned_image' do
     subject do
       create(
-        :collection_template_with_image,
-        image_clean: { contrast: 40, brightness: 22 }
+        :collection_template,
+        image: create(:image, file_name: 'eddie.jpg'),
+        image_clean: { contrast: 40, brightness: 22 },
+        crop_bounds: [0, 0, 100, 100]
       )
     end
     it 'returns the cleaned image file_name' do
       expect(subject.cleaned_image)
-        .to match(/eddie[0-9]*_ccb65591c6884ca90a0b88ba9ca2ec13_tmp/)
+        .to match(/eddie_.*_tmp/)
+    end
+  end
+  describe '#fingerprinted_name' do
+    subject do
+      create(
+        :collection_template,
+        image: create(:image, file_name: 'eddie.jpg'),
+        image_clean: { contrast: 40, brightness: 22 },
+        crop_bounds: [0, 0, 100, 100]
+      )
+    end
+    it 'returns a MD5 hashed value of name, crop_bounds, and image_clean' do
+      expect(subject.fingerprinted_name)
+        .to eq 'bda852ad38ed2a0bdcb7cf53511c3d8c'
+    end
+  end
+  describe '#cropped_image' do
+    context 'when no crop_bounds' do
+      subject do
+        create(
+          :collection_template,
+          image: create(:image, file_name: 'eddie.jpg'),
+          image_clean: { contrast: 40, brightness: 22 }
+        )
+      end
+      it 'is not available' do
+        expect(subject.cropped_image).to eq ''
+      end
+    end
+    context 'with crop_bounds' do
+      subject do
+        create(
+          :collection_template,
+          image: create(:image, file_name: 'eddie.jpg'),
+          image_clean: { contrast: 40, brightness: 22 },
+          crop_bounds: '0,0,100,100'
+        )
+      end
+      it 'is a url' do
+        expect(subject.cropped_image)
+          .to match(/.*localhost.*image-service.*100,100/)
+      end
     end
   end
 end

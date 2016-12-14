@@ -12,13 +12,6 @@ RSpec.describe 'Image clean', type: :feature, js: true do
     click_button 'Next Step'
     click_button 'Next Step'
   end
-  describe 'image viewer' do
-    it 'has tiled images' do
-      expect(page).to have_css '[data-react-class="LeafletIiif"]'
-      expect(page)
-        .to have_css '.leaflet-tile-container img[src*="/image-service/eddie"]'
-    end
-  end
   describe 'image clean form' do
     it 'all sliders are disabled' do
       expect(page).to have_css 'input[type="range"][disabled]', count: 6
