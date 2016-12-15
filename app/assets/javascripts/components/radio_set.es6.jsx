@@ -9,9 +9,22 @@ class RadioSet extends React.Component {
     this.handleOptionChange = this.handleOptionChange.bind(this);
   }
 
-  handlechange = (value) => {
-    this.setState({ value });
-  };
+  handleOptionChange(changeEvent) {
+    this.setState({
+      selectedOption: changeEvent.target.value,
+    });
+  }
+
+  fieldName() {
+    if (this.props.enabled) {
+      return 'collection_template[image_clean][posterize_method]';
+    }
+    /*
+     * We don't want to send through form elements that are disabled, so set a
+     * bad name here
+    */
+    return '';
+  }
 
   labelClasses() {
     const buttonClasses = 'btn btn-primary';
@@ -41,7 +54,7 @@ class RadioSet extends React.Component {
               <input
                 type="radio"
                 value="kmeans"
-                name="collection_template[image_clean][posterize_method]"
+                name={this.fieldName()}
                 checked={this.state.selectedOption === 'kmeans'}
                 onChange={this.handleOptionChange}
               />
@@ -51,7 +64,7 @@ class RadioSet extends React.Component {
               <input
                 type="radio"
                 value="linear"
-                name="collection_template[image_clean][posterize_method]"
+                name={this.fieldName()}
                 checked={this.state.selectedOption === 'linear'}
                 onChange={this.handleOptionChange}
               />
