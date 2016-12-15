@@ -41,6 +41,7 @@ class RadioSet extends React.Component {
               <input
                 type="radio"
                 value="kmeans"
+                name="collection_template[image_clean][posterize_method]"
                 checked={this.state.selectedOption === 'kmeans'}
                 onChange={this.handleOptionChange}
               />
@@ -50,6 +51,7 @@ class RadioSet extends React.Component {
               <input
                 type="radio"
                 value="linear"
+                name="collection_template[image_clean][posterize_method]"
                 checked={this.state.selectedOption === 'linear'}
                 onChange={this.handleOptionChange}
               />

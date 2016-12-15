@@ -32,8 +32,8 @@ class CollectionTemplate < ApplicationRecord
     image_clean.each do |k, v|
       if k.to_s == 'posterize'
         pipeline_params.push(action: k, options:
-          { colors: v.to_i, method: 'kmeans' })
-      else
+          { colors: v.to_i, method: image_clean['posterize_method'] })
+      elsif k.to_s != 'posterize_method'
         pipeline_params.push(action: k, options: { value: v.to_i })
       end
     end
