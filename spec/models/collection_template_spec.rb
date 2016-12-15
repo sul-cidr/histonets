@@ -29,7 +29,7 @@ RSpec.describe CollectionTemplate, type: :model do
       create(
         :collection_template,
         image_clean: { contrast: 40, brightness: 22, posterize: 3,
-                       posterize_method: 'linear'}
+                       posterize_method: 'linear' }
       )
     end
     it 'creates json used by histonets-cv' do
