@@ -28,11 +28,13 @@ class CollectionTemplate < ApplicationRecord
   attr_accessor :form_step
 
   def image_clean_to_formal_json
+    json_params = HashWithIndifferentAccess
+                  .new_from_hash_copying_default(image_clean)
     pipeline_params = []
-    image_clean.each do |k, v|
+    json_params.each do |k, v|
       if k.to_s == 'posterize'
         pipeline_params.push(action: k, options:
-          { colors: v.to_i, method: image_clean['posterize_method'] })
+          { colors: v.to_i, method: json_params[:posterize_method] })
       elsif k.to_s != 'posterize_method'
         pipeline_params.push(action: k, options: { value: v.to_i })
       end

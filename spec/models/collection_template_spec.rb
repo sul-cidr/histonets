@@ -28,7 +28,8 @@ RSpec.describe CollectionTemplate, type: :model do
     subject do
       create(
         :collection_template,
-        image_clean: { contrast: 40, brightness: 22, posterize: 3 }
+        image_clean: { contrast: 40, brightness: 22, posterize: 3,
+                       posterize_method: 'linear'}
       )
     end
     it 'creates json used by histonets-cv' do
@@ -36,7 +37,7 @@ RSpec.describe CollectionTemplate, type: :model do
         .to eq '[{"action":"contrast","options":{"value":40}},'\
                '{"action":"brightness","options":{"value":22}},'\
                '{"action":"posterize","options":{"colors":3,'\
-               '"method":"kmeans"}}]'
+               '"method":"linear"}}]'
     end
   end
   describe '#cleaned_image' do
