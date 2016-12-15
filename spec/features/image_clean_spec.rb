@@ -17,8 +17,9 @@ RSpec.describe 'Image clean', type: :feature, js: true do
       click_button 'Next Step'
     end
     describe 'image clean form' do
-      it 'all sliders are disabled' do
+      it 'all inputs are disabled' do
         expect(page).to have_css 'input[type="range"][disabled]', count: 6
+        expect(page).to have_css 'div.btn-group label', 'disabled'
       end
       it 'enabling and moving range sends through option' do
         expect(page).to have_css 'input[type="range"]'
@@ -36,6 +37,14 @@ RSpec.describe 'Image clean', type: :feature, js: true do
           .set 200
         click_button 'Next Step'
         expect(CollectionTemplate.last.image_clean).to eq('contrast' => '200')
+      end
+      it 'enabling posterize method buttons passes through option' do
+        find('[for="collection_template_image_clean_posterize_enabled"]').click
+        expect(page).to have_xpath '//input[@name="'\
+          'collection_template[image_clean][posterize_method]"]'
+        click_button 'Next Step'
+        expect(CollectionTemplate.last.image_clean)
+          .to eq('posterize' => '0', 'posterize_method' => 'kmeans')
       end
     end
   end
