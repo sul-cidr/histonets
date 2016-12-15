@@ -5,12 +5,9 @@
   "repository": "git@github.com:sul-cidr/histonets.git",
   "author": "",
   "license": "Apache-2.0",
-  "dependencies": {
-    "react-toolbox": "^2.0.0-beta.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-eslint": "^7.1.1",
-    "classnames": "^2.2.5",
     "eslint": "^3.10.2",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
@@ -20,6 +17,5 @@
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.4.1",
     "react-dom": "^15.4.1",
-    "react-toolbox": "^2.0.0-beta.1"
   }
 }
