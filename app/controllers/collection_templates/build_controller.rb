@@ -58,7 +58,7 @@ class CollectionTemplates::BuildController < ApplicationController
                              {
                                image_clean: [
                                  :denoise, :equalize, :brightness, :contrast,
-                                 :smooth, :posterize
+                                 :smooth, :posterize, :posterize_method
                                ]
                              }
                            end

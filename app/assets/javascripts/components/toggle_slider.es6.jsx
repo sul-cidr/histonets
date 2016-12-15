@@ -12,7 +12,9 @@ class ToggleSlider extends React.Component {
   }
 
   handleOptionChange() {
-    this.setState({ enabled: !(this.state.enabled) });
+    const newState = !(this.state.enabled);
+    this.setState({ enabled: newState });
+    this.props.handleEnableChange(newState);
   }
 
   fieldName() {
@@ -83,10 +85,12 @@ ToggleSlider.propTypes = {
   attribute: React.PropTypes.string.isRequired,
   type: React.PropTypes.string.isRequired,
   value: React.PropTypes.number,
+  handleEnableChange: React.PropTypes.func,
 };
 
 ToggleSlider.defaultProps = {
   min: 0,
   max: 100,
   value: 0,
+  handleEnableChange: () => {},
 };
