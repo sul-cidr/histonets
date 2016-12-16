@@ -32,11 +32,27 @@ Install the [Python library `histonets`](https://github.com/sul-cidr/histonets-c
 $ pip install -r requirements.txt
 ```
 
+The application also uses redis for background job queueing. Make sure to have redis installed as background jobs get scheduled automatically.
+
+```sh
+$ brew install redis
+```
+
 ## Running the application
 
 Run the application
 ```sh
 $ rails s
+```
+
+Run the redis server
+```sh
+$ redis-server
+```
+
+Run the sidekiq job processor
+```sh
+$ bundle exec sidekiq
 ```
 
 ## Running the tests

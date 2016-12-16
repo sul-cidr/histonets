@@ -30,3 +30,6 @@ config/environments/*.local.yml
 
 # Ignore node_modules
 node_modules
+
+# Ignore redis dumps
+*.rdb
