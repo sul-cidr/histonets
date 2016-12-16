@@ -63,6 +63,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'rspec-sidekiq'
 end
 
 group :development do
