@@ -221,6 +221,10 @@ GEM
     redis (3.3.2)
     riiif (0.4.1)
       rails (> 3.2.0)
+    rspec (3.5.0)
+      rspec-core (~> 3.5.0)
+      rspec-expectations (~> 3.5.0)
+      rspec-mocks (~> 3.5.0)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -237,6 +241,9 @@ GEM
       rspec-expectations (~> 3.5.0)
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
+    rspec-sidekiq (2.2.0)
+      rspec (~> 3.0, >= 3.0.0)
+      sidekiq (>= 2.4.0)
     rspec-support (3.5.0)
     sass (3.4.22)
     sass-rails (5.0.6)
@@ -327,6 +334,7 @@ DEPENDENCIES
   react-rails
   riiif
   rspec-rails (~> 3.5)
+  rspec-sidekiq
   sass-rails (~> 5.0)
   sidekiq
   sqlite3

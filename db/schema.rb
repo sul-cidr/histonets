@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161214113639) do
+ActiveRecord::Schema.define(version: 20161216110941) do
 
   create_table "collection_templates", force: :cascade do |t|
     t.integer  "collection_id"
@@ -39,6 +39,14 @@ ActiveRecord::Schema.define(version: 20161214113639) do
     t.integer "image_id"
     t.index ["collection_id"], name: "index_collections_images_on_collection_id"
     t.index ["image_id"], name: "index_collections_images_on_image_id"
+  end
+
+  create_table "histograms", force: :cascade do |t|
+    t.integer  "image_id"
+    t.binary   "histogram"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["image_id"], name: "index_histograms_on_image_id"
   end
 
   create_table "images", force: :cascade do |t|
