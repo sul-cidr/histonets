@@ -1,6 +1,7 @@
 class Image < ApplicationRecord
   has_and_belongs_to_many :collections
   has_many :collection_templates
+  has_one :histogram, dependent: :destroy
   validates :file_name, uniqueness: true
 
   def file_name_no_extension
