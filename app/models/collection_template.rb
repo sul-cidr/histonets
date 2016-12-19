@@ -7,6 +7,9 @@ class CollectionTemplate < ApplicationRecord
   belongs_to :image, optional: true
   has_many :image_templates
 
+  accepts_nested_attributes_for :image_templates,
+                                reject_if: :reject_image_templates
+
   serialize :image_clean, Hash
 
   cattr_accessor :form_steps do
@@ -66,6 +69,12 @@ class CollectionTemplate < ApplicationRecord
       region: crop_bounds,
       size: 'full'
     )}"
+  end
+
+  private
+
+  def reject_image_templates(attributes)
+    attributes['image_url'].blank?
   end
 
   # TODO: Add step by step validations here

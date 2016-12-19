@@ -61,6 +61,10 @@ class CollectionTemplates::BuildController < ApplicationController
                                  :smooth, :posterize, :posterize_method
                                ]
                              }
+                           when 'create_image_templates'
+                             {
+                               image_templates_attributes: [:image_url, :id]
+                             }
                            end
     params.require(:collection_template)
           .permit(permitted_attributes).merge(form_step: step)
