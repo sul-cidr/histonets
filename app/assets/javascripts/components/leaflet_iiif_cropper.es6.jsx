@@ -4,7 +4,7 @@ class LeafletIiifCropper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      region: [0, 0, 300, 300],
+      region: props.region,
     };
   }
 
@@ -41,6 +41,13 @@ class LeafletIiifCropper extends React.Component {
       currentThis.setState({ region });
     });
   }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (nextState.region !== this.state.region) {
+      this.props.onRegionChanged(nextState.region);
+    }
+  }
+
   render() {
     return (
       <input
@@ -61,4 +68,10 @@ LeafletIiifCropper.propTypes = {
   map: React.PropTypes.shape({
     getZoom: React.PropTypes.func.isRequired,
   }).isRequired,
+  onRegionChanged: React.PropTypes.func,
+  region: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
+};
+
+LeafletIiifCropper.defaultProps = {
+  onRegionChanged: () => {},
 };

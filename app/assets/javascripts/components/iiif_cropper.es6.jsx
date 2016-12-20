@@ -5,8 +5,10 @@ class IiifCropper extends React.Component {
     super(props);
     this.state = {
       iiifLoaded: false,
+      region: [0, 0, 300, 300],
     };
     this.onLoad = this.onLoad.bind(this);
+    this.onRegionChanged = this.onRegionChanged.bind(this);
   }
 
   // No need to update the component if everything is loaded
@@ -21,6 +23,12 @@ class IiifCropper extends React.Component {
     this.setState({ ...leafletState });
   }
 
+  onRegionChanged(region) {
+    this.setState({
+      region,
+    });
+  }
+
   render() {
     // Eslint only likes "pure functions" so this is required ¯\_(ツ)_/¯
     if (!this.props.iiifImage) {
@@ -33,6 +41,7 @@ class IiifCropper extends React.Component {
           <LeafletIiifCropper
             {...this.state}
             cropperName={this.props.cropperName}
+            onRegionChanged={this.onRegionChanged}
           />
         ) : null }
       </div>
