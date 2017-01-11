@@ -1,10 +1,16 @@
 <%= t 'image_templates.title' %>
 
 <%= form_for @collection_template, method: :put, url: wizard_path do |f| %>
-  <%= f.hidden_field(:image_paths) %>
+  <% # Add in a hidden field just so that the BuildController stays happy %>
+  <%= f.hidden_field :id, value: @collection_template.id %>
+  <div class="form-group">
+    <%= react_component('ImageTemplateContainer', {
+        iiifImage: Riiif::Engine.routes.url_helpers.info_path(
+          @collection_template.cleaned_image
+        ),
+        imageTemplates: @collection_template.image_templates,
+        cropperName: 'collection_template[crop_bounds]'
+    }) %>
+  </div>
   <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>
-
-<%= react_component('LeafletIiif', {
-  iiifImage: Riiif::Engine.routes.url_helpers.info_path(@collection_template.cleaned_image)
-}) %>

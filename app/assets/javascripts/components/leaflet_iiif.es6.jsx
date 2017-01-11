@@ -26,7 +26,9 @@ class LeafletIiif extends React.Component {
       zoom: 0,
     });
 
-    const iiifLayer = L.tileLayer.iiif(this.props.iiifImage);
+    const iiifLayer = L.tileLayer.iiif(this.props.iiifImage, {
+      maxZoom: 7,
+    });
 
     map.addLayer(iiifLayer);
 
