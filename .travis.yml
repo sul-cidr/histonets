@@ -6,4 +6,5 @@ sudo: false
 before_script:
   - pip3 install https://github.com/sul-cidr/histonets-cv/archive/master.zip
   - RAILS_ENV=test bundle exec rake db:migrate
+  - RAILS_ENV=test bundle exec rake assets:precompile
 # sudo: false Leaving this commented out, as we may need this to install the correct python version etc.
