@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :collection_templates, only: [:new, :create, :show, :index, :destroy] do
     resources :build,
               only: [:show, :update], controller: 'collection_templates/build'
+    resources :image_templates, only: [:edit, :update]
   end
 end

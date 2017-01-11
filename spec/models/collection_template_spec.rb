@@ -20,6 +20,8 @@ RSpec.describe CollectionTemplate, type: :model do
           auto_clean
           crop_image
           image_clean
+          edit_image_templates
+          create_image_paths
         )
       )
     end
@@ -94,6 +96,40 @@ RSpec.describe CollectionTemplate, type: :model do
         expect(subject.cropped_image)
           .to match(/.*localhost.*image-service.*100,100/)
       end
+    end
+  end
+  describe '#unverified_image_templates' do
+    subject { create(:collection_template) }
+    let(:image_template_nil) do
+      create(:image_template, status: nil, collection_template: subject)
+    end
+    let(:image_template_false) do
+      create(:image_template, status: false, collection_template: subject)
+    end
+    before do
+      subject.image_templates = [image_template_nil, image_template_false]
+    end
+    it 'returns all image_templates that are unverified' do
+      expect(subject.unverified_image_templates.count).to eq 2
+    end
+  end
+  describe '#unverify_image_templates' do
+    subject { create(:collection_template) }
+    let(:image_templates) do
+      create_list(
+        :image_template,
+        3,
+        status: true,
+        collection_template: subject
+      )
+    end
+    before do
+      subject.image_templates = image_templates
+    end
+    it 'sets all image_templates to false' do
+      expect(subject.unverified_image_templates.count).to eq 0
+      subject.unverify_image_templates
+      expect(subject.unverified_image_templates.count).to eq 3
     end
   end
 end
