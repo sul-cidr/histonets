@@ -15,6 +15,11 @@ class ImageTemplateViewer extends React.Component {
           name={`collection_template[image_templates_attributes][${this.props.id}][image_url]`}
           value={this.props.image_url}
         />
+        <input
+          type="hidden"
+          name={`collection_template[image_templates_attributes][${this.props.id}][id]`}
+          value={this.props.id}
+        />
       </li>
     );
   }
@@ -22,7 +27,10 @@ class ImageTemplateViewer extends React.Component {
 
 ImageTemplateViewer.propTypes = {
   image_url: React.PropTypes.string,
-  id: React.PropTypes.string,
+  id: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number,
+  ]),
 };
 
 ImageTemplateViewer.defaultProps = {
