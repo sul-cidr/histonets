@@ -5,7 +5,7 @@
 class CollectionTemplate < ApplicationRecord
   belongs_to :collection
   belongs_to :image, optional: true
-  has_many :image_templates
+  has_many :image_templates, dependent: :destroy
 
   accepts_nested_attributes_for :image_templates,
                                 reject_if: :reject_image_templates
