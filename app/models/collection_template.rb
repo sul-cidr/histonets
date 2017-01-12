@@ -20,6 +20,8 @@ class CollectionTemplate < ApplicationRecord
       auto_clean
       image_clean
       create_image_templates
+      edit_image_templates
+      create_image_paths
     )
   end
 
@@ -69,6 +71,18 @@ class CollectionTemplate < ApplicationRecord
       region: crop_bounds,
       size: 'full'
     )}"
+  end
+
+  ##
+  # Query for unverified image_templates
+  def unverified_image_templates
+    image_templates.where(status: [false, nil])
+  end
+
+  ##
+  # Set all `image_templates` as unverified|false
+  def unverify_image_templates
+    image_templates.map { |it| it.update(status: false) }
   end
 
   private

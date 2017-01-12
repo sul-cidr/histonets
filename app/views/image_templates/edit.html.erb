@@ -1,0 +1,18 @@
+<h1><%= t 'image_templates.edit.title' %></h1>
+
+<div>
+  <%= @image_template.image_url %>
+</div>
+
+<%= form_for @image_template, method: :put, url: collection_template_image_template_path do |f| %>
+  <% if f.object.errors.any? %>
+    <div class="error_messages">
+      <% f.object.errors.full_messages.each do |error| %>
+        <p><%= error %></p>
+      <% end %>
+    </div>
+  <% end %>
+  <% # Add in a hidden field just so that the controller stays happy %>
+  <%= f.hidden_field :id, value: @image_template.id %>
+  <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
+<% end %>

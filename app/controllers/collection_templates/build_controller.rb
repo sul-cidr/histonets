@@ -13,6 +13,20 @@ class CollectionTemplates::BuildController < ApplicationController
     case step
     when 'image_clean'
       skip_step if @collection_template.auto_clean
+    ##
+    # Basically a skipped step here. Not a "real" step, but a place to check for
+    # unverified_image_templates
+    when 'edit_image_templates'
+      if !@collection_template.unverified_image_templates.empty?
+        # rubocop:disable Style/AndOr
+        redirect_to edit_collection_template_image_template_path(
+          @collection_template,
+          @collection_template.unverified_image_templates.first
+        ) and return # `and return` is a Rails ism, we should keep this
+        # rubocop:enable
+      else
+        skip_step
+      end
     end
     render_wizard
   end
@@ -25,6 +39,8 @@ class CollectionTemplates::BuildController < ApplicationController
       ImageEnhanceJob.new.perform(@collection_template)
     when 'image_clean'
       ImageCleanJob.new.perform(@collection_template)
+    when 'create_image_templates'
+      @collection_template.unverify_image_templates
     end
     render_wizard @collection_template
   end

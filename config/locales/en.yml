@@ -26,8 +26,12 @@ en:
   auto_clean:
     title: 'Automatic or Manual Image Cleaning'
     label: 'Automatically clean images?'
+  create_image_paths:
+    title: 'Create Image Paths'
   image_templates:
     title: 'Create Image Templates'
+    edit:
+      title: 'Edit Image Templates'
   select_collection:
     title: 'Select a Collection'
   select_image:
