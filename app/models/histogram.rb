@@ -6,8 +6,8 @@
 class Histogram < ApplicationRecord
   include ActiveSupport::Benchmarkable
 
-  belongs_to :image
-  delegate :file_name, to: :image
+  belongs_to :histogramable, polymorphic: true
+  delegate :file_name, to: :histogramable
 
   ##
   # Extracts, parses, and saves the histogram

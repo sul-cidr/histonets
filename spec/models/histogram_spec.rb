@@ -4,8 +4,13 @@ require 'rails_helper'
 
 RSpec.describe Histogram, type: :model do
   describe '#extract_and_parse_histogram' do
+    let(:histogramable) { create(:image, file_name: 'yolo.jpg') }
     subject(:generic_histogram) do
-      create(:histogram, image: create(:image, file_name: 'yolo.jpg'))
+      create(
+        :histogram,
+        histogramable_id: histogramable.id,
+        histogramable_type: 'Image'
+      )
     end
     let(:extractor) { instance_double(HistogramExtractor) }
     it 'extracts and saves a histogram' do

@@ -1,7 +1,7 @@
 class Image < ApplicationRecord
   has_and_belongs_to_many :collections
   has_many :collection_templates
-  has_one :histogram, dependent: :destroy
+  has_one :histogram, dependent: :destroy, as: :histogramable
   validates :file_name, uniqueness: true
 
   after_commit :calculate_histogram, on: :create

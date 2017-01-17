@@ -6,6 +6,10 @@ class CollectionTemplate < ApplicationRecord
   belongs_to :collection
   belongs_to :image, optional: true
   has_many :image_templates, dependent: :destroy
+  has_one :histogram, dependent: :destroy, as: :histogramable
+
+  # Used by Histogram to figure out where the file is
+  delegate :file_name, to: :cleaned_image
 
   accepts_nested_attributes_for :image_templates,
                                 reject_if: :reject_image_templates
