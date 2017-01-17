@@ -3,7 +3,12 @@
 class PosterizeForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { enabled: false };
+    this.state = {
+      enabled: false,
+      formName: 'posterize_method',
+      defaultRadio: 'kmeans',
+      otherRadio: 'linear',
+    };
     this.handleEnableChange = this.handleEnableChange.bind(this);
   }
 
@@ -21,7 +26,12 @@ class PosterizeForm extends React.Component {
           {...this.props}
           handleEnableChange={this.handleEnableChange}
         />
-        <RadioSet enabled={this.state.enabled} />
+        <RadioSet
+          enabled={this.state.enabled}
+          formName={this.state.formName}
+          defaultRadio={this.state.defaultRadio}
+          otherRadio={this.state.otherRadio}
+        />
       </div>
     );
   }

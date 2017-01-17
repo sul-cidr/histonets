@@ -3,7 +3,7 @@ class RadioSet extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedOption: 'kmeans',
+      selectedOption: props.defaultRadio,
       enabled: props.enabled,
     };
     this.handleOptionChange = this.handleOptionChange.bind(this);
@@ -50,25 +50,25 @@ class RadioSet extends React.Component {
             disabled={!this.props.enabled}
             data-toggle="buttons"
           >
-            <label htmlFor="posterize_method" className={this.activeClasses()}>
+            <label htmlFor={this.props.formName} className={this.activeClasses()}>
               <input
                 type="radio"
-                value="kmeans"
+                value={this.props.defaultRadio}
                 name={this.fieldName()}
-                checked={this.state.selectedOption === 'kmeans'}
+                checked={this.state.selectedOption === this.props.defaultRadio}
                 onChange={this.handleOptionChange}
               />
-              Kmeans
+              {this.props.defaultRadio}
             </label>
-            <label htmlFor="posterize_method" className={this.labelClasses()}>
+            <label htmlFor={this.props.formName} className={this.labelClasses()}>
               <input
                 type="radio"
-                value="linear"
+                value={this.props.otherRadio}
                 name={this.fieldName()}
-                checked={this.state.selectedOption === 'linear'}
+                checked={this.state.selectedOption === this.props.otherRadio}
                 onChange={this.handleOptionChange}
               />
-              Linear
+              {this.props.otherRadio}
             </label>
           </div>
         </div>
@@ -78,7 +78,10 @@ class RadioSet extends React.Component {
 }
 
 RadioSet.propTypes = {
+  defaultRadio: React.PropTypes.string,
   enabled: React.PropTypes.bool,
+  formName: React.PropTypes.string,
+  otherRadio: React.PropTypes.string,
 };
 
 RadioSet.defaultProps = {
