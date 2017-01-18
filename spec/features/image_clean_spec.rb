@@ -46,15 +46,30 @@ RSpec.describe 'Image clean', type: :feature, js: true do
         expect(CollectionTemplate.last.image_clean)
           .to eq('posterize' => '0', 'posterize_method' => 'kmeans')
       end
+      it 'enqueues the histogram calculation' do
+        ActiveJob::Base.queue_adapter = :test
+        find('[for="collection_template_image_clean_posterize_enabled"]').click
+        expect(page).to have_xpath '//input[@name="'\
+          'collection_template[image_clean][posterize_method]"]'
+        expect do
+          click_button 'Next Step'
+        end.to have_enqueued_job(CalculateHistogramJob)
+      end
     end
   end
   context 'auto cleaning' do
     before do
       check 'collection_template_auto_clean'
-      click_button 'Next Step'
     end
     it 'saves and sets auto_clean' do
+      click_button 'Next Step'
       expect(CollectionTemplate.last.auto_clean).to be true
+    end
+    it 'enqueues the histogram calculation' do
+      ActiveJob::Base.queue_adapter = :test
+      expect do
+        click_button 'Next Step'
+      end.to have_enqueued_job(CalculateHistogramJob)
     end
   end
 end
