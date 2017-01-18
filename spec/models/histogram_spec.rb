@@ -3,38 +3,24 @@
 require 'rails_helper'
 
 RSpec.describe Histogram, type: :model do
-  describe '#extract_histogram' do
+  describe '#extract_and_parse_histogram' do
+    let(:histogramable) { create(:image, file_name: 'yolo.jpg') }
     subject(:generic_histogram) do
-      create(:histogram, image: create(:image, file_name: 'yolo.jpg'))
-    end
-    let(:riiif_instance) { instance_double(Riiif::File) }
-    it 'receives file_name from relation and calls extract' do
-      expect(Riiif::File).to receive(:new)
-        .with('spec/fixtures/images/yolo.jpg').and_return(riiif_instance)
-      expect(riiif_instance).to receive(:extract).with(
-        format: '-define histogram:unique-colors=true -format %c histogram:info'
+      create(
+        :histogram,
+        histogramable_id: histogramable.id,
+        histogramable_type: 'Image'
       )
-      generic_histogram.extract_histogram
     end
-  end
-  describe '.parse_histogram' do
-    let(:raw_input) do
-      "     18: (162,129, 50) #A28132 srgb(162,129,50)\n"\
-      "     14: (162,142,107) #A28E6B srgb(162,142,107)\n"\
-      "     1: (162,142,141) #A28E8D srgb(162,142,141)\n"
-    end
-    subject(:parsed_response) { described_class.parse_histogram(raw_input) }
-    it 'returns a hash from a raw string' do
-      expect(parsed_response).to be_an Hash
-    end
-    it 'each line is a key,value pair' do
-      expect(parsed_response.count).to eq 3
-    end
-    it 'keys are the rgb colors without whitespace' do
-      expect(parsed_response.keys).to include('(162,129,50)')
-    end
-    it 'values are the counts' do
-      expect(parsed_response.values).to include('18')
+    let(:extractor) { instance_double(HistogramExtractor) }
+    it 'extracts and saves a histogram' do
+      expect(HistogramExtractor).to receive(:new)
+        .with('yolo.jpg').and_return(extractor)
+      expect(extractor).to receive(:extract_and_parse_histogram).and_return({
+        fake: :histogram
+      }.to_json)
+      generic_histogram.extract_and_parse_histogram
+      expect(generic_histogram.histogram).to eq '{"fake":"histogram"}'
     end
   end
 end

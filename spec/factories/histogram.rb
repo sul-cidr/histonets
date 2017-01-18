@@ -2,6 +2,5 @@
 
 FactoryGirl.define do
   factory :histogram do
-    image
   end
 end

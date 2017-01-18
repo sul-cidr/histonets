@@ -37,8 +37,10 @@ class CollectionTemplates::BuildController < ApplicationController
     case step
     when 'auto_clean'
       ImageEnhanceJob.new.perform(@collection_template)
+      @collection_template.calculate_histogram
     when 'image_clean'
       ImageCleanJob.new.perform(@collection_template)
+      @collection_template.calculate_histogram
     when 'create_image_templates'
       @collection_template.unverify_image_templates
     end

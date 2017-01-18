@@ -17,7 +17,7 @@ RSpec.describe HistonetsCv::Cli, type: :model do
     it 'executes the contrast command with arguments' do
       expect(subject).to receive(:execute)
         .with('contrast 42 file://spec/fixtures/images/yolo.jpg -o '\
-              'spec/fixtures/images/yolo_contrast_tmp.jpg')
+              'spec/fixtures/images/yolo_contrast_tmp.png')
       subject.contrast(42)
     end
   end
@@ -26,7 +26,7 @@ RSpec.describe HistonetsCv::Cli, type: :model do
     it 'executes the brightness command with arguments' do
       expect(subject).to receive(:execute)
         .with('brightness 42 file://spec/fixtures/images/yolo.jpg -o '\
-              'spec/fixtures/images/yolo_brightness_tmp.jpg')
+              'spec/fixtures/images/yolo_brightness_tmp.png')
       subject.brightness(42)
     end
   end
@@ -45,7 +45,7 @@ RSpec.describe HistonetsCv::Cli, type: :model do
     it 'executes the pipeline command with json arguments' do
       expect(subject).to receive(:execute)
         .with("pipeline '#{arguments}' file://spec/fixtures/images/yolo.jpg "\
-              '-o spec/fixtures/images/yolo__tmp.jpg')
+              '-o spec/fixtures/images/yolo__tmp.png')
       subject.pipeline(arguments)
     end
   end

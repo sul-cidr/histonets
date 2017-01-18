@@ -1,2 +1,3 @@
 HOST_URL: "http://localhost:3000"
 IMAGE_PATH: 'spec/fixtures/images'
+DEFAULT_IMAGE_EXTENSION: 'png'
