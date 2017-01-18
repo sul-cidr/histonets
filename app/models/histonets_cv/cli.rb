@@ -8,10 +8,11 @@ module HistonetsCv
 
     delegate :logger, to: :Rails
 
-    attr_reader :file_name
+    attr_reader :file_name, :extension
 
-    def initialize(file_name = '')
+    def initialize(file_name = '', extension = 'png')
       @file_name = file_name
+      @extension = extension
     end
 
     def contrast(value)
@@ -73,7 +74,7 @@ module HistonetsCv
     def output(hash)
       "-o #{Settings.IMAGE_PATH}/"\
       "#{File.basename(file_name, File.extname(file_name))}_#{hash}_tmp"\
-      "#{File.extname(file_name)}"
+      ".#{extension}"
     end
   end
 end

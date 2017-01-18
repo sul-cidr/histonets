@@ -67,7 +67,7 @@ RSpec.describe CollectionTemplate, type: :model do
     end
     it 'returns a MD5 hashed value of name, crop_bounds, and image_clean' do
       expect(subject.fingerprinted_name)
-        .to eq '383843602aa6372e03b5343c2ae8c9db'
+        .to eq '5045802809d18d1e73953eeccdf130dd'
     end
   end
   describe '#cropped_image' do

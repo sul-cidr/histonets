@@ -9,7 +9,7 @@ class CollectionTemplate < ApplicationRecord
   has_one :histogram, dependent: :destroy, as: :histogramable
 
   # Used by Histogram to figure out where the file is
-  delegate :file_name, to: :cleaned_image
+  alias_attribute :file_name, :cleaned_file_name
 
   accepts_nested_attributes_for :image_templates,
                                 reject_if: :reject_image_templates
@@ -56,6 +56,10 @@ class CollectionTemplate < ApplicationRecord
     "#{fingerprinted_name}_tmp"
   end
 
+  def cleaned_file_name
+    "#{cleaned_image}.#{Settings.DEFAULT_IMAGE_EXTENSION}"
+  end
+
   def fingerprinted_name
     Digest::MD5.hexdigest(
       [
@@ -73,7 +77,8 @@ class CollectionTemplate < ApplicationRecord
     "#{Riiif::Engine.routes.url_helpers.image_path(
       image.file_name_no_extension,
       region: crop_bounds,
-      size: 'full'
+      size: 'full',
+      format: Settings.DEFAULT_IMAGE_EXTENSION
     )}"
   end
 
@@ -87,6 +92,10 @@ class CollectionTemplate < ApplicationRecord
   # Set all `image_templates` as unverified|false
   def unverify_image_templates
     image_templates.map { |it| it.update(status: false) }
+  end
+
+  def calculate_histogram
+    CalculateHistogramJob.perform_later(self)
   end
 
   private

@@ -20,7 +20,7 @@ class ImageTemplateContainer extends React.Component {
   }
 
   regionToImageUrl(region) {
-    return `${this.props.iiifImage.replace('/info.json', '')}/${region.join(',')}/full/0/default.jpg`;
+    return `${this.props.iiifImage.replace('/info.json', '')}/${region.join(',')}/full/0/default.png`;
   }
 
   render() {
