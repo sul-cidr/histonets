@@ -32,7 +32,10 @@ class ImageTemplatesController < ApplicationController
   end
 
   def image_template_params
-    params.require(:image_template).permit(:id)
+    permitted_attributes = {
+      match_options: [:threshold, :rotation, :elasticity]
+    }
+    params.require(:image_template).permit(:id, permitted_attributes)
   end
 
   # Use callbacks to share common setup or constraints between actions.
