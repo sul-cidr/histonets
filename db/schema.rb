@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170117212158) do
+ActiveRecord::Schema.define(version: 20170119132559) do
 
   create_table "collection_templates", force: :cascade do |t|
     t.integer  "collection_id"
@@ -42,14 +42,12 @@ ActiveRecord::Schema.define(version: 20170117212158) do
   end
 
   create_table "histograms", force: :cascade do |t|
-    t.integer  "image_id"
     t.binary   "histogram"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.string   "histogramable_type"
     t.integer  "histogramable_id"
     t.index ["histogramable_type", "histogramable_id"], name: "index_histograms_on_histogramable_type_and_histogramable_id"
-    t.index ["image_id"], name: "index_histograms_on_image_id"
   end
 
   create_table "image_templates", force: :cascade do |t|
