@@ -9,5 +9,26 @@
   <% end %>
   <% # Add in a hidden field just so that the BuildController stays happy %>
   <%= f.hidden_field :id, value: @collection_template.id %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-8">
+        <%= react_component('LeafletIiif', {
+          iiifImage: Riiif::Engine.routes.url_helpers.info_path(
+            @collection_template.cleaned_image
+          )
+        }) %>
+      </div>
+      <div class="col-md-4">
+        <ul class="image-path-list">
+          <% @collection_template.parsed_histogram.each do |histogram| %>
+            <%= react_component('Histogram', {
+              histogram: histogram
+              })
+            %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
   <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>
