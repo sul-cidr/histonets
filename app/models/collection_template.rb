@@ -37,8 +37,7 @@ class CollectionTemplate < ApplicationRecord
   attr_accessor :form_step
 
   def image_clean_to_formal_json
-    json_params = HashWithIndifferentAccess
-                  .new_from_hash_copying_default(image_clean)
+    json_params = HashWithIndifferentAccess.new(image_clean)
     pipeline_params = []
     json_params.each do |k, v|
       if k.to_s == 'posterize'
