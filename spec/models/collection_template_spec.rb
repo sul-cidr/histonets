@@ -132,4 +132,35 @@ RSpec.describe CollectionTemplate, type: :model do
       expect(subject.unverified_image_templates.count).to eq 3
     end
   end
+  describe '#create_image_template_matches' do
+    subject do
+      create(
+        :collection_template,
+        image: create(:image, file_name: 'eddie.jpg')
+      )
+    end
+    let(:image_templates) do
+      create_list(
+        :image_template,
+        3,
+        image_url: '/yolo.png',
+        match_options: { 'flip' => 5, 'threshold' => 5 },
+        status: true,
+        collection_template: subject
+      )
+    end
+    let(:cli_instance) { instance_double(HistonetsCv::Cli) }
+    before do
+      subject.image_templates = image_templates
+      allow(HistonetsCv::Cli).to receive(:new).and_return(cli_instance)
+    end
+    it 'calls the cli with options' do
+      options = Array
+                .new(3, 'http://localhost:1337/yolo.png -th 5 -f 5').join(' ')
+      expect(cli_instance).to receive(:match)
+        .with(options, subject.cleaned_image_url).and_return('[[[0,200]]]')
+      subject.create_image_template_matches
+      expect(subject.image_matches).to eq [[[0, 200]]]
+    end
+  end
 end
