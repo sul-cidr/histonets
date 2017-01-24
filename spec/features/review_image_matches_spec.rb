@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Image path editing', type: :feature, js: true do
+RSpec.describe 'Review image matches', type: :feature, js: true do
   before do
     ActiveJob::Base.queue_adapter = :inline
     image = create(:image, file_name: 'eddie.jpg')
@@ -14,13 +14,17 @@ RSpec.describe 'Image path editing', type: :feature, js: true do
     click_button 'Next Step'
     check 'collection_template_auto_clean'
     click_button 'Next Step'
+    # Click somewhere on the map to zoom in
+    find('#map').double_click
+    click_button 'Add template of cropped area'
     click_button 'Next Step'
     click_button 'Next Step'
   end
   after do
     ActiveJob::Base.queue_adapter = :test
   end
-  it 'Should display the precalculated histograms on the page' do
-    expect(page).to have_css '.histogram-color', count: 8
+  it 'Should show the rectangle on the map' do
+    expect(page).to have_css '[data-matches-geometry]'
+    expect(page).to have_css '.leaflet-overlay-pane path', wait: 10
   end
 end

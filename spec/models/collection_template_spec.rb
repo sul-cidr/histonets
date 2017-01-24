@@ -21,6 +21,7 @@ RSpec.describe CollectionTemplate, type: :model do
           crop_image
           image_clean
           edit_image_templates
+          review_template_match_results
           create_image_paths
         )
       )

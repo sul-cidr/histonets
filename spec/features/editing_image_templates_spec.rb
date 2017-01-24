@@ -22,6 +22,7 @@ RSpec.describe 'Create image templates', type: :feature, js: true do
       expect(page).to have_css 'h1', text: 'Edit Image Templates'
       click_button 'Next Step'
     end
+    click_button 'Next Step'
     expect(page).to have_css 'h1', text: 'Create Image Paths'
   end
   describe 'edit image form' do

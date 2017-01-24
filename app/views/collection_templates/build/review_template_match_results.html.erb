@@ -1,0 +1,28 @@
+<h1><%= t 'review_template_match_results.title' %></h1>
+
+<%= form_for @collection_template, method: :put, url: wizard_path do |f| %>
+  <% if f.object.errors.any? %>
+    <div class="error_messages">
+      <% f.object.errors.full_messages.each do |error| %>
+        <p><%= error %></p>
+      <% end %>
+    </div>
+  <% end %>
+  <% # Add in a hidden field just so that the BuildController stays happy %>
+  <%= f.hidden_field :id, value: @collection_template.id %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-8">
+        <%= react_component('ImageMatchResults', {
+          iiifImage: Riiif::Engine.routes.url_helpers.info_path(
+            @collection_template.cleaned_image
+          ),
+          matches: @collection_template.image_matches
+        }) %>
+      </div>
+    </div>
+  </div>
+  <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
+<% end %>
+
+<%= link_to t('image_templates.title'), wizard_path(:create_image_templates) %>
