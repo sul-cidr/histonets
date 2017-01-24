@@ -1,0 +1,19 @@
+.image-path-list {
+  max-height: 500px;
+  overflow-y: scroll;
+
+  li {
+    height: 60px;
+    margin: 10px;
+  }
+}
+
+$swatch-border: rgba(0, 0, 0, 0.2);
+
+.histogram-color {
+  border: 1px solid $swatch-border;
+  height: 40px;
+  position: relative;
+  top: 15px;
+  width: 40px;
+}

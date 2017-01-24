@@ -31,10 +31,14 @@ class CollectionTemplate < ApplicationRecord
 
   ##
   # TODO: Unimplemented form steps to add:
-  # create_image_paths
   # view_image_graph
 
   attr_accessor :form_step
+
+  def parsed_histogram
+    return JSON.parse(histogram.histogram) unless histogram.nil?
+    []
+  end
 
   def image_clean_to_formal_json
     json_params = HashWithIndifferentAccess.new(image_clean)

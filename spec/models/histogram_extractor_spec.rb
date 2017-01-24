@@ -21,6 +21,7 @@ RSpec.describe HistogramExtractor, type: :model do
     let(:raw_input) do
       "     18: (162,129, 50) #A28132 srgb(162,129,50)\n"\
       "     14: (162,142,107) #A28E6B srgb(162,142,107)\n"\
+      "                                                \n"\
       "     1: (162,142,141) #A28E8D srgb(162,142,141)\n"
     end
     subject(:parsed_response) { described_class.parse_histogram(raw_input) }

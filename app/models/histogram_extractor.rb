@@ -41,11 +41,12 @@ class HistogramExtractor
   ##
   # Parses raw output from ImageMagick histogram into a Hash
   def self.parse_histogram(raw_output)
-    raw_output.each_line.map do |line|
+    output = raw_output.each_line.map do |line|
       [
-        /\([0-9]*,[0-9]*,[0-9]*\)/.match(line.delete(' '))[0],
-        /[0-9]*:/.match(line)[0].sub(':', '')
+        /\([0-9]*,[0-9]*,[0-9]*\)/.match(line.delete(' ')).to_s,
+        /[0-9]*:/.match(line).to_s.sub(':', '')
       ]
     end.to_h
+    output.delete_if { |k, v| v.empty? || k.empty? }
   end
 end
