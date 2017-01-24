@@ -9,6 +9,7 @@ class IiifCropper extends React.Component {
     };
     this.onLoad = this.onLoad.bind(this);
     this.onRegionChanged = this.onRegionChanged.bind(this);
+    console.log(this);
   }
 
   // No need to update the component if everything is loaded

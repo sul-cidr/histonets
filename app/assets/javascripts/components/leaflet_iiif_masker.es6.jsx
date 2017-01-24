@@ -1,36 +1,41 @@
 /* global L */
 
+const mapStyle = {
+  height: '500px',
+  width: '100%',
+};
+
 class LeafletIiifMasker extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      region: props.region,
-    };
   }
 
-  componentWillMount() {
-    const map = L.map('map', {
+  componentDidMount() {
+    const map = L.map(this.leafletContainer, {
       center: [0, 0],
       crs: L.CRS.Simple,
       zoom: 0,
     });
 
     // Directly add a IIIF tile to the map
-    const imageUrl = 'https://stacks.stanford.edu/image/iiif/cv770rd9515%2F0767_23A_SM/0,2048,2048,2048/512,/0/default.jpg'
 
     // Grab the region from the URL
-    const region = imageUrl.match(/(\d*,){3}\d*/)[0].split(',');
+    const region = this.props.iiifImage.match(/(\d*,){3}\d*/)[0].split(',');
     const size = 512;
     const x = parseInt(region[0], 10); // specifying radix to make linter happy
     const y = parseInt(region[1], 10);
 
     // Set imageBounds based off of the x,y and size
-    const imageBounds = [[y + size, x], [y, size + x]];
+    const imageBounds = [[y + size, x+80], [y+80, size + x]];
     map.fitBounds(imageBounds);
-    const overlayLayer = L.imageOverlay(imageUrl, imageBounds);
+    /* const baseLayer = L.imageOverlay(imageUrl, imageBounds);*/
+    const baseLayer = L.imageOverlay(this.props.iiifImage, imageBounds);
 
     // Add the overlayLayer to the map.
-    map.addLayer(overlayLayer);
+    baseLayer.addTo(map);
+
+    /* Add the overlayLayer to the map.
+     * baseLayer.addTo(map);*/
 
     // Initialise the FeatureGroup to store editable layers
     const drawnItems = new L.FeatureGroup();
@@ -52,27 +57,22 @@ class LeafletIiifMasker extends React.Component {
 
     map.addControl(drawControl);
 
-    map.on('draw:created', function (e) {
-      const type = e.layerType
+    map.on(L.Draw.Event.CREATED, function (e) {
       const layer = e.layer;
 
       const geojson = e.layer.toGeoJSON();
-      // Log out the geojson
-      console.log(geojson);
 
       // Convert to annotation
       const layerBounds = e.layer.getBounds();
-      // console.log(al)
       const layerX = layerBounds.getWest();
       const layerY = layerBounds.getNorth();
       const w = layerBounds.getEast() - x;
       const h = y - layerBounds.getSouth();
       const annoRegion = [layerX, layerY, w, h];
       const anno = `xywh=${annoRegion.join(',')}`;
-      console.log(anno);
 
       // Do whatever else you need to. (save to db, add to map etc)
-      map.addLayer(layer);
+      drawnItems.addLayer(layer);
     });
   }
 
@@ -83,20 +83,17 @@ class LeafletIiifMasker extends React.Component {
   }
 
   render() {
+    // Eslint only likes "pure functions" so this is required ¯\_(ツ)_/¯
     return (
-      <input
-          value={this.state.region}
-          name={this.props.cropperName}
-          readOnly
-          hidden
-      />
+      <div>
+        <div id="map" ref={(c) => { this.leafletContainer = c; }} style={mapStyle} />
+      </div>
     );
   }
 }
 
 LeafletIiifMasker.propTypes = {
-  cropperName: React.PropTypes.string.isRequired,
-  /* iiifImage: React.PropTypes.string.isRequired,*/
+  iiifImage: React.PropTypes.string.isRequired,
   onRegionChanged: React.PropTypes.func,
 };
 

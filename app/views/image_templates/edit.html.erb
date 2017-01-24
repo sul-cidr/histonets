@@ -1,11 +1,9 @@
 <h1><%= t 'image_templates.edit.title' %></h1>
 
+
 <div id="map">
   <%= react_component('LeafletIiifMasker', {
-    iiifImage: Riiif::Engine.routes.url_helpers.info_path(
-      @image_template.image_url
-    ),
-    cropperName: 'collection_template[crop_bounds]'
+    iiifImage: @image_template.image_url
   }) %>
   <hr>
 </div>
