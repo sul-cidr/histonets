@@ -39,6 +39,10 @@ module HistonetsCv
       execute("enhance #{input(image_url)} #{output(fingerprint)}")
     end
 
+    def match(image_templates, image_url = nil)
+      execute("match #{image_templates} #{input(image_url)}")
+    end
+
     def help
       execute('--help')
     end

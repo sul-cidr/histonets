@@ -15,6 +15,7 @@ class CollectionTemplate < ApplicationRecord
                                 reject_if: :reject_image_templates
 
   serialize :image_clean, Hash
+  serialize :image_matches, Array
 
   cattr_accessor :form_steps do
     %w(
@@ -63,6 +64,17 @@ class CollectionTemplate < ApplicationRecord
     "#{cleaned_image}.#{Settings.DEFAULT_IMAGE_EXTENSION}"
   end
 
+  def cleaned_image_url
+    return '' unless cleaned_image.present?
+    "#{Settings.HOST_URL}"\
+    "#{Riiif::Engine.routes.url_helpers.image_path(
+      cleaned_image,
+      region: 'full',
+      size: 'full',
+      format: Settings.DEFAULT_IMAGE_EXTENSION
+    )}"
+  end
+
   def fingerprinted_name
     Digest::MD5.hexdigest(
       [
@@ -99,6 +111,16 @@ class CollectionTemplate < ApplicationRecord
 
   def calculate_histogram
     CalculateHistogramJob.perform_later(self)
+  end
+
+  def create_image_template_matches
+    temp = HistonetsCv::Cli.new(image.file_name)
+                           .match(
+                             image_templates.map(&:cli_options).join(' '),
+                             cleaned_image_url
+                           )
+    self.image_matches = JSON.parse(temp)
+    save
   end
 
   private
