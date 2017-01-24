@@ -15,6 +15,7 @@ class ImageTemplatesController < ApplicationController
         @image_template.collection_template.unverified_image_templates.first
       )
     else
+      @image_template.collection_template.create_image_template_matches
       ##
       # When no more unverified_image_templates remain, redirect back to the
       # step after `edit_image_templates`
