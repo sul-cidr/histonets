@@ -12,12 +12,12 @@ class ImageTemplateViewer extends React.Component {
         />
         <input
           type="hidden"
-          name={`collection_template[image_templates_attributes][${this.props.id}][image_url]`}
+          name="collection_template[image_templates_attributes][][image_url]"
           value={this.props.image_url}
         />
         <input
           type="hidden"
-          name={`collection_template[image_templates_attributes][${this.props.id}][id]`}
+          name="collection_template[image_templates_attributes][][id]"
           value={this.props.id}
         />
       </li>
