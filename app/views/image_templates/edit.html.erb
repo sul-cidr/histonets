@@ -29,3 +29,6 @@
   }) %>
   <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>
+
+<hr>
+<%= link_to t('crud.destroy'), collection_template_image_template_path, {method: :delete, remote: true, data: { confirm: t('crud.confirm') }, class: 'btn btn-danger'} %>

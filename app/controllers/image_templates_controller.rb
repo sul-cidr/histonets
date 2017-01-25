@@ -15,10 +15,21 @@ class ImageTemplatesController < ApplicationController
         @image_template.collection_template.unverified_image_templates.first
       )
     else
+      @image_template.collection_template.create_image_template_matches
       ##
       # When no more unverified_image_templates remain, redirect back to the
       # step after `edit_image_templates`
       return_to_next_collection_template_builder
+    end
+  end
+
+  def destroy
+    @image_template.destroy
+    respond_to do |format|
+      format.html do
+        return_to_image_template_builder
+      end
+      format.json { head :no_content }
     end
   end
 
@@ -28,6 +39,13 @@ class ImageTemplatesController < ApplicationController
     redirect_to collection_template_build_path(
       @image_template.collection_template,
       CollectionTemplate.form_steps[CollectionTemplate.form_steps.index('edit_image_templates') + 1]
+    )
+  end
+
+  def return_to_image_template_builder
+    redirect_to collection_template_build_path(
+      @image_template.collection_template,
+      'create_image_templates'
     )
   end
 

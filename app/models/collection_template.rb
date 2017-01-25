@@ -26,6 +26,7 @@ class CollectionTemplate < ApplicationRecord
       image_clean
       create_image_templates
       edit_image_templates
+      review_template_match_results
       create_image_paths
     )
   end
