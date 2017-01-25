@@ -24,6 +24,9 @@
   <%= react_component('ToggleSlider', {
     value: 0, max: 100, object: f.object_name, attribute: 'match_options', type: 'rotation'
   }) %>
+  <%= react_component('FlipForm', {
+    object: f.object_name, attribute: 'match_options', type: 'flip'
+  }) %>
   <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>
 
