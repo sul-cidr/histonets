@@ -22,6 +22,7 @@ RSpec.describe 'Collection Template Builder', type: :feature, js: true do
       click_button 'Next Step'
       click_button 'Next Step'
       click_button 'Next Step'
+      click_button 'Next Step'
       # Just a basic show page with some json rendered
       expect(page).to have_css 'body', text: '{"id":'
     end
