@@ -9,7 +9,7 @@
   <% end %>
   <div class="form-group">
     <div class="form-check">
-      <%= f.label :auto_clean, class: 'form-check-label' do %>
+      <%= f.label :auto_clean, class: 'form-check-label', data: {toggle: 'tooltip', placement: 'right', title: t('auto_clean.help') } do %>
         <%= f.check_box :auto_clean, class: 'form-check-input', checked_value: true %>
         <%= t 'auto_clean.label' %>
       <% end %>

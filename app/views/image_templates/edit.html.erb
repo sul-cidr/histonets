@@ -1,5 +1,8 @@
 <h1><%= t 'image_templates.edit.title' %></h1>
 
+<h2>
+  <%= t 'image_templates.edit.help' %>
+</h2>
 <div>
   <%= image_tag @image_template.image_url %>
   <hr>
@@ -16,13 +19,13 @@
   <% # Add in a hidden field just so that the controller stays happy %>
   <%= f.hidden_field :id, value: @image_template.id %>
   <%= react_component('ToggleSlider', {
-    value: 80, max: 100, object: f.object_name, attribute: 'match_options', type: 'threshold'
+    value: 80, max: 100, object: f.object_name, attribute: 'match_options', type: 'threshold', helpText: t('image_templates.threshold.help')
   }) %>
   <%= react_component('ToggleSlider', {
-    value: 0, max: 100, object: f.object_name, attribute: 'match_options', type: 'elasticity'
+    value: 0, max: 100, object: f.object_name, attribute: 'match_options', type: 'elasticity', helpText: t('image_templates.elasticity.help')
   }) %>
   <%= react_component('ToggleSlider', {
-    value: 0, max: 100, object: f.object_name, attribute: 'match_options', type: 'rotation'
+    value: 0, max: 100, object: f.object_name, attribute: 'match_options', type: 'rotation', helpText: t('image_templates.rotation.help')
   }) %>
   <%= react_component('FlipForm', {
     object: f.object_name, attribute: 'match_options', type: 'flip'

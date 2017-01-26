@@ -1,3 +1,5 @@
+/* globals $ */
+
 class ToggleSlider extends React.Component {
   constructor(props) {
     super(props);
@@ -5,6 +7,14 @@ class ToggleSlider extends React.Component {
 
     this.handleSliderChange = this.handleSliderChange.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
+  }
+
+  componentDidMount() {
+    this.attachTooltip();
+  }
+
+  componentDidUpdate() {
+    this.attachTooltip();
   }
 
   handleSliderChange(event) {
@@ -15,6 +25,10 @@ class ToggleSlider extends React.Component {
     const newState = !(this.state.enabled);
     this.setState({ enabled: newState });
     this.props.handleEnableChange(newState);
+  }
+
+  attachTooltip() {
+    $(this.tooltip).tooltip();
   }
 
   fieldName() {
@@ -35,7 +49,15 @@ class ToggleSlider extends React.Component {
   render() {
     return (
       <div className="form-group row">
-        <p className="col-sm-2 form-text text-capitalize">{this.props.type}</p>
+        <label
+          className="col-sm-2 form-text text-capitalize"
+          data-toggle="tooltip"
+          data-title={this.props.helpText}
+          htmlFor={this.customLabel()}
+          ref={(tooltip) => { this.tooltip = tooltip; }}
+        >
+          {this.props.type}
+        </label>
         <div className="col-sm-4">
           <input
             min={this.props.min}
@@ -86,6 +108,7 @@ ToggleSlider.propTypes = {
   type: React.PropTypes.string.isRequired,
   value: React.PropTypes.number,
   handleEnableChange: React.PropTypes.func,
+  helpText: React.PropTypes.string,
 };
 
 ToggleSlider.defaultProps = {
@@ -93,4 +116,5 @@ ToggleSlider.defaultProps = {
   max: 100,
   value: 0,
   handleEnableChange: () => {},
+  helpText: '',
 };

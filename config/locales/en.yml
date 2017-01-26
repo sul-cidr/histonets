@@ -26,12 +26,23 @@ en:
   auto_clean:
     title: 'Automatic or Manual Image Cleaning'
     label: 'Automatically clean images?'
+    help: 'Clean image automatically with sane defaults.'
   create_image_paths:
     title: 'Create Image Paths'
   image_templates:
     title: 'Create Image Templates'
     edit:
       title: 'Edit Image Templates'
+      help: 'Modify the parameters used for finding matches for this image'
+    help: 'Move around the image to find templates to use for intersection finding.'
+    threshold:
+      help: 'Threshold to match template to image. Ranges from 0 to 100. Defaults to 80.'
+    elasticity:
+      help: ''
+    rotation:
+      help: ''
+    flip:
+      help: 'Whether also match TEMPLATE flipped horizontally. vertically, or both. Defaults to not flipping.'
   select_collection:
     title: 'Select a Collection'
   select_image:
@@ -40,6 +51,19 @@ en:
     title: 'Crop Area of Interest'
   image_clean:
     title: 'Clean Image'
+    help: 'Clean image with manual refinements.'
+    denoise:
+      help: 'Denoise image.'
+    equalize:
+      help: 'Histogram equalization on image.'
+    brightness:
+      help: 'Adjust brightness of image.'
+    contrast:
+      help: 'Adjust contrast of image.'
+    smooth:
+      help: 'Smooth image using bilateral filter.'
+    posterize:
+      help: 'Posterize image by reducing its number of colors.'
   collection_template:
     title: 'Collection Templates'
     new: 'New Collection Template'
