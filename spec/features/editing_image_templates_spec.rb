@@ -46,5 +46,10 @@ RSpec.describe 'Create image templates', type: :feature, js: true do
       click_button 'Next Step'
       expect(ImageTemplate.last.match_options).to eq('threshold' => '80')
     end
+    it 'enabling flip sends through option' do
+      find('[for="image_template_match_options_flip_enabled"]').click
+      click_button 'Next Step'
+      expect(ImageTemplate.last.match_options).to eq('flip' => 'horizontal')
+    end
   end
 end
