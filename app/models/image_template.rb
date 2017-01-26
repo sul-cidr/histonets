@@ -5,4 +5,5 @@
 class ImageTemplate < ApplicationRecord
   belongs_to :collection_template
   serialize :match_options, Hash
+  serialize :masks
 end

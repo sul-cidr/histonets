@@ -1,13 +1,4 @@
 <h1><%= t 'image_templates.edit.title' %></h1>
-
-
-<div id="map">
-  <%= react_component('LeafletIiifMasker', {
-    iiifImage: @image_template.image_url
-  }) %>
-  <hr>
-</div>
-
 <%= form_for @image_template, method: :put, url: collection_template_image_template_path do |f| %>
   <% if f.object.errors.any? %>
     <div class="error_messages">
@@ -18,6 +9,15 @@
   <% end %>
   <% # Add in a hidden field just so that the controller stays happy %>
   <%= f.hidden_field :id, value: @image_template.id %>
+  <div id="map">
+    <%= react_component('LeafletIiifMasker', {
+      iiifImage: @image_template.image_url,
+      fieldName: 'image_template[masks][]',
+      id: 'image_template_masks',
+      masks: @image_template.masks
+    }) %>
+    <hr>
+  </div>
   <%= react_component('ToggleSlider', {
     value: 80, max: 100, object: f.object_name, attribute: 'match_options', type: 'threshold'
   }) %>

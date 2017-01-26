@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170119132559) do
+ActiveRecord::Schema.define(version: 20170125233737) do
 
   create_table "collection_templates", force: :cascade do |t|
     t.integer  "collection_id"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20170119132559) do
     t.datetime "updated_at",    null: false
     t.integer  "image_id"
     t.boolean  "auto_clean"
+    t.text     "image_matches"
     t.index ["collection_id"], name: "index_collection_templates_on_collection_id"
     t.index ["image_id"], name: "index_collection_templates_on_image_id"
   end
@@ -58,6 +59,7 @@ ActiveRecord::Schema.define(version: 20170119132559) do
     t.datetime "updated_at",             null: false
     t.boolean  "status"
     t.text     "match_options"
+    t.text     "masks"
     t.index ["collection_template_id"], name: "index_image_templates_on_collection_template_id"
   end
 

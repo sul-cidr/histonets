@@ -8,9 +8,16 @@ const mapStyle = {
 class LeafletIiifMasker extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      masks: props.masks,
+    };
   }
 
   componentDidMount() {
+    this.createMasker();
+  }
+
+  createMasker() {
     const map = L.map(this.leafletContainer, {
       center: [0, 0],
       crs: L.CRS.Simple,
@@ -26,9 +33,8 @@ class LeafletIiifMasker extends React.Component {
     const y = parseInt(region[1], 10);
 
     // Set imageBounds based off of the x,y and size
-    const imageBounds = [[y + size, x+80], [y+80, size + x]];
+    const imageBounds = [[y + size, x + 80], [y + 80, size + x]];
     map.fitBounds(imageBounds);
-    /* const baseLayer = L.imageOverlay(imageUrl, imageBounds);*/
     const baseLayer = L.imageOverlay(this.props.iiifImage, imageBounds);
 
     // Add the overlayLayer to the map.
@@ -57,36 +63,32 @@ class LeafletIiifMasker extends React.Component {
 
     map.addControl(drawControl);
 
-    map.on(L.Draw.Event.CREATED, function (e) {
-      const layer = e.layer;
-
-      const geojson = e.layer.toGeoJSON();
-
-      // Convert to annotation
-      const layerBounds = e.layer.getBounds();
-      const layerX = layerBounds.getWest();
-      const layerY = layerBounds.getNorth();
-      const w = layerBounds.getEast() - x;
-      const h = y - layerBounds.getSouth();
-      const annoRegion = [layerX, layerY, w, h];
-      const anno = `xywh=${annoRegion.join(',')}`;
-
-      // Do whatever else you need to. (save to db, add to map etc)
-      drawnItems.addLayer(layer);
+    map.on(L.Draw.Event.CREATED, (e) => {
+      drawnItems.addLayer(e.layer);
+      this.updateMasks(drawnItems._layers);
     });
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    if (nextState.region !== this.state.region) {
-      this.props.onRegionChanged(nextState.region);
-    }
+  updateMasks(layers) {
+    this.setState({
+      masks: JSON.stringify(Object.keys(layers).map(layerKey =>
+        layers[layerKey]._bounds,
+      )),
+    });
+
+    // Do whatever else you need to. (save to db, add to map etc)
   }
 
   render() {
-    // Eslint only likes "pure functions" so this is required ¯\_(ツ)_/¯
     return (
       <div>
         <div id="map" ref={(c) => { this.leafletContainer = c; }} style={mapStyle} />
+        <input
+          id={this.props.id}
+          value={this.state.masks}
+          name={this.props.fieldName}
+          readOnly hidden
+        />
       </div>
     );
   }
@@ -94,7 +96,9 @@ class LeafletIiifMasker extends React.Component {
 
 LeafletIiifMasker.propTypes = {
   iiifImage: React.PropTypes.string.isRequired,
-  onRegionChanged: React.PropTypes.func,
+  fieldName: React.PropTypes.string.isRequired,
+  id: React.PropTypes.string.isRequired,
+  masks: React.PropTypes.string.isRequired,
 };
 
 LeafletIiifMasker.defaultProps = {

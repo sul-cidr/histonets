@@ -83,6 +83,10 @@ class CollectionTemplates::BuildController < ApplicationController
                              {
                                image_templates_attributes: [:image_url, :id]
                              }
+                           when 'edit_image_templates'
+                             {
+                               image_templates_attributes: [:image_url, :id, :masks]
+                             }
                            end
     params.require(:collection_template)
           .permit(permitted_attributes).merge(form_step: step)
