@@ -12,19 +12,19 @@
   <% end %>
   <% # Add in a hidden field just so that the BuildController stays happy %>
   <%= f.hidden_field :id, value: @collection_template.id %>
-  <%= react_component('ToggleSlider', {
+  <%= react_component('ToggleForm', {
     object: f.object_name, attribute: 'image_clean', type: 'denoise', helpText: t('image_clean.denoise.help')
   }) %>
-  <%= react_component('ToggleSlider', {
+  <%= react_component('ToggleForm', {
     object: f.object_name, attribute: 'image_clean', type: 'equalize', helpText: t('image_clean.equalize.help')
   }) %>
-  <%= react_component('ToggleSlider', {
+  <%= react_component('ToggleForm', {
     value: 100, max: 200, object: f.object_name, attribute: 'image_clean', type: 'brightness', helpText: t('image_clean.brightness.help')
   }) %>
-  <%= react_component('ToggleSlider', {
+  <%= react_component('ToggleForm', {
     value: 100, max: 200, object: f.object_name, attribute: 'image_clean', type: 'contrast', helpText: t('image_clean.brightness.help')
   }) %>
-  <%= react_component('ToggleSlider', {
+  <%= react_component('ToggleForm', {
     object: f.object_name, attribute: 'image_clean', type: 'smooth', helpText: t('image_clean.brightness.help')
   }) %>
   <%= react_component('PosterizeForm', {

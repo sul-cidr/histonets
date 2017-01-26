@@ -1,15 +1,39 @@
-class FlipForm extends React.Component {
+/* globals $, Range, Select */
+
+class ToggleForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { enabled: false };
+    this.state = { value: props.value, enabled: false };
 
     this.handleOptionChange = this.handleOptionChange.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
+
+    this.acceptableComponents = {
+      Range,
+      Select,
+    };
+  }
+
+  componentDidMount() {
+    this.attachTooltip();
+  }
+
+  componentDidUpdate() {
+    this.attachTooltip();
+  }
+
+  onUpdate(value) {
+    this.setState({ value });
   }
 
   handleOptionChange() {
     const newState = !(this.state.enabled);
     this.setState({ enabled: newState });
     this.props.handleEnableChange(newState);
+  }
+
+  attachTooltip() {
+    $(this.tooltip).tooltip();
   }
 
   fieldName() {
@@ -27,23 +51,35 @@ class FlipForm extends React.Component {
     return `${this.props.object}_${this.props.attribute}_${this.props.type}`;
   }
 
+  componentBasedOnType() {
+    const thisComponent = this.acceptableComponents[this.props.formType];
+    return React.createElement(thisComponent, {
+      ...this.props,
+      enabled: this.state.enabled,
+      onUpdate: this.onUpdate,
+      customLabel: this.customLabel(),
+      fieldName: this.fieldName(),
+    });
+  }
+
   render() {
     return (
       <div className="form-group row">
-        <p className="col-sm-2 form-text text-capitalize">{this.props.type}</p>
+        <label
+          className="col-sm-2 form-text text-capitalize"
+          data-toggle="tooltip"
+          data-title={this.props.helpText}
+          htmlFor={this.customLabel()}
+          ref={(tooltip) => { this.tooltip = tooltip; }}
+        >
+          {this.props.type}
+        </label>
         <div className="col-sm-4">
-          <select
-            name={this.fieldName()}
-            disabled={!this.state.enabled}
-            id={this.customLabel()}
-            className="form-control"
-          >
-            <option value="horizontal">Horizontal</option>
-            <option value="vertical">Vertical</option>
-            <option value="both">Both</option>
-          </select>
+          {this.componentBasedOnType()}
         </div>
-        <div className="col-sm-2" />
+        <div className="col-sm-2">
+          {this.state.value}
+        </div>
         <div className="col-sm-2">
           <fieldset>
             <label className="switch-light switch-material" htmlFor={`${this.customLabel()}_enabled`}>
@@ -70,13 +106,18 @@ class FlipForm extends React.Component {
   }
 }
 
-FlipForm.propTypes = {
+ToggleForm.propTypes = {
   object: React.PropTypes.string.isRequired,
   attribute: React.PropTypes.string.isRequired,
   type: React.PropTypes.string.isRequired,
+  value: React.PropTypes.number,
   handleEnableChange: React.PropTypes.func,
+  helpText: React.PropTypes.string,
+  formType: React.PropTypes.oneOf(['Range', 'Select']),
 };
 
-FlipForm.defaultProps = {
+ToggleForm.defaultProps = {
   handleEnableChange: () => {},
+  helpText: '',
+  formType: 'Range',
 };
