@@ -8,6 +8,11 @@
   <hr>
 </div>
 
+<% @image_template.match_options['threshold'] ||= 80 %>
+<% @image_template.match_options['elasticity'] ||= 0 %>
+<% @image_template.match_options['rotation'] ||= 0 %>
+<% @image_template.match_options['flip'] ||= 'horizontal' %>
+
 <%= form_for @image_template, method: :put, url: collection_template_image_template_path do |f| %>
   <% if f.object.errors.any? %>
     <div class="error_messages">
@@ -19,18 +24,17 @@
   <% # Add in a hidden field just so that the controller stays happy %>
   <%= f.hidden_field :id, value: @image_template.id %>
   <%= react_component('ToggleForm', {
-    value: 80, max: 100, object: f.object_name, attribute: 'match_options', type: 'threshold', formType: 'Range', helpText: t('image_templates.threshold.help')
+    value: @image_template.match_options['threshold'].to_i, max: 100, object: f.object_name, attribute: 'match_options', type: 'threshold', formType: 'Range', helpText: t('image_templates.threshold.help')
   }) %>
   <%= react_component('ToggleForm', {
-    value: 0, max: 100, object: f.object_name, attribute: 'match_options', type: 'elasticity', formType: 'Range', helpText: t('image_templates.elasticity.help')
+    value: @image_template.match_options['elasticity'].to_i, max: 100, object: f.object_name, attribute: 'match_options', type: 'elasticity', formType: 'Range', helpText: t('image_templates.elasticity.help')
   }) %>
   <%= react_component('ToggleForm', {
-    value: 0, max: 100, object: f.object_name, attribute: 'match_options', type: 'rotation', formType: 'Range', helpText: t('image_templates.rotation.help')
+    value: @image_template.match_options['rotation'].to_i, max: 100, object: f.object_name, attribute: 'match_options', type: 'rotation', formType: 'Range', helpText: t('image_templates.rotation.help')
   }) %>
   <%= react_component('ToggleForm', {
     object: f.object_name, attribute: 'match_options', type: 'flip',
-    formType: 'Select', options: ['Horizontal', 'Vertical', 'Both'],
-    helpText: t('image_templates.flip.help')
+    formType: 'Select', options: ['Horizontal', 'Vertical', 'Both'], selected: @image_template.match_options['flip'], helpText: t('image_templates.flip.help')
   }) %>
   <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>
