@@ -1,5 +1,8 @@
 <h1><%= t 'image_templates.edit.title' %></h1>
 
+<h2>
+  <%= t 'image_templates.edit.help' %>
+</h2>
 <div>
   <%= image_tag @image_template.image_url %>
   <hr>
@@ -15,17 +18,19 @@
   <% end %>
   <% # Add in a hidden field just so that the controller stays happy %>
   <%= f.hidden_field :id, value: @image_template.id %>
-  <%= react_component('ToggleSlider', {
-    value: 80, max: 100, object: f.object_name, attribute: 'match_options', type: 'threshold'
+  <%= react_component('ToggleForm', {
+    value: 80, max: 100, object: f.object_name, attribute: 'match_options', type: 'threshold', formType: 'Range', helpText: t('image_templates.threshold.help')
   }) %>
-  <%= react_component('ToggleSlider', {
-    value: 0, max: 100, object: f.object_name, attribute: 'match_options', type: 'elasticity'
+  <%= react_component('ToggleForm', {
+    value: 0, max: 100, object: f.object_name, attribute: 'match_options', type: 'elasticity', formType: 'Range', helpText: t('image_templates.elasticity.help')
   }) %>
-  <%= react_component('ToggleSlider', {
-    value: 0, max: 100, object: f.object_name, attribute: 'match_options', type: 'rotation'
+  <%= react_component('ToggleForm', {
+    value: 0, max: 100, object: f.object_name, attribute: 'match_options', type: 'rotation', formType: 'Range', helpText: t('image_templates.rotation.help')
   }) %>
-  <%= react_component('FlipForm', {
-    object: f.object_name, attribute: 'match_options', type: 'flip'
+  <%= react_component('ToggleForm', {
+    object: f.object_name, attribute: 'match_options', type: 'flip',
+    formType: 'Select', options: ['Horizontal', 'Vertical', 'Both'],
+    helpText: t('image_templates.flip.help')
   }) %>
   <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>

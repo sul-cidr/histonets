@@ -1,4 +1,4 @@
-/* global ToggleSlider, RadioSet */
+/* global ToggleForm, RadioSet */
 
 class PosterizeForm extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class PosterizeForm extends React.Component {
     }
     return (
       <div>
-        <ToggleSlider
+        <ToggleForm
           {...this.props}
           handleEnableChange={this.handleEnableChange}
         />

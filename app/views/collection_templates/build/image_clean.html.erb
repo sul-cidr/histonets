@@ -1,4 +1,6 @@
-<%= t 'image_clean.title' %>
+<h1><%= t 'image_clean.title' %></h1>
+
+<h2><%= t 'image_clean.help' %></h2>
 
 <%= form_for @collection_template, method: :put, url: wizard_path do |f| %>
   <% if f.object.errors.any? %>
@@ -10,22 +12,24 @@
   <% end %>
   <% # Add in a hidden field just so that the BuildController stays happy %>
   <%= f.hidden_field :id, value: @collection_template.id %>
-  <%= react_component('ToggleSlider', {
-    object: f.object_name, attribute: 'image_clean', type: 'denoise'
+  <%= react_component('ToggleForm', {
+    object: f.object_name, attribute: 'image_clean', type: 'denoise', helpText: t('image_clean.denoise.help')
   }) %>
-  <%= react_component('ToggleSlider', {
-    object: f.object_name, attribute: 'image_clean', type: 'equalize'
+  <%= react_component('ToggleForm', {
+    object: f.object_name, attribute: 'image_clean', type: 'equalize', helpText: t('image_clean.equalize.help')
   }) %>
-  <%= react_component('ToggleSlider', {
-    value: 100, max: 200, object: f.object_name, attribute: 'image_clean', type: 'brightness'
+  <%= react_component('ToggleForm', {
+    value: 100, max: 200, object: f.object_name, attribute: 'image_clean', type: 'brightness', helpText: t('image_clean.brightness.help')
   }) %>
-  <%= react_component('ToggleSlider', {
-    value: 100, max: 200, object: f.object_name, attribute: 'image_clean', type: 'contrast'
+  <%= react_component('ToggleForm', {
+    value: 100, max: 200, object: f.object_name, attribute: 'image_clean', type: 'contrast', helpText: t('image_clean.brightness.help')
   }) %>
-  <%= react_component('ToggleSlider', {
-    object: f.object_name, attribute: 'image_clean', type: 'smooth'
+  <%= react_component('ToggleForm', {
+    object: f.object_name, attribute: 'image_clean', type: 'smooth', helpText: t('image_clean.brightness.help')
   }) %>
-  <%= react_component('PosterizeForm', object: f.object_name, attribute: 'image_clean', type: 'posterize') %>
+  <%= react_component('PosterizeForm', {
+    object: f.object_name, attribute: 'image_clean', type: 'posterize', helpText: t('image_clean.posterize.help')
+  }) %>
   <%= f.submit 'Next Step', class: 'btn btn-primary' %>
 <% end %>
 

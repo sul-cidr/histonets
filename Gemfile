@@ -37,7 +37,7 @@ gem 'riiif' # IIIF image server
 
 gem 'wicked' # For step by step form creation
 
-gem 'bootstrap', '>= 4.0.0.alpha5', '< 5'
+gem 'bootstrap', '>= 4.0.0.alpha6', '< 5'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0' # Required for tooltips/popover for twbs
