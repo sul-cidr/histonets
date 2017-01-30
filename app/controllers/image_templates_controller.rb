@@ -34,7 +34,7 @@ class ImageTemplatesController < ApplicationController
   def image_template_params
     permitted_attributes = {
       match_options: [:threshold, :rotation, :elasticity],
-      masks: :masks
+      masks: []
     }
     params.require(:image_template).permit(:id, permitted_attributes)
   end

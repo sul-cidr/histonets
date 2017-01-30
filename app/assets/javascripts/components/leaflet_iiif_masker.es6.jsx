@@ -8,8 +8,10 @@ const mapStyle = {
 class LeafletIiifMasker extends React.Component {
   constructor(props) {
     super(props);
+    // Check that masks is not null
     this.state = {
-      masks: props.masks,
+      masks: JSON.parse(props.masks),
+      featureGroup: null,
     };
   }
 
@@ -24,8 +26,6 @@ class LeafletIiifMasker extends React.Component {
       zoom: 0,
     });
 
-    // Directly add a IIIF tile to the map
-
     // Grab the region from the URL
     const region = this.props.iiifImage.match(/(\d*,){3}\d*/)[0].split(',');
     const size = 512;
@@ -37,15 +37,25 @@ class LeafletIiifMasker extends React.Component {
     map.fitBounds(imageBounds);
     const baseLayer = L.imageOverlay(this.props.iiifImage, imageBounds);
 
-    // Add the overlayLayer to the map.
     baseLayer.addTo(map);
-
-    /* Add the overlayLayer to the map.
-     * baseLayer.addTo(map);*/
 
     // Initialise the FeatureGroup to store editable layers
     const drawnItems = new L.FeatureGroup();
     map.addLayer(drawnItems);
+
+    // Setup and restore any existing regions.
+    this.state.featureGroup = drawnItems;
+    this.state.masks.features.forEach((mask) => {
+      // Lat and Lng are flipped, so we need to first
+      // instantiate the 5-pointed geoJSON polygon as
+      // a poly layer and then re-attach it as a rectangle
+      // based on its bounds. This is so the leaflet
+      // draw tools can manipulate it.
+      //
+      // See: http://stackoverflow.com/a/28308588/564684
+      const maskPolygon = L.GeoJSON.geometryToLayer(mask);
+      drawnItems.addLayer(L.rectangle(maskPolygon.getBounds()));
+    });
 
     // Initialise the draw control and pass it the FeatureGroup of editable layers,
     // only show the rectangle control
@@ -65,18 +75,14 @@ class LeafletIiifMasker extends React.Component {
 
     map.on(L.Draw.Event.CREATED, (e) => {
       drawnItems.addLayer(e.layer);
-      this.updateMasks(drawnItems._layers);
+      this.updateMasks();
     });
   }
 
-  updateMasks(layers) {
+  updateMasks() {
     this.setState({
-      masks: JSON.stringify(Object.keys(layers).map(layerKey =>
-        layers[layerKey]._bounds,
-      )),
+      masks: JSON.stringify(this.state.featureGroup.toGeoJSON()),
     });
-
-    // Do whatever else you need to. (save to db, add to map etc)
   }
 
   render() {
@@ -99,8 +105,4 @@ LeafletIiifMasker.propTypes = {
   fieldName: React.PropTypes.string.isRequired,
   id: React.PropTypes.string.isRequired,
   masks: React.PropTypes.string.isRequired,
-};
-
-LeafletIiifMasker.defaultProps = {
-  onRegionChanged: () => {},
 };
