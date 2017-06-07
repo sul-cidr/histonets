@@ -22,6 +22,11 @@
       </div>
     </div>
   </div>
+
+  <div class='histonets-matches'>
+    <%= pluralize(@collection_template.image_matches.count, t('review_template_match_results.match')) %>
+  </div>
+
   <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>
 
