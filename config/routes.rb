@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     resources :build,
               only: [:show, :update], controller: 'collection_templates/build'
     resources :image_templates, only: [:edit, :update, :destroy]
+    resources :annotations, only: [:index], defaults: { format: :json }
   end
 end

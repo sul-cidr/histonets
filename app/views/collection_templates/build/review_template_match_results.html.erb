@@ -31,3 +31,9 @@
 <% end %>
 
 <%= link_to t('image_templates.title'), wizard_path(:create_image_templates) %>
+
+<%= content_tag :div do %>
+  <%= link_to "http://projectmirador.com/demo/?manifest=#{Settings.HOST_URL}#{wizard_path(:review_template_match_results)}.json" do %>
+    <%= image_tag 'iiif-drag-icon', width: 16 %>
+  <% end %>
+<% end %>

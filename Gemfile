@@ -39,6 +39,8 @@ gem 'wicked' # For step by step form creation
 
 gem 'bootstrap', '>= 4.0.0.alpha6', '< 5'
 
+gem 'iiif-presentation'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0' # Required for tooltips/popover for twbs
   gem 'rails-assets-leaflet-iiif', '~> 1.0'
