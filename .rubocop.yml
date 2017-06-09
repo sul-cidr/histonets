@@ -6,3 +6,7 @@ AllCops:
     - '**/Rakefile'
   Exclude:
     - 'db/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
