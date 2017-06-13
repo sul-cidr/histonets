@@ -1,4 +1,4 @@
-<h2>Update Collection</h2>
+<h2><%= t('collections.edit.title') %></h2>
 <%= form_for(@collection) do |f| %>
   <div class="form-group row">
     <%= f.label :name, class: 'col-2 col-form-label' %>
@@ -12,5 +12,5 @@
       <%= f.text_area :description, class: 'form-control' %>
     </div>
   </div>
-  <%= f.submit('Update collection', class: 'btn btn-primary') %>
+  <%= f.submit(t('collections.edit.submit'), class: 'btn btn-primary') %>
 <% end %>

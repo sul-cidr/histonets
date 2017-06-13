@@ -1,4 +1,4 @@
-<h1>Collections</h1>
+<h1><%= t('collections.title') %></h1>
 <div class="container-fluid">
   <% @collections.each do |collection| %>
   <div class="row collection-item">
@@ -9,12 +9,12 @@
       <%= collection.description %>
     </div>
     <div class="col">
-      <%= link_to 'Edit', edit_collection_path(collection), class: 'btn btn-secondary' %>
+      <%= link_to t('crud.edit'), edit_collection_path(collection), class: 'btn btn-secondary' %>
       <%= link_to t('crud.destroy'), collection_path(collection), {method: :delete, remote: true, data: { confirm: t('crud.confirm') }, class: 'btn btn-danger'} %>
     </div>
   </div>
   <% end %>
   <div class="row">
-    <%= link_to 'New Collection', new_collection_path, class: 'btn btn-primary' %>
+    <%= link_to t('collections.new.button'), new_collection_path, class: 'btn btn-primary' %>
   </div>
 </div>
