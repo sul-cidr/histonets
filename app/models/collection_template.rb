@@ -17,6 +17,8 @@ class CollectionTemplate < ApplicationRecord
   serialize :image_clean, Hash
   serialize :image_matches, Array
 
+  delegate :manifest, :annotations, to: :manifest_presenter
+
   cattr_accessor :form_steps do
     %w(
       select_collection
@@ -122,6 +124,10 @@ class CollectionTemplate < ApplicationRecord
                            )
     self.image_matches = JSON.parse(temp)
     save
+  end
+
+  def manifest_presenter
+    ManifestPresenter.new(self)
   end
 
   private

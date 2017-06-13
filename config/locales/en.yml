@@ -75,3 +75,4 @@ en:
   cropped_image: 'Cropped Image'
   review_template_match_results:
     title: 'Review Template Match Results'
+    match: 'match'
