@@ -1,7 +1,11 @@
 .collection-item {
-  border: 1px solid black;
+  border: 1px solid lighten(black, 30);
   margin-top: $vertical-space;
   margin-bottom: $vertical-space;
   padding-top: $vertical-space / 2;
-  padding-bottom: $vertical-space / 2;  
+  padding-bottom: $vertical-space / 2;
+
+  &:nth-child(even) {
+    background-color: darken(white, 5);
+  }
 }
