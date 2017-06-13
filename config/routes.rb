@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   # IIIF Image API Endpoint
   mount Riiif::Engine => '/image-service', as: 'riiif'
 
+  # Set the root path
+  root 'collections#index'
+
+  # Resourceful routes for Collections
+  resources :collections
+
   # Resourceful routes for CollectionTemplates
   resources :collection_templates, only: [:new, :create, :show, :index, :destroy] do
     resources :build,
