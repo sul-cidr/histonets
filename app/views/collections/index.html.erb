@@ -7,6 +7,8 @@
     </div>
     <div class="col"><%= collection.description %></div>
   </div>
-  <%= collection.to_json  %>
   <% end %>
+  <div class="row">
+    <%= link_to "New Collection", new_collection_path, class: 'btn btn-primary' %>
+  </div>
 </div>
