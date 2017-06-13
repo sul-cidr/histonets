@@ -5,10 +5,15 @@
     <div class="col">
       <%= link_to collection.name, collection %>
     </div>
-    <div class="col"><%= collection.description %></div>
+    <div class="col">
+      <%= collection.description %>
+    </div>
+    <div class="col">
+      <%= link_to 'Edit', edit_collection_path(collection), class: 'btn btn-secondary' %>
+    </div>
   </div>
   <% end %>
   <div class="row">
-    <%= link_to "New Collection", new_collection_path, class: 'btn btn-primary' %>
+    <%= link_to 'New Collection', new_collection_path, class: 'btn btn-primary' %>
   </div>
 </div>

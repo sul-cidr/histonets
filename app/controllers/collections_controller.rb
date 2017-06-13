@@ -1,7 +1,7 @@
 ##
 # Controller for Collections
 class CollectionsController < ApplicationController
-  before_action :set_collection, only: [:show, :destroy, :edit]
+  before_action :set_collection, only: [:show, :destroy, :edit, :update]
 
   # GET /collections
   # GET /collections.json
@@ -32,9 +32,17 @@ class CollectionsController < ApplicationController
   # GET /collections/1/edit
   def edit; end
 
+  # PATCH/PUT /collections/1
+  def update
+    if @collection.update_attributes(collection_params)
+      redirect_to(collection_path(@collection))
+    else
+      render('edit')
+    end
+  end
+
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_collection
     @collection = Collection.find(params[:id])
   end
