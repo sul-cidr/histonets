@@ -4,13 +4,11 @@ class CollectionsController < ApplicationController
   before_action :set_collection, only: [:show, :destroy, :edit, :update]
 
   # GET /collections
-  # GET /collections.json
   def index
     @collections = Collection.all
   end
 
   # GET /collections/1
-  # GET /collections/1.json
   def show; end
 
   # GET /collections/new
@@ -19,7 +17,6 @@ class CollectionsController < ApplicationController
   end
 
   # POST /collections
-  # POST /collections.json
   def create
     @collection = Collection.new(collection_params)
     if @collection.save
@@ -39,6 +36,12 @@ class CollectionsController < ApplicationController
     else
       render('edit')
     end
+  end
+
+  # DELETE /collections/1
+  def destroy
+    @collection.destroy
+    redirect_to(collections_path)
   end
 
   private
