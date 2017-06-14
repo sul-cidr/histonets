@@ -7,11 +7,17 @@ RSpec.describe CollectionsController, type: :controller do
       description: 'Test description'
     }
   end
+  let(:invalid_attributes) do
+    {
+      name: nil
+    }
+  end
   describe 'GET index' do
     let(:collections) { create_list(:collection, 5) }
-    it 'assigns @collections' do
-      get :index
-      expect(assigns(:collections)).to eq collections
+    it 'assigns all collections as @collections' do
+      collection = Collection.create! valid_attributes
+      get :index, params: {}
+      expect(assigns(:collections)).to eq([collection])
     end
     it 'renders index' do
       get :index
@@ -20,7 +26,7 @@ RSpec.describe CollectionsController, type: :controller do
   end
 
   describe 'GET show' do
-    let(:collection) { create(:collection) }
+    let(:collection) { Collection.create! valid_attributes }
     it 'assigns @collection' do
       get :show, params: { id: collection.id }
       expect(assigns(:collection)).to eq collection
@@ -63,6 +69,10 @@ RSpec.describe CollectionsController, type: :controller do
       post :create, params: { collection: valid_attributes }
       expect(subject).to redirect_to(collections_path)
     end
+    it 'redirects to new collection form with invalid attributes' do
+      post :create, params: { collection: invalid_attributes }
+      expect(response).to render_template('new')
+    end
   end
 
   describe 'GET edit' do
@@ -90,10 +100,15 @@ RSpec.describe CollectionsController, type: :controller do
       put :update, params: { id: collection.id, collection: new_attributes }
       expect(response).to redirect_to(collection)
     end
+    it 'redirects to the edit form with invalid attributes' do
+      collection = Collection.create! valid_attributes
+      put :update, params: { id: collection.id, collection: invalid_attributes }
+      expect(response).to render_template('edit')
+    end
   end
 
   describe 'DELETE destroy' do
-    let(:collection) { create(:collection) }
+    let(:collection) { Collection.create! valid_attributes }
     it 'destroys @collection' do
       delete :destroy, params: { id: collection.id }
       expect { collection.reload }.to raise_error(ActiveRecord::RecordNotFound)

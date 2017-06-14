@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :collection do
+    sequence(:name) { |n| "My Collection #{n}" }
     factory :collection_with_images do
       transient do
         images_count 5
