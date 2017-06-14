@@ -68,8 +68,18 @@ en:
     title: 'Collection Templates'
     new: 'New Collection Template'
     build: 'Build a Collection Template'
+  collections:
+    title: 'Collections'
+    new:
+      button: 'New Collection'
+      title: 'Create New Collection'
+      submit: 'Create collection'
+    edit:
+      title: 'Update Collection'
+      submit: 'Update collection'
   crud:
     show: 'Show'
+    edit: 'Edit'
     destroy: 'Destroy'
     confirm: 'Are you sure?'
   cropped_image: 'Cropped Image'
