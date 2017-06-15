@@ -18,6 +18,15 @@ class Image < ApplicationRecord
     Image.find_or_create_by!(file_name: File.basename(path))
   end
 
+  def thumbnail_image_path
+    "#{Settings.HOST_URL}"\
+    "#{Riiif::Engine.routes.url_helpers.image_path(
+      file_name_no_extension,
+      size: '200,',
+      format: Settings.DEFAULT_IMAGE_EXTENSION
+    )}"
+  end
+
   protected
 
   def calculate_histogram

@@ -80,6 +80,9 @@ en:
     edit:
       title: 'Update Collection'
       submit: 'Update collection'
+    show:
+      image_title: 'Images'
+      no_image_message: 'There are currently no images associated with this collection.'
   crud:
     show: 'Show'
     edit: 'Edit'

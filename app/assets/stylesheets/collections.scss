@@ -9,3 +9,23 @@
     background-color: darken($white, 5);
   }
 }
+
+.collection-images {
+  margin-top: $vertical-space;
+  margin-bottom: $vertical-space;
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  .collection-image,
+  .image-name {
+    margin-top: $vertical-space / 2;
+    margin-bottom: $vertical-space / 2;
+  }
+}
+
+.collection-description {
+  margin-top: $vertical-space;
+  margin-bottom: $vertical-space;
+}
