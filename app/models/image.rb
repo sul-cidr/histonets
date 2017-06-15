@@ -19,7 +19,7 @@ class Image < ApplicationRecord
   end
 
   def thumbnail_image_path
-    return "#{Settings.HOST_URL}"\
+    "#{Settings.HOST_URL}"\
     "#{Riiif::Engine.routes.url_helpers.image_path(
       file_name_no_extension,
       size: '200,',

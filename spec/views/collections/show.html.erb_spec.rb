@@ -18,7 +18,9 @@ RSpec.describe 'collections/show', type: :view do
     it 'lets the user know there are no images' do
       @collection = create(:collection)
       render
-      expect(rendered).to have_content('There are currently no images associated with this collection.')
+      expect(rendered).to have_content(
+        'There are currently no images associated with this collection.'
+      )
     end
   end
   describe 'a collection with images' do
