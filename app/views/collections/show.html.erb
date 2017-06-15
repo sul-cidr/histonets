@@ -6,3 +6,8 @@
 <div>
   <%= @collection.description %>
 </div>
+<div class="collection-images">
+  <% @collection.images.each do |image| %>
+    <%= image_tag image.thumbnail_image_path %>
+  <% end %>
+</div>
