@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  application_name: 'Histonets'
   navigation:
     back: 'Back'
     next_step: 'Next Step'
@@ -66,10 +67,12 @@ en:
       help: 'Posterize image by reducing its number of colors.'
   collection_template:
     title: 'Collection Templates'
+    navbar: 'Collection Templates'
     new: 'New Collection Template'
     build: 'Build a Collection Template'
   collections:
     title: 'Collections'
+    navbar: 'Collections'
     new:
       button: 'New Collection'
       title: 'Create New Collection'

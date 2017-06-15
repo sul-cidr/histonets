@@ -1,0 +1,12 @@
+.navbar {
+  background-color: $stanford-cardinal;
+
+  .nav-link {
+    color: $navbar-link;
+    display: inline-flex;
+
+    &:hover {
+      color: $navbar-hover;
+    }
+  }
+}
