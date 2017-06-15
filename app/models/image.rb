@@ -22,7 +22,7 @@ class Image < ApplicationRecord
     return "#{Settings.HOST_URL}"\
     "#{Riiif::Engine.routes.url_helpers.image_path(
       file_name_no_extension,
-      size: '150,',
+      size: '200,',
       format: Settings.DEFAULT_IMAGE_EXTENSION
     )}"
   end
