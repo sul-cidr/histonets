@@ -8,10 +8,10 @@
 </div>
 <hr>
 <div class="collection-images">
-  <h2>Images</h2>
+  <h2><%= t('collections.show.image_title') %></h2>
   <div class="row">
     <% if @collection.images.length == 0 %>
-      <div class="col">There are currently no images associated with this collection.</div>
+      <div class="col"><%= t('collections.show.no_image_message') %></div>
     <% else %>
       <% @collection.images.each do |image| %>
       <div class="collection-image col">
