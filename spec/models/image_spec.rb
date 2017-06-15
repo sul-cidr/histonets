@@ -29,4 +29,10 @@ RSpec.describe Image, type: :model do
       expect(create(:image).extension).to eq '.jpg'
     end
   end
+  describe '#thumbnail_image_path' do
+    it 'returns a IIIF url' do
+      expect(create(:image).thumbnail_image_path)
+        .to match(/.*localhost.*image-service.*200,/)
+    end
+  end
 end
