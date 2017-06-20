@@ -12,7 +12,10 @@ RSpec.describe HistogramExtractor, type: :model do
       expect(Riiif::File).to receive(:new)
         .with('spec/fixtures/images/yolo.jpg').and_return(riiif_instance)
       expect(riiif_instance).to receive(:extract).with(
-        format: '-define histogram:unique-colors=true -format %c histogram:info'
+        Riiif::Transformation.new(
+          nil, nil, nil, nil,
+          '-define histogram:unique-colors=true -format %c histogram:info'
+        )
       )
       generic_histogram.extract_histogram
     end

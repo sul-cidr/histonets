@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'config'
 
-gem 'riiif', '1.1.1' # IIIF image server pin to 1.1.1 greater than that has issues
+gem 'riiif', '>= 1.4.3'
 
 gem 'wicked' # For step by step form creation
 
