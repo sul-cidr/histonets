@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails', '~> 5.0.4'
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'config'
 
-gem 'riiif', '1.1.1' # IIIF image server pin to 1.1.1 greater than that has issues
+gem 'riiif', '>= 1.4.3'
 
 gem 'wicked' # For step by step form creation
 

@@ -33,8 +33,12 @@ class HistogramExtractor
   def extract_histogram
     Riiif::File.new("#{Settings.IMAGE_PATH}/#{file_name}")
                .extract(
-                 format: '-define histogram:unique-colors=true -format %c'\
-                   ' histogram:info'
+                 Riiif::Transformation.new(
+                   nil, nil, nil, nil,
+                   # Only provide :format for this Struct
+                   '-define histogram:unique-colors=true -format %c'\
+                     ' histogram:info'
+                 )
                )
   end
 

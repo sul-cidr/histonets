@@ -8,7 +8,10 @@ RSpec.describe CalculateHistogramJob, type: :job do
     expect(Riiif::File).to receive(:new)
       .with('spec/fixtures/images/yolo.jpg').and_return(riiif_instance)
     expect(riiif_instance).to receive(:extract).with(
-      format: '-define histogram:unique-colors=true -format %c histogram:info'
+      Riiif::Transformation.new(
+        nil, nil, nil, nil,
+        '-define histogram:unique-colors=true -format %c histogram:info'
+      )
     ).and_return(
       "     18: (162,129, 50) #A28132 srgb(162,129,50)\n"\
       "     14: (162,142,107) #A28E6B srgb(162,142,107)\n"\
