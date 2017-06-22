@@ -1,0 +1,124 @@
+// scss-lint:disable NestingDepth, SelectorDepth
+#breadcrumbs {
+  list-style: none;
+  display: flex;
+  width: 100%;
+  padding: 0 15px;
+  margin: 10px 0;
+
+  li {
+    flex-grow: 1;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    box-sizing: border-box;
+
+    &.current a {
+      background-color: $bright-cardinal;
+
+      &::before {
+        border-color: $bright-cardinal;
+        border-left-color: transparent;
+      }
+
+      &::after {
+        border-left-color: $bright-cardinal;
+      }
+    }
+
+    &.unfinished {
+      opacity: 0.5;
+    }
+
+    a {
+      color: #FFF;
+      display: block;
+      background-color: $stanford-cardinal;
+      text-decoration: none;
+      position: relative;
+      height: 40px;
+      line-height: 40px;
+      padding: 0 10px 0 5px;
+      text-align: center;
+      margin-right: 23px;
+    }
+
+    &:first-child {
+      a {
+        padding-left: 15px;
+        @include border-radius(4px 0 0 4px);
+
+        &::before {
+          border: none;
+        }
+      }
+    }
+
+    &:last-child {
+      a {
+        @include border-radius(0 4px 4px 0);
+        margin-right: 0;
+
+        &::after {
+          border: none;
+        }
+      }
+    }
+
+    a {
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        border: 0 solid $stanford-cardinal;
+        border-width: 20px 10px;
+        width: 0;
+        height: 0;
+      }
+
+      &::before {
+        left: -20px;
+        border-left-color: transparent;
+      }
+
+      &::after {
+        left: 100%;
+        border-color: transparent;
+        border-left-color: $stanford-cardinal;
+      }
+
+      &:hover {
+        background-color: $bright-cardinal;
+        transition: all 0.2s ease-out;
+
+        &::before {
+          border-color: $bright-cardinal;
+          border-left-color: transparent;
+          transition: all 0.2s ease-out;
+        }
+
+        &::after {
+          border-left-color: $bright-cardinal;
+          transition: all 0.2s ease-out;
+        }
+      }
+
+      &:active {
+        background-color: $less-bright-cardinal;
+        transition: all 0.2s ease-out;
+
+        &::before {
+          border-color: $less-bright-cardinal;
+          border-left-color: transparent;
+          transition: all 0.2s ease-out;
+        }
+
+        &::after {
+          border-left-color: $less-bright-cardinal;
+          transition: all 0.2s ease-out;
+        }
+      }
+    }
+  }
+}
