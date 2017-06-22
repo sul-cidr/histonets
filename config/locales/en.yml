@@ -30,6 +30,7 @@ en:
     help: 'Clean image automatically with sane defaults.'
   create_image_paths:
     title: 'Create Image Paths'
+    instruction: 'Select colors that represent paths you want to generate'
   image_templates:
     title: 'Create Image Templates'
     edit:

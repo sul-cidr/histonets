@@ -18,11 +18,14 @@
           )
         }) %>
       </div>
-      <div class="col-md-4">
-        <ul class="image-path-list">
+      <div class="col-md-4 image-path-list">
+        <h3><%= t 'create_image_paths.instruction' %></h3>
+        <ul class="list-unstyled">
           <% @collection_template.parsed_histogram.each do |histogram| %>
             <%= react_component('Histogram', {
-              histogram: histogram
+              histogram: histogram,
+              pathName: 'collection_template[image_paths][]',
+              imagePaths: @collection_template.image_paths
               })
             %>
           <% end %>
