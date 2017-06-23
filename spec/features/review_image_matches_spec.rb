@@ -18,7 +18,6 @@ RSpec.describe 'Review image matches', type: :feature, js: true do
     find('#map').double_click
     click_button 'Add template of cropped area'
     click_button 'Next Step'
-    click_button 'Next Step'
   end
   after do
     ActiveJob::Base.queue_adapter = :test

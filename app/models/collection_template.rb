@@ -28,7 +28,6 @@ class CollectionTemplate < ApplicationRecord
       auto_clean
       image_clean
       create_image_templates
-      edit_image_templates
       review_template_match_results
       create_image_paths
     )
@@ -99,18 +98,6 @@ class CollectionTemplate < ApplicationRecord
       size: 'full',
       format: Settings.DEFAULT_IMAGE_EXTENSION
     )}"
-  end
-
-  ##
-  # Query for unverified image_templates
-  def unverified_image_templates
-    image_templates.where(status: [false, nil])
-  end
-
-  ##
-  # Set all `image_templates` as unverified|false
-  def unverify_image_templates
-    image_templates.map { |it| it.update(status: false) }
   end
 
   def calculate_histogram

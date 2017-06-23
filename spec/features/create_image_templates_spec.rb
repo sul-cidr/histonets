@@ -19,7 +19,14 @@ RSpec.describe 'Create image templates', type: :feature, js: true do
     click_button 'Add template of cropped area'
     expect(page).to have_css 'li img[src*="0,0,300,300"]'
     expect(page).to have_css 'img'
+    finder = '//input[@name="collection_template[image_templates_attributes][]'\
+      '[match_options][threshold]"]'
+    find(:xpath, finder).set 100
     click_button 'Next Step'
-    expect(ImageTemplate.last.image_url).to match(/0,0,300,300/)
+    last = ImageTemplate.last
+    expect(last.image_url).to match(/0,0,300,300/)
+    expect(last.match_options['threshold']).to eq '100'
+    page.go_back
+    expect(page).to have_css '.image-template-list li', count: 1
   end
 end

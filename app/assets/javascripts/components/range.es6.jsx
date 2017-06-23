@@ -23,6 +23,7 @@ class Range extends React.Component {
         disabled={!this.props.enabled}
         style={{ width: '100%' }}
         value={this.state.value}
+        className={this.props.className}
       />
     );
   }
@@ -36,6 +37,7 @@ Range.propTypes = {
   customLabel: React.PropTypes.string,
   enabled: React.PropTypes.bool,
   onUpdate: React.PropTypes.func,
+  className: React.PropTypes.string,
 };
 
 Range.defaultProps = {
@@ -43,4 +45,5 @@ Range.defaultProps = {
   max: 100,
   value: 0,
   onUpdate: () => {},
+  className: '',
 };
