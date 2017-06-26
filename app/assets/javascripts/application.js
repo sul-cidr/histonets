@@ -21,4 +21,5 @@
 //= require react
 //= require react_ujs
 //= require components
+//= require image-picker.min
 //= require_tree .

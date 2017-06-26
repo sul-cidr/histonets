@@ -1,0 +1,16 @@
+.image-select-form {
+  margin-top: $vertical-space;
+  margin-bottom: $vertical-space;
+}
+
+.thumbnails {
+  font-size: 1em;
+
+  p {
+    margin-top: $vertical-space / 2;
+  }
+}
+
+.thumbnail.selected {
+  color: $white;
+}
