@@ -330,7 +330,7 @@ DEPENDENCIES
   rails-controller-testing
   react-rails
   riiif (>= 1.4.3)
-  rspec-rails (~> 3.5)
+  rspec-rails (~> 3.6)
   rspec-sidekiq
   sass-rails (~> 5.0)
   sidekiq
@@ -343,4 +343,4 @@ DEPENDENCIES
   wicked
 
 BUNDLED WITH
-   1.14.6
+   1.15.1
