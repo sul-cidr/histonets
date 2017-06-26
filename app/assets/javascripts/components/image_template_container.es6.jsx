@@ -1,4 +1,4 @@
-/* global ImageTemplateCropper, ImageTemplateList  */
+/* global ImageTemplateCropper, ImageTemplateList, $  */
 
 class ImageTemplateContainer extends React.Component {
   constructor(props) {
@@ -6,6 +6,8 @@ class ImageTemplateContainer extends React.Component {
     this.state = {
       imageTemplates: props.imageTemplates,
     };
+
+    this.updateRemovedItems = this.updateRemovedItems.bind(this);
     this.onAddNewTemplate = this.onAddNewTemplate.bind(this);
   }
 
@@ -19,6 +21,30 @@ class ImageTemplateContainer extends React.Component {
     });
   }
 
+  updateRemovedItems(itemIndex) {
+    // This would have been much nicer with Redux
+    const newTemplates = this.state.imageTemplates.slice();
+    const itemToRemove = newTemplates[itemIndex];
+    let removeFromList = false;
+    // If it doesn't have an id than its not persisted, if it does we need to
+    // delete it.
+    if (itemToRemove.id) {
+      $.ajax({
+        url: `${this.props.templateDestroyRoute}${itemToRemove.id}`,
+        type: 'DELETE',
+        success(result) {
+          removeFromList = result;
+        },
+      });
+    } else {
+      removeFromList = true;
+    }
+    if (removeFromList) {
+      newTemplates.splice(itemIndex, 1);
+      this.setState({ imageTemplates: newTemplates });
+    }
+  }
+
   regionToImageUrl(region) {
     return `${this.props.iiifImage.replace('/info.json', '')}/${region.join(',')}/full/0/default.png`;
   }
@@ -29,14 +55,17 @@ class ImageTemplateContainer extends React.Component {
     }
     return (
       <div className="row">
-        <div className="col-md-8">
+        <div className="col-md-6">
           <ImageTemplateCropper
             {...this.props}
             onAddNewTemplate={this.onAddNewTemplate}
           />
         </div>
-        <div className="col-md-4">
-          <ImageTemplateList imageTemplates={this.state.imageTemplates} />
+        <div className="col-md-6">
+          <ImageTemplateList
+            imageTemplates={this.state.imageTemplates}
+            updateRemovedItems={this.updateRemovedItems}
+          />
         </div>
       </div>
     );
@@ -48,4 +77,9 @@ ImageTemplateContainer.propTypes = {
     React.PropTypes.object,
   ),
   iiifImage: React.PropTypes.string,
+  templateDestroyRoute: React.PropTypes.string,
+};
+
+ImageTemplateContainer.defaultProps = {
+  templateDestroyRoute: '',
 };

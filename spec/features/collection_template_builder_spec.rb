@@ -20,6 +20,9 @@ RSpec.describe 'Collection Template Builder', type: :feature, js: true do
       click_button 'Next Step'
       expect(page).to have_css 'body', text: 'Clean Image'
       click_button 'Next Step'
+      # Click somewhere on the map to zoom in
+      find('#map').double_click
+      click_button 'Add template of cropped area'
       click_button 'Next Step'
       click_button 'Next Step'
       click_button 'Next Step'

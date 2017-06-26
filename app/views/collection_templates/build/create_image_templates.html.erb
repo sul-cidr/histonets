@@ -12,7 +12,8 @@
           @collection_template.cleaned_image
         ),
         imageTemplates: @collection_template.image_templates,
-        cropperName: 'collection_template[crop_bounds]'
+        cropperName: 'collection_template[crop_bounds]',
+        templateDestroyRoute: collection_template_image_template_path.gsub('create_image_templates', '')
     }) %>
   </div>
   <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
