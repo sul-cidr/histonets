@@ -58,6 +58,16 @@ RSpec.describe HistonetsCv::Cli, type: :model do
       subject.match(arguments)
     end
   end
+  describe '#select' do
+    subject { described_class.new('yolo.jpg') }
+    let(:arguments) { [[123, 45, 67], 'holla'] }
+    it 'executes the select command with arguments' do
+      expect(subject).to receive(:execute)
+        .with("select #{arguments[0]} file://spec/fixtures/images/yolo.jpg "\
+              '-o spec/fixtures/images/yolo_holla_tmp.png')
+      subject.select(*arguments)
+    end
+  end
   describe '#help' do
     it 'returns help text' do
       expect(subject.help)

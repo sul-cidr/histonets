@@ -43,6 +43,11 @@ module HistonetsCv
       execute("match #{image_templates} #{input(image_url)}")
     end
 
+    def select(image_paths, additional_file_name, image_url = nil)
+      execute("select #{image_paths} #{input(image_url)} "\
+        "#{output(additional_file_name)}")
+    end
+
     def help
       execute('--help')
     end
@@ -75,9 +80,13 @@ module HistonetsCv
       end
     end
 
-    def output(hash)
+    ##
+    # @param [String] additional_file_name often times could just be the
+    # fingerprint
+    def output(additional_file_name)
       "-o #{Settings.IMAGE_PATH}/"\
-      "#{File.basename(file_name, File.extname(file_name))}_#{hash}_tmp"\
+      "#{File.basename(file_name, File.extname(file_name))}_"\
+      "#{additional_file_name}_tmp"\
       ".#{extension}"
     end
   end

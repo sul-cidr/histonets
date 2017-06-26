@@ -29,6 +29,8 @@ class CollectionTemplates::BuildController < ApplicationController
       @collection_template.calculate_histogram
     when 'create_image_templates'
       @collection_template.create_image_template_matches
+    when 'create_image_paths'
+      PathSelectJob.new.perform(@collection_template)
     end
     render_wizard @collection_template
   end

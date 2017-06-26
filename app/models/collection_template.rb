@@ -63,6 +63,26 @@ class CollectionTemplate < ApplicationRecord
     "#{fingerprinted_name}_tmp"
   end
 
+  def pathselected_image
+    "#{image.file_name_no_extension}_"\
+    "#{fingerprint_pathselection}_tmp"
+  end
+
+  def fingerprint_pathselection
+    "#{fingerprinted_name}_"\
+    "#{image_paths_to_hex.join('_')}"
+  end
+
+  def image_paths_to_hex
+    image_paths.map do |image_path|
+      # split on commas
+      image_path.split(',')
+                .map { |value| value.to_i.to_s(16).rjust(2, '0') }.join('')
+      # convert string to int to hex string and justify
+      # http://blog.lebrijo.com/converting-rgb-colors-to-hexadecimal-with-ruby/
+    end
+  end
+
   def cleaned_file_name
     "#{cleaned_image}.#{Settings.DEFAULT_IMAGE_EXTENSION}"
   end
@@ -112,6 +132,12 @@ class CollectionTemplate < ApplicationRecord
                            )
     self.image_matches = JSON.parse(temp)
     save
+  end
+
+  ##
+  # A nice formatting that the CLI will like
+  def formatted_image_paths
+    image_paths.map { |image_path| "[#{image_path}]" }.join(' ')
   end
 
   def manifest_presenter

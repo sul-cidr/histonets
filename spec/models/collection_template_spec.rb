@@ -56,6 +56,44 @@ RSpec.describe CollectionTemplate, type: :model do
         .to match(/eddie_.*_tmp/)
     end
   end
+  describe '#pathselected_image' do
+    subject do
+      create(
+        :collection_template,
+        image: create(:image, file_name: 'eddie.jpg'),
+        image_paths: ['255,255,255', '0,0,0']
+      )
+    end
+    it 'concatenates fingerprint_pathselection, file_name, and tmp' do
+      expect(subject.pathselected_image)
+        .to eq 'eddie_495cfb3737dac34bd5a94c06edd1392c_ffffff_000000_tmp'
+    end
+  end
+  describe '#fingerprint_pathselection' do
+    subject do
+      create(
+        :collection_template,
+        image: create(:image, file_name: 'eddie.jpg'),
+        image_paths: ['255,255,255', '0,0,0']
+      )
+    end
+    it 'concatenates fingerprint and hex path selections' do
+      expect(subject.fingerprint_pathselection)
+        .to eq '495cfb3737dac34bd5a94c06edd1392c_ffffff_000000'
+    end
+  end
+  describe '#image_paths_to_hex' do
+    subject do
+      create(
+        :collection_template,
+        image: create(:image, file_name: 'eddie.jpg'),
+        image_paths: ['255,255,255', '0,0,0']
+      )
+    end
+    it 'returns converted RGB to hex values' do
+      expect(subject.image_paths_to_hex).to include('ffffff', '000000')
+    end
+  end
   describe '#fingerprinted_name' do
     subject do
       create(
