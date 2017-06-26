@@ -1,4 +1,4 @@
-#image-select {
+.image-select-form {
   margin-top: $vertical-space;
   margin-bottom: $vertical-space;
 }
@@ -9,11 +9,8 @@
   p {
     margin-top: $vertical-space / 2;
   }
+}
 
-  .thumbnail.selected {
-
-    p {
-      color: $white;
-    }
-  }
+.thumbnail.selected {
+  color: $white;
 }

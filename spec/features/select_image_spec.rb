@@ -13,6 +13,6 @@ RSpec.describe 'Selecting an image for a template', type: :feature, js: true do
     click_button 'Next Step'
     expect(page).to have_content 'Select an Image'
     expect(page).to have_css 'form.edit_collection_template'
-    expect(page).to have_css 'select#image-select'
+    expect(page).to have_css 'select.image-select-form'
   end
 end

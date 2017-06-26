@@ -8,12 +8,12 @@
       <% end %>
     </div>
   <% end %>
-  <%= f.select :image_id, options_for_select(@collection_template.collection.images.map{ |image| [image.file_name, image.id, {'data-img-src'=>image.thumbnail_image_path}] }), {}, {class: 'custom-select', id: 'image-select'} %>
+  <%= f.select :image_id, options_for_select(@collection_template.collection.images.map{ |image| [image.file_name, image.id, {'data-img-src'=>image.thumbnail_image_path}] }), {}, {class: 'custom-select image-select-form'} %>
   <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>
 
 <script>
-  $('select#image-select').imagepicker({
+  $('select.image-select-form').imagepicker({
     hide_select: false,
     show_label: true
   });
