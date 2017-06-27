@@ -1,0 +1,26 @@
+<h1><%= t 'post_process_image_paths.title' %></h1>
+<%= form_for @collection_template, method: :put, url: wizard_path do |f| %>
+  <% if f.object.errors.any? %>
+    <div class="error_messages">
+      <% f.object.errors.full_messages.each do |error| %>
+        <p><%= error %></p>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <% # Add in a hidden field just so that the BuildController stays happy %>
+    <%= f.hidden_field :id, value: @collection_template.id %>
+    <div class='row'>
+      <div class='col-md-6'>
+        <%= react_component('LeafletIiif', {
+            iiifImage: Riiif::Engine.routes.url_helpers.info_path(
+              @collection_template.pathselected_image
+            )
+        }) %>
+      </div>
+      <div class='col-md-6'>
+      </div>
+    </div>
+  </div>
+  <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
+<% end %>

@@ -22,6 +22,7 @@ RSpec.describe CollectionTemplate, type: :model do
           image_clean
           review_template_match_results
           create_image_paths
+          post_process_image_paths
         )
       )
     end
@@ -46,28 +47,66 @@ RSpec.describe CollectionTemplate, type: :model do
     subject do
       create(
         :collection_template,
-        image: create(:image, file_name: 'eddie.jpg'),
+        image: create(:image, file_name: 'small_map.jpg'),
         image_clean: { contrast: 40, brightness: 22 },
         crop_bounds: [0, 0, 100, 100]
       )
     end
     it 'returns the cleaned image file_name' do
       expect(subject.cleaned_image)
-        .to match(/eddie_.*_tmp/)
+        .to match(/small_map_.*_tmp/)
+    end
+  end
+  describe '#pathselected_image' do
+    subject do
+      create(
+        :collection_template,
+        image: create(:image, file_name: 'small_map.jpg'),
+        image_paths: ['255,255,255', '0,0,0']
+      )
+    end
+    it 'concatenates fingerprint_pathselection, file_name, and tmp' do
+      expect(subject.pathselected_image)
+        .to eq 'small_map_0be5efdb4c9b1d2b1ec690cf6b9bc396_ffffff_000000_tmp'
+    end
+  end
+  describe '#fingerprint_pathselection' do
+    subject do
+      create(
+        :collection_template,
+        image: create(:image, file_name: 'small_map.jpg'),
+        image_paths: ['255,255,255', '0,0,0']
+      )
+    end
+    it 'concatenates fingerprint and hex path selections' do
+      expect(subject.fingerprint_pathselection)
+        .to eq '0be5efdb4c9b1d2b1ec690cf6b9bc396_ffffff_000000'
+    end
+  end
+  describe '#image_paths_to_hex' do
+    subject do
+      create(
+        :collection_template,
+        image: create(:image, file_name: 'small_map.jpg'),
+        image_paths: ['255,255,255', '0,0,0']
+      )
+    end
+    it 'returns converted RGB to hex values' do
+      expect(subject.image_paths_to_hex).to include('ffffff', '000000')
     end
   end
   describe '#fingerprinted_name' do
     subject do
       create(
         :collection_template,
-        image: create(:image, file_name: 'eddie.jpg'),
+        image: create(:image, file_name: 'small_map.jpg'),
         image_clean: { contrast: 40, brightness: 22 },
         crop_bounds: [0, 0, 100, 100]
       )
     end
     it 'returns a MD5 hashed value of name, crop_bounds, and image_clean' do
       expect(subject.fingerprinted_name)
-        .to eq '5045802809d18d1e73953eeccdf130dd'
+        .to eq '39d56e891a394551a45fcdba843b64d8'
     end
   end
   describe '#cropped_image' do
@@ -75,7 +114,7 @@ RSpec.describe CollectionTemplate, type: :model do
       subject do
         create(
           :collection_template,
-          image: create(:image, file_name: 'eddie.jpg'),
+          image: create(:image, file_name: 'small_map.jpg'),
           image_clean: { contrast: 40, brightness: 22 }
         )
       end
@@ -87,7 +126,7 @@ RSpec.describe CollectionTemplate, type: :model do
       subject do
         create(
           :collection_template,
-          image: create(:image, file_name: 'eddie.jpg'),
+          image: create(:image, file_name: 'small_map.jpg'),
           image_clean: { contrast: 40, brightness: 22 },
           crop_bounds: '0,0,100,100'
         )
@@ -102,7 +141,7 @@ RSpec.describe CollectionTemplate, type: :model do
     subject do
       create(
         :collection_template,
-        image: create(:image, file_name: 'eddie.jpg')
+        image: create(:image, file_name: 'small_map.jpg')
       )
     end
     let(:image_templates) do

@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Review image matches', type: :feature, js: true do
   before do
     ActiveJob::Base.queue_adapter = :inline
-    image = create(:image, file_name: 'eddie.jpg')
+    image = create(:image, file_name: 'small_map.jpg')
     create(:collection, images: [image])
     visit new_collection_template_path
     click_link 'Build a Collection Template'

@@ -93,3 +93,5 @@ en:
   review_template_match_results:
     title: 'Review Template Match Results'
     match: 'match'
+  post_process_image_paths:
+    title: 'Post Process Template Match Results'

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Selecting an image for a template', type: :feature, js: true do
   before do
-    image = create(:image, file_name: 'eddie.jpg')
+    image = create(:image, file_name: 'small_map.jpg')
     image2 = create(:image, file_name: '4799757.jpg')
     create(:collection, images: [image, image2])
     visit new_collection_template_path

@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Manifests/Annotations requests' do
   describe 'provides a JSON response' do
     before do
-      image = create(:image, file_name: 'eddie.jpg')
+      image = create(:image, file_name: 'small_map.jpg')
       create(:collection, images: [image])
       matches = [[[20, 30], [25, 35]], [[40, 60], [50, 75]]]
       create(
