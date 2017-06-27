@@ -10,12 +10,12 @@ RSpec.describe ImageEnhanceJob, type: :job do
   describe '#perform' do
     let(:collection_template) do
       create(:collection_template,
-             image: create(:image, file_name: 'eddie.jpg'),
+             image: create(:image, file_name: 'small_map.jpg'),
              auto_clean: true)
     end
     it 'calls the HistonetsCv::Cli enhance' do
       expect(cli_instance).to receive(:enhance)
-        .with('9c7348b6ca1db7ca63aa49d9662a685f', '')
+        .with('9d7fc6f4f87c77c73c959ab3d9e0f2d8', '')
       subject.perform(collection_template)
     end
   end

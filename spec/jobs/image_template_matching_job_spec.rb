@@ -6,7 +6,7 @@ RSpec.describe ImageTemplateMatchingJob, type: :job do
   describe '#perform' do
     let(:collection_template) do
       create(:collection_template,
-             image: create(:image, file_name: 'eddie.jpg'),
+             image: create(:image, file_name: 'small_map.jpg'),
              auto_clean: true)
     end
     it 'calls appropriate method on the collection_template' do

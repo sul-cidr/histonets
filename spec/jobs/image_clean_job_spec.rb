@@ -10,7 +10,7 @@ RSpec.describe ImageCleanJob, type: :job do
   describe '#perform' do
     let(:collection_template) do
       create(:collection_template,
-             image: create(:image, file_name: 'eddie.jpg'),
+             image: create(:image, file_name: 'small_map.jpg'),
              image_clean: { 'contrast' => '42' },
              crop_bounds: '0,0,100,100')
     end
@@ -18,8 +18,8 @@ RSpec.describe ImageCleanJob, type: :job do
       expect(cli_instance).to receive(:pipeline)
         .with(
           '[{"action":"contrast","options":{"value":42}}]',
-          'http://localhost:1337/image-service/eddie/0,0,100,100/full/0/default.png',
-          '82fa8cd8b2eacfe3c12695d8cbb54838'
+          'http://localhost:1337/image-service/small_map/0,0,100,100/full/0/default.png',
+          '338221af315f9de7056ef3d9b751200f'
         )
       subject.perform(collection_template)
     end

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Image clean', type: :feature, js: true do
   before do
-    image = create(:image, file_name: 'eddie.jpg')
+    image = create(:image, file_name: 'small_map.jpg')
     create(:collection, images: [image])
     visit new_collection_template_path
     click_link 'Build a Collection Template'
