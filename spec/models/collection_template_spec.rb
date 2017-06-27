@@ -22,6 +22,7 @@ RSpec.describe CollectionTemplate, type: :model do
           image_clean
           review_template_match_results
           create_image_paths
+          post_process_image_paths
         )
       )
     end

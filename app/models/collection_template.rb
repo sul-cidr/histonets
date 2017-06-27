@@ -30,6 +30,7 @@ class CollectionTemplate < ApplicationRecord
       create_image_templates
       review_template_match_results
       create_image_paths
+      post_process_image_paths
     )
   end
 
