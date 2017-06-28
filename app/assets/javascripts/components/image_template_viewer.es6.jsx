@@ -10,11 +10,17 @@ class ImageTemplateViewer extends React.Component {
   }
 
   handleChange(value) {
-    this.setState({ value });
+    this.setState({ value }, () => {
+      this.updateImageTemplates(this.state.value, this.props.index);
+    });
   }
 
   handleClose() {
     this.props.removeItem(this.props.index);
+  }
+
+  updateImageTemplates(value, index) {
+    this.props.updateImageTemplates(value, index);
   }
 
   render() {
@@ -91,6 +97,7 @@ ImageTemplateViewer.propTypes = {
   }),
   removeItem: React.PropTypes.func,
   index: React.PropTypes.number,
+  updateImageTemplates: React.PropTypes.func,
 };
 
 ImageTemplateViewer.defaultProps = {
@@ -100,4 +107,5 @@ ImageTemplateViewer.defaultProps = {
   },
   removeItem: () => {},
   index: null,
+  updateImageTemplates: () => {},
 };

@@ -6,6 +6,7 @@ class ImageTemplateList extends React.Component {
 
     this.removeItem = this.removeItem.bind(this);
     this.state = { imageTemplates: props.imageTemplates };
+    this.updateImageTemplates = this.updateImageTemplates.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -18,6 +19,10 @@ class ImageTemplateList extends React.Component {
     this.props.updateRemovedItems(itemIndex);
   }
 
+  updateImageTemplates(value, index) {
+    this.props.updateImageTemplates(value, index);
+  }
+
   render() {
     if (!this.props) {
       return null;
@@ -28,6 +33,7 @@ class ImageTemplateList extends React.Component {
         key={Math.random()}
         removeItem={this.removeItem}
         index={index}
+        updateImageTemplates={this.updateImageTemplates}
       />,
     );
     return (
@@ -43,8 +49,10 @@ ImageTemplateList.propTypes = {
     React.PropTypes.object,
   ),
   updateRemovedItems: React.PropTypes.func,
+  updateImageTemplates: React.PropTypes.func,
 };
 
 ImageTemplateList.defaultProps = {
   updateRemovedItems: () => {},
+  updateImageTemplates: () => {},
 };
