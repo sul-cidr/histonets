@@ -7,8 +7,9 @@ class Range extends React.Component {
   }
 
   handleSliderChange(event) {
-    this.setState({ value: event.target.value });
-    this.props.onUpdate(this.state.value);
+    this.setState({ value: event.target.value }, () => {
+      this.props.onUpdate(this.state.value);
+    });
   }
 
   render() {
