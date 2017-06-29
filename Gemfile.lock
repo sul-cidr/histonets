@@ -189,7 +189,7 @@ GEM
       railties (= 5.1.2)
       sprockets-rails (>= 2.0.0)
     rails-assets-css-toggle-switch (4.0.2)
-    rails-assets-leaflet (1.1.0)
+    rails-assets-leaflet (1.0.3)
     rails-assets-leaflet-iiif (1.2.1)
     rails-assets-tether (1.4.0)
     rails-controller-testing (1.0.2)
