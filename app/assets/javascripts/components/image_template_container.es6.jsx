@@ -9,12 +9,14 @@ class ImageTemplateContainer extends React.Component {
 
     this.updateRemovedItems = this.updateRemovedItems.bind(this);
     this.onAddNewTemplate = this.onAddNewTemplate.bind(this);
+    this.updateImageTemplates = this.updateImageTemplates.bind(this);
   }
 
   onAddNewTemplate(cropperState) {
     const imageTemplates = this.state.imageTemplates;
     imageTemplates.push({
       image_url: this.regionToImageUrl(cropperState.region),
+      match_options: { threshold: 80 },
     });
     this.setState({
       imageTemplates,
@@ -49,6 +51,12 @@ class ImageTemplateContainer extends React.Component {
     return `${this.props.iiifImage.replace('/info.json', '')}/${region.join(',')}/full/0/default.png`;
   }
 
+  updateImageTemplates(value, index) {
+    this.threshold = value;
+    this.index = index;
+    this.state.imageTemplates[index].match_options.threshold = value;
+  }
+
   render() {
     if (!this.props) {
       return null;
@@ -65,6 +73,7 @@ class ImageTemplateContainer extends React.Component {
           <ImageTemplateList
             imageTemplates={this.state.imageTemplates}
             updateRemovedItems={this.updateRemovedItems}
+            updateImageTemplates={this.updateImageTemplates}
           />
         </div>
       </div>

@@ -29,4 +29,12 @@ RSpec.describe 'Create image templates', type: :feature, js: true do
     page.go_back
     expect(page).to have_css '.image-template-list li', count: 1
   end
+  it 'persists the threhold during creation of another template' do
+    click_button 'Add template of cropped area'
+    input = '//input[@name="collection_template[image_templates_attributes][]'\
+      '[match_options][threshold]"]'
+    find(:xpath, input).set '100'
+    click_button 'Add template of cropped area'
+    expect(page).to have_css("input[value='100']")
+  end
 end
