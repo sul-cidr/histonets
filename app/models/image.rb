@@ -3,6 +3,7 @@ class Image < ApplicationRecord
   has_many :collection_templates
   has_one :histogram, dependent: :destroy, as: :histogramable
   validates :file_name, uniqueness: true
+  delegate :parsed_histogram, to: :histogram
 
   after_commit :calculate_histogram, on: :create
 
@@ -34,6 +35,10 @@ class Image < ApplicationRecord
       size: 'full',
       format: Settings.DEFAULT_IMAGE_EXTENSION
     )}"
+  end
+
+  def calculate_histogram_now
+    CalculateHistogramJob.perform_now(self)
   end
 
   protected
