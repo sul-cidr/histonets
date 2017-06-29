@@ -35,4 +35,10 @@ RSpec.describe Image, type: :model do
         .to match(/.*localhost.*image-service.*200,/)
     end
   end
+  describe '#full_image_path' do
+    it 'returns a IIIF url' do
+      expect(create(:image).full_image_path)
+        .to match(%r{.*localhost.*image-service.*full\/full})
+    end
+  end
 end
