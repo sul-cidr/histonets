@@ -16,4 +16,8 @@ class Histogram < ApplicationRecord
                                        .extract_and_parse_histogram
     save
   end
+
+  def parsed_histogram
+    JSON.parse(histogram)
+  end
 end
