@@ -16,8 +16,8 @@ class ManifestPresenter
     @canvas = IIIF::Presentation::Canvas.new(
       '@id' => path,
       'label' => 'canvas',
-      'width' => image_info[:width],
-      'height' => image_info[:height]
+      'width' => image_info.width,
+      'height' => image_info.height
     )
   end
 
@@ -78,8 +78,8 @@ class ManifestPresenter
       'label' => "Image #{id}",
       service_id: cleaned_image_service_base,
       resource_id: cleaned_image_service_base,
-      width: image_info[:width],
-      height: image_info[:height],
+      width: image_info.width,
+      height: image_info.height,
       profile: 'http://iiif.io/api/image/2/profiles/level2.json'
     )
   end
