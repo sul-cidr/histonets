@@ -27,6 +27,15 @@ class Image < ApplicationRecord
     )}"
   end
 
+  def full_image_path
+    "#{Settings.HOST_URL}"\
+    "#{Riiif::Engine.routes.url_helpers.image_path(
+      file_name_no_extension,
+      size: 'full',
+      format: Settings.DEFAULT_IMAGE_EXTENSION
+    )}"
+  end
+
   protected
 
   def calculate_histogram
