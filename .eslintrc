@@ -3,5 +3,8 @@
   "extends": "airbnb",
   "globals": {
     "React": true
-    }
+    },
+  "env": {
+    "browser": true
+    },
 }

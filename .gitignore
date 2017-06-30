@@ -33,3 +33,5 @@ node_modules
 
 # Ignore redis dumps
 *.rdb
+/public/packs
+/node_modules
