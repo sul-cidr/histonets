@@ -1,6 +1,9 @@
 /* global L */
 
-class LeafletIiifCropper extends React.Component {
+import React from 'react';
+import PropTypes from 'prop-types';
+
+export default class LeafletIiifCropper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,15 +64,15 @@ class LeafletIiifCropper extends React.Component {
 }
 
 LeafletIiifCropper.propTypes = {
-  cropperName: React.PropTypes.string.isRequired,
-  iiifLayer: React.PropTypes.shape({
-    getTileUrl: React.PropTypes.func.isRequired,
+  cropperName: PropTypes.string.isRequired,
+  iiifLayer: PropTypes.shape({
+    getTileUrl: PropTypes.func.isRequired,
   }).isRequired,
-  map: React.PropTypes.shape({
-    getZoom: React.PropTypes.func.isRequired,
+  map: PropTypes.shape({
+    getZoom: PropTypes.func.isRequired,
   }).isRequired,
-  onRegionChanged: React.PropTypes.func,
-  region: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
+  onRegionChanged: PropTypes.func,
+  region: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 LeafletIiifCropper.defaultProps = {

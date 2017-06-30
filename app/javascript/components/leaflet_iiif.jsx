@@ -1,11 +1,14 @@
 /* global L */
 
+import React from 'react';
+import PropTypes from 'prop-types';
+
 const mapStyle = {
   height: '500px',
   width: '100%',
 };
 
-class LeafletIiif extends React.Component {
+export default class LeafletIiif extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -54,8 +57,8 @@ class LeafletIiif extends React.Component {
 }
 
 LeafletIiif.propTypes = {
-  iiifImage: React.PropTypes.string.isRequired,
-  onLoad: React.PropTypes.func,
+  iiifImage: PropTypes.string.isRequired,
+  onLoad: PropTypes.func,
 };
 
 LeafletIiif.defaultProps = {

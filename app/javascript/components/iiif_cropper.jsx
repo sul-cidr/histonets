@@ -1,6 +1,11 @@
 /* global L, LeafletIiif, LeafletIiifCropper */
 
-class IiifCropper extends React.Component {
+import React from 'react';
+import PropTypes from 'prop-types';
+import LeafletIiif from './leaflet_iiif';
+import LeafletIiifCropper from './leaflet_iiif_cropper';
+
+export default class IiifCropper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +25,7 @@ class IiifCropper extends React.Component {
   }
 
   onLoad(leafletState) {
-    this.setState({ ...leafletState });
+    this.setState({ leafletState });
   }
 
   onRegionChanged(region) {
@@ -50,6 +55,6 @@ class IiifCropper extends React.Component {
 }
 
 IiifCropper.propTypes = {
-  iiifImage: React.PropTypes.string.isRequired,
-  cropperName: React.PropTypes.string.isRequired,
+  iiifImage: PropTypes.string.isRequired,
+  cropperName: PropTypes.string.isRequired,
 };

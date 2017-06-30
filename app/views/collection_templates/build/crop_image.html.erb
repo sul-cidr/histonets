@@ -10,12 +10,16 @@
   <div class="form-group">
     <% # Add in a hidden field just so that the BuildController stays happy %>
     <%= f.hidden_field :id, value: @collection_template.id %>
-    <%= react_component('IiifCropper', {
+    <%= content_tag :div,
+      id: "iiif-cropper",
+      data: {
         iiifImage: Riiif::Engine.routes.url_helpers.info_path(
           @collection_template.image.file_name_no_extension
         ),
         cropperName: 'collection_template[crop_bounds]'
-    }) %>
+      }.to_json do %>
+    <% end %>
   </div>
   <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>
+<%= javascript_pack_tag 'crop_image' %>
