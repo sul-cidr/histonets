@@ -7,14 +7,18 @@
   <% # Add in a hidden field just so that the BuildController stays happy %>
   <%= f.hidden_field :id, value: @collection_template.id %>
   <div class="form-group">
-    <%= react_component('ImageTemplateContainer', {
+    <%= content_tag :div,
+      id: "image-template-container",
+      data: {
         iiifImage: Riiif::Engine.routes.url_helpers.info_path(
           @collection_template.cleaned_image
         ),
         imageTemplates: @collection_template.image_templates,
         cropperName: 'collection_template[crop_bounds]',
         templateDestroyRoute: collection_template_image_template_path.gsub('create_image_templates', '')
-    }) %>
+      }.to_json do %>
+    <% end %>
   </div>
   <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>
+<%= javascript_pack_tag 'create_image_templates' %>

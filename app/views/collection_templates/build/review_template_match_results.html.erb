@@ -13,12 +13,15 @@
   <div class="form-group">
     <div class="row">
       <div class="col-md-8">
-        <%= react_component('ImageMatchResults', {
-          iiifImage: Riiif::Engine.routes.url_helpers.info_path(
-            @collection_template.cleaned_image
-          ),
-          matches: @collection_template.image_matches
-        }) %>
+        <%= content_tag :div,
+          id: "image-match-results",
+          data: {
+            iiifImage: Riiif::Engine.routes.url_helpers.info_path(
+              @collection_template.cleaned_image
+            ),
+            matches: @collection_template.image_matches
+          }.to_json do %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -37,3 +40,4 @@
     <%= image_tag 'iiif-drag-icon', width: 16 %>
   <% end %>
 <% end %>
+<%= javascript_pack_tag 'review_template_match_results' %>

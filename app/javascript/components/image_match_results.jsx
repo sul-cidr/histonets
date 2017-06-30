@@ -21,7 +21,7 @@ export default class ImageMatchResults extends React.Component {
   }
 
   onLoad(leafletState) {
-    this.setState({ ...leafletState });
+    this.setState(leafletState);
   }
 
   render() {
