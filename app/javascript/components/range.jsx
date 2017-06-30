@@ -1,4 +1,7 @@
-class Range extends React.Component {
+import React from 'react';
+import PropTypes from 'prop-types';
+
+export default class Range extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: props.value, enabled: false };
@@ -31,14 +34,14 @@ class Range extends React.Component {
 }
 
 Range.propTypes = {
-  min: React.PropTypes.number,
-  max: React.PropTypes.number,
-  value: React.PropTypes.number,
-  fieldName: React.PropTypes.string,
-  customLabel: React.PropTypes.string,
-  enabled: React.PropTypes.bool,
-  onUpdate: React.PropTypes.func,
-  className: React.PropTypes.string,
+  min: PropTypes.number,
+  max: PropTypes.number,
+  value: PropTypes.number,
+  fieldName: PropTypes.string,
+  customLabel: PropTypes.string,
+  enabled: PropTypes.bool,
+  onUpdate: PropTypes.func,
+  className: PropTypes.string,
 };
 
 Range.defaultProps = {

@@ -1,4 +1,7 @@
-class Histogram extends React.Component {
+import React from 'react';
+import PropTypes from 'prop-types';
+
+export default class Histogram extends React.Component {
   // Tried to push some of this into a seperate es6 model, but PhantomJS would
   // not comply. :(
   static formattedColor(color) {
@@ -69,12 +72,12 @@ class Histogram extends React.Component {
 }
 
 Histogram.propTypes = {
-  histogram: React.PropTypes.arrayOf(
-    React.PropTypes.string,
+  histogram: PropTypes.arrayOf(
+    PropTypes.string,
   ),
-  pathName: React.PropTypes.string.isRequired,
-  imagePaths: React.PropTypes.arrayOf(
-    React.PropTypes.string,
+  pathName: PropTypes.string.isRequired,
+  imagePaths: PropTypes.arrayOf(
+    PropTypes.string,
   ),
 };
 

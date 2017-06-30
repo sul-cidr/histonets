@@ -1,6 +1,8 @@
-/* global ImageTemplateViewer */
+import React from 'react';
+import PropTypes from 'prop-types';
+import ImageTemplateViewer from './image_template_viewer';
 
-class ImageTemplateList extends React.Component {
+export default class ImageTemplateList extends React.Component {
   constructor(props) {
     super(props);
 
@@ -45,11 +47,11 @@ class ImageTemplateList extends React.Component {
 }
 
 ImageTemplateList.propTypes = {
-  imageTemplates: React.PropTypes.arrayOf(
-    React.PropTypes.object,
+  imageTemplates: PropTypes.arrayOf(
+    PropTypes.object,
   ),
-  updateRemovedItems: React.PropTypes.func,
-  updateImageTemplates: React.PropTypes.func,
+  updateRemovedItems: PropTypes.func,
+  updateImageTemplates: PropTypes.func,
 };
 
 ImageTemplateList.defaultProps = {

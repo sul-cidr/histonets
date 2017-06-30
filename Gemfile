@@ -17,7 +17,6 @@ gem 'coffee-rails', '~> 4.2'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-gem 'react-rails'
 
 gem 'webpacker'
 
@@ -47,8 +46,6 @@ gem 'honeybadger', '~> 3.1'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0' # Required for tooltips/popover for twbs
-  gem 'rails-assets-leaflet-iiif', '~> 1.0'
-  gem 'rails-assets-leaflet', '~> 1.0'
   gem 'rails-assets-css-toggle-switch'
 end
 

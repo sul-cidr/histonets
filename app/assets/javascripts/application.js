@@ -10,9 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require leaflet
-//= require leaflet-iiif
-//= require leaflet-areaselect
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
@@ -20,6 +17,5 @@
 //= require bootstrap-sprockets
 //= require react
 //= require react_ujs
-//= require components
 //= require image-picker.min
 //= require_tree .

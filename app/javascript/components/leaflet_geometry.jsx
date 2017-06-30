@@ -1,6 +1,8 @@
-/* global L */
+import L from 'leaflet';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class LeafletGeometry extends React.Component {
+export default class LeafletGeometry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,8 +29,8 @@ class LeafletGeometry extends React.Component {
 }
 
 LeafletGeometry.propTypes = {
-  matches: React.PropTypes.arrayOf(
-    React.PropTypes.array,
+  matches: PropTypes.arrayOf(
+    PropTypes.array,
   ),
-  unprojectZoom: React.PropTypes.number,
+  unprojectZoom: PropTypes.number,
 };

@@ -1,6 +1,11 @@
-/* global ImageTemplateCropper, ImageTemplateList, $  */
+/* global $ */
 
-class ImageTemplateContainer extends React.Component {
+import React from 'react';
+import PropTypes from 'prop-types';
+import ImageTemplateCropper from './image_template_cropper';
+import ImageTemplateList from './image_template_list';
+
+export default class ImageTemplateContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -82,11 +87,11 @@ class ImageTemplateContainer extends React.Component {
 }
 
 ImageTemplateContainer.propTypes = {
-  imageTemplates: React.PropTypes.arrayOf(
-    React.PropTypes.object,
+  imageTemplates: PropTypes.arrayOf(
+    PropTypes.object,
   ),
-  iiifImage: React.PropTypes.string,
-  templateDestroyRoute: React.PropTypes.string,
+  iiifImage: PropTypes.string,
+  templateDestroyRoute: PropTypes.string,
 };
 
 ImageTemplateContainer.defaultProps = {

@@ -1,6 +1,8 @@
-/* global ToggleForm, RadioSet */
+import React from 'react';
+import ToggleForm from './toggle_form';
+import RadioSet from './radio_set';
 
-class PosterizeForm extends React.Component {
+export default class PosterizeForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

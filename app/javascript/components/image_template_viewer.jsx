@@ -1,6 +1,8 @@
-/* global Range */
+import React from 'react';
+import PropTypes from 'prop-types';
+import Range from './range';
 
-class ImageTemplateViewer extends React.Component {
+export default class ImageTemplateViewer extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: parseInt(props.match_options.threshold, 10) };
@@ -84,20 +86,20 @@ class ImageTemplateViewer extends React.Component {
 }
 
 ImageTemplateViewer.propTypes = {
-  image_url: React.PropTypes.string,
-  id: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.number,
+  image_url: PropTypes.string,
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
   ]),
-  match_options: React.PropTypes.shape({
-    threshold: React.PropTypes.oneOfType([
-      React.PropTypes.number,
-      React.PropTypes.string,
+  match_options: PropTypes.shape({
+    threshold: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
     ]),
   }),
-  removeItem: React.PropTypes.func,
-  index: React.PropTypes.number,
-  updateImageTemplates: React.PropTypes.func,
+  removeItem: PropTypes.func,
+  index: PropTypes.number,
+  updateImageTemplates: PropTypes.func,
 };
 
 ImageTemplateViewer.defaultProps = {

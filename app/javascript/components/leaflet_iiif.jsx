@@ -1,7 +1,8 @@
-/* global L */
-
+import L from 'leaflet';
 import React from 'react';
 import PropTypes from 'prop-types';
+import 'leaflet-iiif';
+import '../../../vendor/assets/javascripts/leaflet-areaselect';
 
 const mapStyle = {
   height: '500px',

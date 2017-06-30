@@ -1,4 +1,7 @@
-class RadioSet extends React.Component {
+import React from 'react';
+import PropTypes from 'prop-types';
+
+export default class RadioSet extends React.Component {
 
   constructor(props) {
     super(props);
@@ -78,10 +81,10 @@ class RadioSet extends React.Component {
 }
 
 RadioSet.propTypes = {
-  defaultRadio: React.PropTypes.string,
-  enabled: React.PropTypes.bool,
-  formName: React.PropTypes.string,
-  otherRadio: React.PropTypes.string,
+  defaultRadio: PropTypes.string,
+  enabled: PropTypes.bool,
+  formName: PropTypes.string,
+  otherRadio: PropTypes.string,
 };
 
 RadioSet.defaultProps = {

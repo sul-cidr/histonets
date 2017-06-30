@@ -1,4 +1,7 @@
-class Select extends React.Component {
+import React from 'react';
+import PropTypes from 'prop-types';
+
+export default class Select extends React.Component {
   render() {
     if (!this.props) {
       return null;
@@ -19,10 +22,10 @@ class Select extends React.Component {
 }
 
 Select.propTypes = {
-  customLabel: React.PropTypes.string,
-  enabled: React.PropTypes.bool,
-  fieldName: React.PropTypes.string,
-  options: React.PropTypes.arrayOf(React.PropTypes.string),
+  customLabel: PropTypes.string,
+  enabled: PropTypes.bool,
+  fieldName: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.string),
 };
 
 Select.defaultProps = {

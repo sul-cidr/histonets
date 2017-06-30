@@ -1,6 +1,9 @@
-/* global L, LeafletIiif, LeafletGeometry */
+import React from 'react';
+import PropTypes from 'prop-types';
+import LeafletIiif from './leaflet_iiif';
+import LeafletGeometry from './leaflet_geometry';
 
-class ImageMatchResults extends React.Component {
+export default class ImageMatchResults extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,8 +45,8 @@ class ImageMatchResults extends React.Component {
 }
 
 ImageMatchResults.propTypes = {
-  iiifImage: React.PropTypes.string.isRequired,
-  matches: React.PropTypes.arrayOf(
-    React.PropTypes.array,
+  iiifImage: PropTypes.string.isRequired,
+  matches: PropTypes.arrayOf(
+    PropTypes.array,
   ),
 };

@@ -1,6 +1,8 @@
-/* global IiifCropper */
+import React from 'react';
+import PropTypes from 'prop-types';
+import IiifCropper from './iiif_cropper';
 
-class ImageTemplateCropper extends React.Component {
+export default class ImageTemplateCropper extends React.Component {
   addTemplate() {
     this.props.onAddNewTemplate(this.cropper.state);
   }
@@ -27,5 +29,5 @@ class ImageTemplateCropper extends React.Component {
 }
 
 ImageTemplateCropper.propTypes = {
-  onAddNewTemplate: () => {},
+  onAddNewTemplate: PropTypes.func,
 };

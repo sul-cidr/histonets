@@ -1,5 +1,3 @@
-/* global L, LeafletIiif, LeafletIiifCropper */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import LeafletIiif from './leaflet_iiif';
@@ -25,7 +23,7 @@ export default class IiifCropper extends React.Component {
   }
 
   onLoad(leafletState) {
-    this.setState({ leafletState });
+    this.setState(leafletState);
   }
 
   onRegionChanged(region) {

@@ -1,6 +1,11 @@
-/* globals $, Range, Select */
+/* globals $ */
 
-class ToggleForm extends React.Component {
+import React from 'react';
+import PropTypes from 'prop-types';
+import Range from './range';
+import Select from './select';
+
+export default class ToggleForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: props.value, enabled: false };
@@ -107,13 +112,13 @@ class ToggleForm extends React.Component {
 }
 
 ToggleForm.propTypes = {
-  object: React.PropTypes.string.isRequired,
-  attribute: React.PropTypes.string.isRequired,
-  type: React.PropTypes.string.isRequired,
-  value: React.PropTypes.number,
-  handleEnableChange: React.PropTypes.func,
-  helpText: React.PropTypes.string,
-  formType: React.PropTypes.oneOf(['Range', 'Select']),
+  object: PropTypes.string.isRequired,
+  attribute: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  value: PropTypes.number,
+  handleEnableChange: PropTypes.func,
+  helpText: PropTypes.string,
+  formType: PropTypes.oneOf(['Range', 'Select']),
 };
 
 ToggleForm.defaultProps = {

@@ -1,5 +1,4 @@
-/* global L */
-
+import L from 'leaflet';
 import React from 'react';
 import PropTypes from 'prop-types';
 
