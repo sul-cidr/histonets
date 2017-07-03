@@ -71,4 +71,31 @@ RSpec.describe ProcessImageJob, type: :job do
       described_class.new.perform(collection_template, images.first)
     end
   end
+  describe 'trackable callbacks' do
+    let(:images) { create_list(:image, 5) }
+    let(:collection) { create(:collection, images: images) }
+    let(:collection_template) do
+      create(:collection_template, collection: collection,
+                                   image: images.first, auto_clean: true)
+    end
+    it 'check status enqueuing' do
+      described_class.perform_later(collection_template, images.first)
+      expect(ProcessImageJob).to have_been_enqueued
+      expect(ProcessTracker.find_by(
+        trackable_id: collection_template.id
+      ).status).to eq 'ENQUEUED'
+    end
+    describe 'check status started' do
+      it 'skipped because we cannot test the callback'
+    end
+    it 'status completed' do
+      expect(cli_instance).to receive(:enhance)
+      expect(cli_instance).to receive(:select).and_return '[]'
+      expect(cli_instance).to receive(:match).and_return '[]'
+      described_class.perform_now(collection_template, images.first)
+      expect(ProcessTracker.find_by(
+        trackable_id: collection_template.id
+      ).status).to eq 'COMPLETED'
+    end
+  end
 end

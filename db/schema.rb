@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123193743) do
+ActiveRecord::Schema.define(version: 20170703183237) do
 
   create_table "collection_templates", force: :cascade do |t|
     t.integer "collection_id"
@@ -67,6 +67,19 @@ ActiveRecord::Schema.define(version: 20170123193743) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["file_name"], name: "index_images_on_file_name", unique: true
+  end
+
+  create_table "process_trackers", force: :cascade do |t|
+    t.string "trackable_type"
+    t.integer "trackable_id"
+    t.string "job_id"
+    t.string "status"
+    t.string "job_type"
+    t.text "arguments"
+    t.integer "executions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trackable_type", "trackable_id"], name: "index_process_trackers_on_trackable_type_and_trackable_id"
   end
 
 end
