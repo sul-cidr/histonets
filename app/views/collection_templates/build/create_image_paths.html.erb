@@ -12,22 +12,30 @@
   <div class="form-group">
     <div class="row">
       <div class="col-md-8">
-        <%= react_component('LeafletIiif', {
-          iiifImage: Riiif::Engine.routes.url_helpers.info_path(
-            @collection_template.cleaned_image
-          )
-        }) %>
+        <%= content_tag :div,
+          id: "image-path-image",
+          data: {
+            iiifImage: Riiif::Engine.routes.url_helpers.info_path(
+              @collection_template.cleaned_image
+            )
+          }.to_json do %>
+        <% end %>
       </div>
       <div class="col-md-4 image-path-list">
         <h3><%= t 'create_image_paths.instruction' %></h3>
         <ul class="list-unstyled">
+          <% counter = 1 %>
           <% @collection_template.parsed_histogram.each do |histogram| %>
-            <%= react_component('Histogram', {
-              histogram: histogram,
-              pathName: 'collection_template[image_paths][]',
-              imagePaths: @collection_template.image_paths
-              })
-            %>
+            <%= content_tag :div,
+              id: "image-path-histogram-" + counter.to_s,
+              class: "histogram",
+              data: {
+                histogram: histogram,
+                pathName: 'collection_template[image_paths][]',
+                imagePaths: @collection_template.image_paths
+              }.to_json do %>
+            <% end %>
+            <% counter = counter + 1 %>
           <% end %>
         </ul>
       </div>
@@ -35,3 +43,4 @@
   </div>
   <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>
+<%= javascript_pack_tag 'create_image_paths' %>
