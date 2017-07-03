@@ -12,25 +12,44 @@
   <% end %>
   <% # Add in a hidden field just so that the BuildController stays happy %>
   <%= f.hidden_field :id, value: @collection_template.id %>
-  <%= react_component('ToggleForm', {
-    object: f.object_name, attribute: 'image_clean', type: 'denoise', helpText: t('image_clean.denoise.help')
-  }) %>
-  <%= react_component('ToggleForm', {
-    object: f.object_name, attribute: 'image_clean', type: 'equalize', helpText: t('image_clean.equalize.help')
-  }) %>
-  <%= react_component('ToggleForm', {
-    value: 100, max: 200, object: f.object_name, attribute: 'image_clean', type: 'brightness', helpText: t('image_clean.brightness.help')
-  }) %>
-  <%= react_component('ToggleForm', {
-    value: 100, max: 200, object: f.object_name, attribute: 'image_clean', type: 'contrast', helpText: t('image_clean.brightness.help')
-  }) %>
-  <%= react_component('ToggleForm', {
-    object: f.object_name, attribute: 'image_clean', type: 'smooth', helpText: t('image_clean.brightness.help')
-  }) %>
-  <%= react_component('PosterizeForm', {
-    object: f.object_name, attribute: 'image_clean', type: 'posterize', helpText: t('image_clean.posterize.help')
-  }) %>
+  <%= content_tag :div,
+    id: "image-clean-denoise",
+    data: {
+      object: f.object_name, attribute: 'image_clean', type: 'denoise', helpText: t('image_clean.denoise.help')
+    }.to_json do %>
+  <% end %>
+  <%= content_tag :div,
+    id: "image-clean-equalize",
+    data: {
+      object: f.object_name, attribute: 'image_clean', type: 'equalize', helpText: t('image_clean.equalize.help')
+    }.to_json do %>
+  <% end %>
+  <%= content_tag :div,
+    id: "image-clean-brightness",
+    data: {
+      value: 100, max: 200, object: f.object_name, attribute: 'image_clean', type: 'brightness', helpText: t('image_clean.brightness.help')
+    }.to_json do %>
+  <% end %>
+  <%= content_tag :div,
+    id: "image-clean-contrast",
+    data: {
+      value: 100, max: 200, object: f.object_name, attribute: 'image_clean', type: 'contrast', helpText: t('image_clean.brightness.help')
+    }.to_json do %>
+  <% end %>
+  <%= content_tag :div,
+    id: "image-clean-smooth",
+    data: {
+      object: f.object_name, attribute: 'image_clean', type: 'smooth', helpText: t('image_clean.brightness.help')
+    }.to_json do %>
+  <% end %>
+  <%= content_tag :div,
+    id: "image-clean-posterize",
+    data: {
+      object: f.object_name, attribute: 'image_clean', type: 'posterize', helpText: t('image_clean.posterize.help')
+    }.to_json do %>
+  <% end %>
   <%= f.submit 'Next Step', class: 'btn btn-primary' %>
 <% end %>
 
 <%= render 'collection_templates/cropped_image' %>
+<%= javascript_pack_tag 'image_clean' %>
