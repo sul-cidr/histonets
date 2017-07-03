@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import 'leaflet-iiif';
 import '../../../vendor/assets/javascripts/leaflet-areaselect';
+import '../../../vendor/assets/stylesheets/leaflet-areaselect.css';
 
 const mapStyle = {
   height: '500px',

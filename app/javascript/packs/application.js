@@ -1,3 +1,1 @@
-import jQuery from 'jquery';
-
-window.jQuery = jQuery;
+import '../app-styles.sass';
