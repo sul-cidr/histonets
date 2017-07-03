@@ -12,11 +12,14 @@
     <%= f.hidden_field :id, value: @collection_template.id %>
     <div class='row'>
       <div class='col-md-6'>
-        <%= react_component('LeafletIiif', {
-            iiifImage: Riiif::Engine.routes.url_helpers.info_path(
-              @collection_template.pathselected_image
-            )
-        }) %>
+        <%= content_tag :div,
+          id: "post-processed-image-paths",
+          data: {
+              iiifImage: Riiif::Engine.routes.url_helpers.info_path(
+                @collection_template.pathselected_image
+              )
+          }.to_json do %>
+        <% end %>
       </div>
       <div class='col-md-6'>
       </div>
@@ -24,3 +27,4 @@
   </div>
   <%= f.submit t('navigation.next_step'), class: 'btn btn-primary' %>
 <% end %>
+<%= javascript_pack_tag 'post_process_image_paths' %>
