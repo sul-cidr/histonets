@@ -12,7 +12,7 @@ RSpec.describe 'Crop image', type: :feature, js: true do
     click_button 'Next Step'
   end
   it 'has image viewer with crop and saves crop' do
-    expect(page).to have_css '[data-react-class="IiifCropper"]'
+    expect(page).to have_css 'div#iiif-cropper'
     expect(page).to have_css '.leaflet-areaselect-container'
     expect(page)
       .to have_css '.leaflet-tile-container '\
