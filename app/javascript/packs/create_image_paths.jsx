@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const histograms = document.getElementsByClassName('histogram');
 
-  for (let i = 1; i < histograms.length; i += 1) {
+  for (let i = 1; i <= histograms.length; i += 1) {
     const nodeId = `image-path-histogram-${String(i)}`;
     const histogramNode = document.getElementById(nodeId);
     const dataHistogram = JSON.parse(histogramNode.getAttribute('data'));
