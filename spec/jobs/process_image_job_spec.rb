@@ -83,7 +83,7 @@ RSpec.describe ProcessImageJob, type: :job do
       expect(ProcessImageJob).to have_been_enqueued
       expect(ProcessTracker.find_by(
         trackable_id: collection_template.id
-      ).status).to eq 'ENQUEUED'
+      ).enqueued?).to be true
     end
     describe 'check status started' do
       it 'skipped because we cannot test the callback'
@@ -95,7 +95,7 @@ RSpec.describe ProcessImageJob, type: :job do
       described_class.perform_now(collection_template, images.first)
       expect(ProcessTracker.find_by(
         trackable_id: collection_template.id
-      ).status).to eq 'COMPLETED'
+      ).completed?).to be true
     end
   end
 end

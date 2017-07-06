@@ -7,13 +7,13 @@ module TrackableJob
     base.class_eval do
       before_enqueue do |job|
         tracker = job_tracker(job.job_id, job.arguments.first)
-        tracker.update(status: 'ENQUEUED')
+        tracker.enqueued!
       end
 
       before_perform do |job|
         tracker = job_tracker(job.job_id, job.arguments.first)
+        tracker.started!
         tracker.update(
-          status: 'STARTED',
           job_type: job.class,
           arguments: job.arguments,
           executions: job.executions
@@ -22,7 +22,8 @@ module TrackableJob
 
       after_perform do |job|
         tracker = job_tracker(job.job_id, job.arguments.first)
-        tracker.update(status: 'COMPLETED', executions: job.executions)
+        tracker.completed!
+        tracker.update(executions: job.executions)
       end
     end
   end
