@@ -6,6 +6,7 @@
 # Job for processing an Image from a CollectionTemplate
 class ProcessImageJob < ApplicationJob
   queue_as :default
+  include TrackableJob
 
   ##
   # Executes a synchronous set of tasks for Image -> Graph

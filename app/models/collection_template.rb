@@ -7,6 +7,7 @@ class CollectionTemplate < ApplicationRecord
   belongs_to :image, optional: true
   has_many :image_templates, dependent: :destroy
   has_one :histogram, dependent: :destroy, as: :histogramable
+  has_many :process_trackers, dependent: :destroy, as: :trackable
 
   # Used by Histogram to figure out where the file is
   alias_attribute :file_name, :cleaned_file_name
@@ -143,6 +144,12 @@ class CollectionTemplate < ApplicationRecord
 
   def manifest_presenter
     ManifestPresenter.new(self)
+  end
+
+  def process_all_images
+    collection.images.map do |image|
+      ProcessImageJob.perform_later(self, image)
+    end
   end
 
   private

@@ -168,4 +168,15 @@ RSpec.describe CollectionTemplate, type: :model do
       expect(subject.image_matches).to eq [[[0, 200]]]
     end
   end
+  describe '#process_all_images' do
+    let(:collection) { create(:collection_with_images) }
+    subject do
+      create(:collection_template, collection: collection)
+    end
+    it 'enqueues a ProcessImageJob for all images in a collection' do
+      subject.process_all_images
+      expect(ProcessImageJob)
+        .to have_been_enqueued.at_least(collection.images.count).times
+    end
+  end
 end

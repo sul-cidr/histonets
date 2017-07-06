@@ -4,4 +4,50 @@
   <%= @collection_template.to_json %>
 </div>
 
+<h2> Track Processing Progress </h2>
+<table class='table table-striped'>
+  <thead>
+    <tr>
+      <th>Job ID</th>
+      <th>Created at</th>
+      <th>Updated at</th>
+      <th>Elapsed</th>
+      <th>Job Type</th>
+      <th>Arguments</th>
+      <th>Times executed</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @collection_template.process_trackers.each do |process_tracker| %>
+      <tr>
+        <td>
+          <%= process_tracker.job_id %>
+        </td>
+        <td>
+          <%= process_tracker.created_at %>
+        </td>
+        <td>
+          <%= process_tracker.updated_at %>
+        </td>
+        <td>
+          <%= distance_of_time_in_words(process_tracker.updated_at, process_tracker.created_at) %>
+        </td>
+        <td>
+          <%= process_tracker.job_type %>
+        </td>
+        <td>
+          <%= process_tracker.arguments %>
+        </td>
+        <td>
+          <%= process_tracker.executions %>
+        </td>
+        <td>
+          <%= process_tracker.status %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to t('navigation.back'), collection_templates_path %>
