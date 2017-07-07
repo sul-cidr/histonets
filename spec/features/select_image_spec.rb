@@ -7,8 +7,8 @@ RSpec.describe 'Selecting an image for a template', type: :feature, js: true do
     image = create(:image, file_name: 'small_map.jpg')
     image2 = create(:image, file_name: '4799757.jpg')
     create(:collection, images: [image, image2])
-    visit new_collection_template_path
-    click_link 'Build a Collection Template'
+    visit collections_path
+    click_button 'Create collection template'
     click_button 'Next Step'
   end
   it 'renders the select form' do
