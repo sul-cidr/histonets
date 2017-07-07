@@ -19,7 +19,7 @@ RSpec.describe 'collections/show', type: :view do
     render
     expect(rendered).to have_css 'form.edit_collection'
     expect(rendered).to have_css '#collection_collection_id', visible: false
-    expect(rendered).to have_selector("input[value='1']", :visible => false)
+    expect(rendered).to have_selector("input[value='1']", visible: false)
   end
   describe 'a collection without images' do
     it 'lets the user know there are no images' do
