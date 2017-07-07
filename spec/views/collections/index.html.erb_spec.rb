@@ -14,8 +14,8 @@ RSpec.describe 'collections/index', type: :view do
     render
     expect(rendered).to have_css 'form.edit_collection'
     expect(rendered).to have_css '#collection_collection_id', visible: false
-    expect(rendered).to have_selector("input[value='1']", :visible => false)
-    expect(rendered).to have_selector("input[value='2']", :visible => false)
+    expect(rendered).to have_selector("input[value='1']", visible: false)
+    expect(rendered).to have_selector("input[value='2']", visible: false)
   end
   it 'renders links to edit each collection' do
     render

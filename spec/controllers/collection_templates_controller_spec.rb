@@ -37,11 +37,11 @@ RSpec.describe CollectionTemplatesController, type: :controller do
   end
   describe 'POST create' do
     it 'assigns @collection_template' do
-      post :create, params: { collection: { collection_id: 1 }}
+      post :create, params: { collection: { collection_id: 1 } }
       expect(assigns(:collection_template)).to be_an CollectionTemplate
     end
     it 'redirects to collection_template_build' do
-      post :create, params: { collection: { collection_id: 1 }}
+      post :create, params: { collection: { collection_id: 1 } }
       expect(subject).to redirect_to(
         collection_template_build_path(
           assigns(:collection_template), 'select_collection'
