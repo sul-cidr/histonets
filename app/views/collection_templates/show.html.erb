@@ -4,6 +4,15 @@
   <%= @collection_template.to_json %>
 </div>
 
+<%= link_to t('collection_template.process_images'),
+      process_images_collection_template_path(@collection_template),
+      method: :post,
+      class: 'btn btn-warning',
+      data: {
+        confirm: t('collection_template.process_confirm')
+      }
+%>
+
 <h2> Track Processing Progress </h2>
 <table class='table table-striped'>
   <thead>

@@ -3,7 +3,7 @@
 ##
 # Controller for CollectionTemplate resources
 class CollectionTemplatesController < ApplicationController
-  before_action :set_collection_template, only: [:show, :destroy]
+  before_action :set_collection_template, only: %i[show destroy process_images]
 
   # GET /collection_templates
   # GET /collection_templates.json
@@ -41,6 +41,13 @@ class CollectionTemplatesController < ApplicationController
                     notice: 'Collection template was successfully destroyed.'
       end
       format.json { head :no_content }
+    end
+  end
+
+  def process_images
+    @collection_template.process_all_images
+    respond_to do |format|
+      format.html { redirect_to @collection_template }
     end
   end
 

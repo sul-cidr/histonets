@@ -17,5 +17,8 @@ Rails.application.routes.draw do
               only: [:show, :update], controller: 'collection_templates/build'
     resources :image_templates, only: [:destroy]
     resources :annotations, only: [:index], defaults: { format: :json }
+    member do
+      post 'process_images'
+    end
   end
 end

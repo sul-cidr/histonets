@@ -69,4 +69,11 @@ RSpec.describe CollectionTemplatesController, type: :controller do
       end
     end
   end
+  describe 'POST process_images' do
+    let(:collection_template) { create(:collection_template) }
+    it 'redirects to show page' do
+      post :process_images, params: { id: collection_template.id }
+      expect(subject).to redirect_to collection_template_path
+    end
+  end
 end
