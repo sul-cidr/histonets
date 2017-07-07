@@ -10,8 +10,8 @@ RSpec.describe 'Collection Template Builder', type: :feature, js: true do
       create(:collection, images: [image])
     end
     it 'renders and creates consecutive form steps' do
-      visit new_collection_template_path
-      click_link 'Build a Collection Template'
+      visit collections_path
+      click_button 'Create collection template'
       click_button 'Next Step'
       click_button 'Next Step'
       expect(page).to have_css 'body', text: 'Crop Area of Interest'
@@ -45,8 +45,8 @@ RSpec.describe 'Collection Template Builder', type: :feature, js: true do
     end
     context 'when using auto clean' do
       it 'skips manual clean' do
-        visit new_collection_template_path
-        click_link 'Build a Collection Template'
+        visit collections_path
+        click_button 'Create collection template'
         click_button 'Next Step'
         click_button 'Next Step'
         click_button 'Next Step'
@@ -57,8 +57,8 @@ RSpec.describe 'Collection Template Builder', type: :feature, js: true do
     end
     it 'increments CollectionTemplate' do
       expect do
-        visit new_collection_template_path
-        click_link 'Build a Collection Template'
+        visit collections_path
+        click_button 'Create collection template'
         click_button 'Next Step'
         click_button 'Next Step'
         click_button 'Next Step'
