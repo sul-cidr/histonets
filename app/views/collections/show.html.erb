@@ -3,6 +3,17 @@
 <h1 class="collection-name">
   <%= @collection.name %>
 </h1>
+<%= form_for @collection, method: :post, url: collection_templates_path do |f| %>
+  <% if f.object.errors.any? %>
+    <div class="error_messages">
+      <% f.object.errors.full_messages.each do |error| %>
+        <p><%= error %></p>
+      <% end %>
+    </div>
+  <% end %>
+  <%= f.hidden_field :collection_id, value: @collection.id %>
+  <%= f.submit t('collections.create_template'), class: 'btn btn-primary template-button' %>
+<% end %>
 <div class="collection-description">
   <%= @collection.description %>
 </div>
