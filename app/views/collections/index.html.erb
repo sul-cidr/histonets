@@ -9,8 +9,21 @@
       <%= collection.description %>
     </div>
     <div class="col">
-      <%= link_to t('crud.edit'), edit_collection_path(collection), class: 'btn btn-secondary' %>
-      <%= link_to t('crud.destroy'), collection_path(collection), {method: :delete, remote: true, data: { confirm: t('crud.confirm') }, class: 'btn btn-danger'} %>
+      <%= form_for collection, method: :post, url: collection_templates_path do |f| %>
+        <% if f.object.errors.any? %>
+          <div class="error_messages">
+            <% f.object.errors.full_messages.each do |error| %>
+              <p><%= error %></p>
+            <% end %>
+          </div>
+        <% end %>
+        <%= f.hidden_field :collection_id, value: collection.id %>
+        <%= f.submit t('collections.create_template'), class: 'btn btn-primary' %>
+      <% end %>
+      <div class="crud-buttons">
+        <%= link_to t('crud.edit'), edit_collection_path(collection), class: 'btn btn-secondary' %>
+        <%= link_to t('crud.destroy'), collection_path(collection), {method: :delete, remote: true, data: { confirm: t('crud.confirm') }, class: 'btn btn-danger'} %>
+      </div>
     </div>
   </div>
   <% end %>
