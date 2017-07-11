@@ -24,7 +24,7 @@ class CollectionTemplatesController < ApplicationController
   # POST /collection_templates
   # POST /collection_templates.json
   def create
-    @collection_template = CollectionTemplate.new(create_params)
+    @collection_template = CollectionTemplate.create(create_params)
     @collection_template.save(validate: false)
     redirect_to collection_template_build_path(
       @collection_template, CollectionTemplate.form_steps.first
