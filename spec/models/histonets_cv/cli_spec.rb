@@ -16,7 +16,7 @@ RSpec.describe HistonetsCv::Cli, type: :model do
     subject { described_class.new('yolo.jpg') }
     it 'executes the contrast command with arguments' do
       expect(subject).to receive(:execute)
-        .with('contrast 42 file://spec/fixtures/images/yolo.jpg -o '\
+        .with('contrast 42 spec/fixtures/images/yolo.jpg -o '\
               'spec/fixtures/images/yolo_contrast_tmp.png')
       subject.contrast(42)
     end
@@ -25,7 +25,7 @@ RSpec.describe HistonetsCv::Cli, type: :model do
     subject { described_class.new('yolo.jpg') }
     it 'executes the brightness command with arguments' do
       expect(subject).to receive(:execute)
-        .with('brightness 42 file://spec/fixtures/images/yolo.jpg -o '\
+        .with('brightness 42 spec/fixtures/images/yolo.jpg -o '\
               'spec/fixtures/images/yolo_brightness_tmp.png')
       subject.brightness(42)
     end
@@ -44,7 +44,7 @@ RSpec.describe HistonetsCv::Cli, type: :model do
     end
     it 'executes the pipeline command with json arguments' do
       expect(subject).to receive(:execute)
-        .with("pipeline '#{arguments}' file://spec/fixtures/images/yolo.jpg "\
+        .with("pipeline '#{arguments}' spec/fixtures/images/yolo.jpg "\
               '-o spec/fixtures/images/yolo__tmp.png')
       subject.pipeline(arguments)
     end
@@ -54,7 +54,7 @@ RSpec.describe HistonetsCv::Cli, type: :model do
     let(:arguments) { 'http://test -th 8' }
     it 'executes the match command with arguments' do
       expect(subject).to receive(:execute)
-        .with("match #{arguments} file://spec/fixtures/images/yolo.jpg")
+        .with("match #{arguments} spec/fixtures/images/yolo.jpg")
       subject.match(arguments)
     end
   end
@@ -63,7 +63,7 @@ RSpec.describe HistonetsCv::Cli, type: :model do
     let(:arguments) { [[123, 45, 67], 'holla'] }
     it 'executes the select command with arguments' do
       expect(subject).to receive(:execute)
-        .with("select #{arguments[0]} file://spec/fixtures/images/yolo.jpg "\
+        .with("select #{arguments[0]} spec/fixtures/images/yolo.jpg "\
               '-o spec/fixtures/images/yolo_holla_tmp.png')
       subject.select(*arguments)
     end
