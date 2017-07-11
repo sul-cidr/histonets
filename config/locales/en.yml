@@ -76,6 +76,7 @@ en:
   collections:
     title: 'Collections'
     navbar: 'Collections'
+    create_template: 'Create collection template'
     new:
       button: 'New Collection'
       title: 'Create New Collection'

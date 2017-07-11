@@ -24,7 +24,7 @@ class CollectionTemplatesController < ApplicationController
   # POST /collection_templates
   # POST /collection_templates.json
   def create
-    @collection_template = CollectionTemplate.new
+    @collection_template = CollectionTemplate.new(create_params)
     @collection_template.save(validate: false)
     redirect_to collection_template_build_path(
       @collection_template, CollectionTemplate.form_steps.first
@@ -65,5 +65,11 @@ class CollectionTemplatesController < ApplicationController
     params
       .require(:collection_template)
       .permit(:collection_id, :image_id)
+  end
+
+  def create_params
+    params
+      .require(:collection)
+      .permit(:collection_id)
   end
 end
