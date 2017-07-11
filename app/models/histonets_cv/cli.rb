@@ -76,7 +76,7 @@ module HistonetsCv
       if image_url.present?
         image_url
       else
-        "file://#{Settings.IMAGE_PATH}/#{file_name}"
+        "#{Settings.IMAGE_PATH}/#{file_name}"
       end
     end
 
