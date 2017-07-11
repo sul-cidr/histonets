@@ -22,7 +22,7 @@
       <% end %>
       <div class="crud-buttons">
         <%= link_to t('crud.edit'), edit_collection_path(collection), class: 'btn btn-secondary' %>
-        <%= link_to t('crud.destroy'), collection_path(collection), {method: :delete, remote: true, data: { confirm: t('crud.confirm') }, class: 'btn btn-danger'} %>
+        <%= link_to t('crud.destroy'), collection_path(collection), {method: :delete, remote: true, data: { confirm: t('collections.confirm') }, class: 'btn btn-danger'} %>
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@ class Collection < ApplicationRecord
 
   has_and_belongs_to_many :images
   has_one :histogram, dependent: :destroy, as: :histogramable
+  has_many :collection_templates, dependent: :destroy
 
   ##
   # Creates a "Composite Histogram" consisting of colors and summed value counts

@@ -87,6 +87,7 @@ en:
     show:
       image_title: 'Images'
       no_image_message: 'There are currently no images associated with this collection.'
+    confirm: "Are you sure? This will delete all collection templates associated with this collection."
   crud:
     show: 'Show'
     edit: 'Edit'

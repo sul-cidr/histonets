@@ -9,6 +9,14 @@ RSpec.describe Collection, type: :model do
   it 'can have many images' do
     expect(create(:collection_with_images).images.length).to eq 5
   end
+  describe 'with collection templates' do
+    let(:collection) { create(:collection) }
+    let(:collection_template) { create(:collection_template) }
+    it 'has dependent collection templates' do
+      collection.collection_templates << collection_template
+      expect { collection.destroy }.to change(CollectionTemplate, :count)
+    end
+  end
   describe '#create_composite_histogram' do
     let(:histogram_extractor) { instance_double(HistogramExtractor) }
     before do
