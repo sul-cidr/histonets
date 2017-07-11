@@ -31,6 +31,13 @@
             %>
           <% end %>
         </ul>
+        <h3><%= t 'create_image_paths.skeletonize.instruction' %></h3>
+        <%= react_component('Skeletonize', {
+          modes: ['regular', '3d', 'medial', 'combined'],
+          selectedMode: '3d',
+          dilation: 50
+        })
+        %>
       </div>
     </div>
   </div>

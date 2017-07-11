@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170703183237) do
+ActiveRecord::Schema.define(version: 20170712230750) do
 
   create_table "collection_templates", force: :cascade do |t|
     t.integer "collection_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20170703183237) do
     t.integer "image_id"
     t.boolean "auto_clean"
     t.text "image_matches"
+    t.text "skeletonize"
     t.index ["collection_id"], name: "index_collection_templates_on_collection_id"
     t.index ["image_id"], name: "index_collection_templates_on_image_id"
   end
