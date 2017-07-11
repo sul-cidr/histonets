@@ -30,4 +30,11 @@ RSpec.describe 'Post process image paths', type: :feature, js: true do
     expect(page).to have_css 'h1', text: 'Post Process Template Match Results'
     expect(page).to have_css '#map'
   end
+  it 'Should provide the skeletonize form' do
+    expect(page).to have_css 'h3', text: 'Select and configure the path matching method'
+    expect(page).to have_css 'select', count: 2
+    expect(page).to have_css 'select[name="collection_template[skeletonize][selected_mode]"] option', count: 5
+    expect(page).to have_css 'select[name="collection_template[skeletonize][binarizationMethod]"] option', count: 4
+    expect(page).to have_css 'input[type="range"]', count: 1
+  end
 end

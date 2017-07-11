@@ -77,6 +77,12 @@ class CollectionTemplates::BuildController < ApplicationController
                              {
                                image_paths: []
                              }
+                           when 'post_process_image_paths'
+                             {
+                               skeletonize: [
+                                 :selected_mode, :dilation, :binarizationMethod
+                               ]
+                             }
                            end
     params.require(:collection_template)
           .permit(permitted_attributes).merge(form_step: step)
