@@ -12,13 +12,13 @@ RSpec.describe ProcessImageJob, type: :job do
     let(:collection) { create(:collection, images: images) }
     let(:collection_template) do
       create(:collection_template, collection: collection,
-                                   image: images.first, auto_clean: true)
+                                   image: images.first, auto_clean: true, id: 5)
     end
     context 'when autocleaning' do
       it 'calls the autoclean command "enhance"' do
         expect(cli_instance).to receive(:enhance)
           .with(
-            '1_imageclean',
+            '5_imageclean',
             'http://localhost:1337/image-service/'\
               "#{images.first.file_name_no_extension}/full/full/0/default.png"
           )
@@ -37,7 +37,7 @@ RSpec.describe ProcessImageJob, type: :job do
             '[{"action":"contrast","options":{"value":42}}]',
             'http://localhost:1337/image-service/'\
               "#{images.first.file_name_no_extension}/full/full/0/default.png",
-            '1_imageclean'
+            '5_imageclean'
           )
         ## Stub out other calls that are going to happen
         expect(cli_instance).to receive(:match).and_return '[]'
@@ -49,7 +49,7 @@ RSpec.describe ProcessImageJob, type: :job do
       expect(cli_instance).to receive(:match).with(
         '',
         'http://localhost:1337/image-service/'\
-          "#{images.first.file_name_no_extension}_2_imageclean_tmp"\
+          "#{images.first.file_name_no_extension}_5_imageclean_tmp"\
           '/full/full/0/default.png'
       ).and_return '[]'
       ## Stub out other calls that are going to happen
@@ -60,9 +60,9 @@ RSpec.describe ProcessImageJob, type: :job do
     it 'calls the creation of image paths' do
       expect(cli_instance).to receive(:select).with(
         '',
-        '1_imagepaths',
+        '5_imagepaths',
         'http://localhost:1337/image-service/'\
-          "#{images.first.file_name_no_extension}_2_imageclean_tmp"\
+          "#{images.first.file_name_no_extension}_5_imageclean_tmp"\
           '/full/full/0/default.png'
       ).and_return '[]'
       ## Stub out other calls that are going to happen
