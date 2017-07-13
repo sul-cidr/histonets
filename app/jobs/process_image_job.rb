@@ -46,7 +46,8 @@ class ProcessImageJob < ApplicationJob
                               .map(&:cli_options).join(' '),
                              "#{Settings.HOST_URL}"\
                              "#{Riiif::Engine.routes.url_helpers.image_path(
-                               image.file_name_no_extension + '_2_imageclean_tmp',
+                               image.file_name_no_extension +
+                                 "_#{collection_template.id}_imageclean_tmp",
                                size: 'full',
                                format: Settings.DEFAULT_IMAGE_EXTENSION
                              )}"
@@ -62,7 +63,8 @@ class ProcessImageJob < ApplicationJob
                       "#{collection_template.id}_imagepaths",
                       "#{Settings.HOST_URL}"\
                       "#{Riiif::Engine.routes.url_helpers.image_path(
-                        image.file_name_no_extension + '_2_imageclean_tmp',
+                        image.file_name_no_extension +
+                          "_#{collection_template.id}_imageclean_tmp",
                         size: 'full',
                         format: Settings.DEFAULT_IMAGE_EXTENSION
                       )}"
