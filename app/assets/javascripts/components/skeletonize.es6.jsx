@@ -8,7 +8,7 @@ class Skeletonize extends React.Component {
       selectedMode: props.selectedMode,
       binarizationMethod: props.binarizationMethod,
       formName: 'skeletonize_method',
-      dilation: parseInt(props.dilation),
+      dilation: parseInt(props.dilation, 10),
     };
     this.handleModeChange = this.handleModeChange.bind(this);
     this.handleBinarizationChange = this.handleBinarizationChange.bind(this);
@@ -24,7 +24,7 @@ class Skeletonize extends React.Component {
   }
 
   handleDilationChange(dilation) {
-    this.setState({ dilation: parseInt(dilation) });
+    this.setState({ dilation: parseInt(dilation, 10) });
   }
 
   render() {
@@ -114,4 +114,6 @@ Skeletonize.defaultProps = {
   selectedMode: 'combined',
   dilation: '13',
   binarizationMethod: 'li',
+  modes: ['regular', '3d', 'medial', 'combined', 'thin'],
+  binarizationMethods: ['sauvola', 'isodata', 'otsu', 'li'],
 };
