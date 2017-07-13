@@ -1,3 +1,5 @@
+/* global Range */
+
 class Skeletonize extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +24,7 @@ class Skeletonize extends React.Component {
   }
 
   handleDilationChange(dilation) {
-    this.setState({ dilation: dilation});
+    this.setState({ dilation });
   }
 
   render() {
@@ -33,17 +35,19 @@ class Skeletonize extends React.Component {
       <div>
         <div className="form-group row">
           <label
-              className="col-sm-3 form-text text-capitalize"
-              data-toggle="tooltip"
-          >Matching Method
+            className="col-sm-3 form-text text-capitalize"
+            data-toggle="tooltip"
+            htmlFor="selected_mode"
+          >
+            Matching Method
           </label>
 
           <div className="col-sm-6">
             <select
-                name="collection_template[skeletonize][selected_mode]"
-                value={this.state.selectedMode}
-                onChange={this.handleModeChange}
-                className={"form-control"}
+              name="collection_template[skeletonize][selected_mode]"
+              value={this.state.selectedMode}
+              onChange={this.handleModeChange}
+              className={'form-control'}
             >
               { this.props.modes.map(
                   mode => <option value={mode.toLowerCase()} key={Math.random()}>{mode}</option>,
@@ -53,16 +57,18 @@ class Skeletonize extends React.Component {
         </div>
         <div className="form-group row">
           <label
-              className="col-sm-3 form-text text-capitalize"
-              data-toggle="tooltip"
-          >Binarization Method
+            className="col-sm-3 form-text text-capitalize"
+            data-toggle="tooltip"
+            htmlFor="binarizationMethod"
+          >
+            Binarization Method
           </label>
           <div className="col-sm-6">
             <select
-                name="collection_template[skeletonize][binarizationMethod]"
-                value={this.state.binarizationMethod}
-                onChange={this.handleBinarizationChange}
-                className={"form-control"}
+              name="collection_template[skeletonize][binarizationMethod]"
+              value={this.state.binarizationMethod}
+              onChange={this.handleBinarizationChange}
+              className={'form-control'}
             >
               { this.props.binarizationMethods.map(
                   mode => <option value={mode.toLowerCase()} key={Math.random()}>{mode}</option>,
@@ -72,17 +78,18 @@ class Skeletonize extends React.Component {
         </div>
         <div className="form-group row">
           <label
-              className="col-sm-3 form-text text-capitalize"
-              data-toggle="tooltip"
+            className="col-sm-3 form-text text-capitalize"
+            data-toggle="tooltip"
+            htmlFor="dilation"
           >Dilation
           </label>
           <div className="col-sm-6">
             <Range
-                fieldName="collection_template[skeletonize][dilation]"
-                value={parseInt(50, 10)}
-                enabled={ true }
-                onUpdate={this.handleDilationChange}
-                className="align-middle"
+              fieldName="collection_template[skeletonize][dilation]"
+              value={this.state.dilation}
+              enabled
+              onUpdate={this.handleDilationChange}
+              className="align-middle"
             />
           </div>
           <div className="col-sm-2">
@@ -96,11 +103,10 @@ class Skeletonize extends React.Component {
 
 Skeletonize.propTypes = {
   modes: React.PropTypes.arrayOf(React.PropTypes.string),
+  binarizationMethod: React.PropTypes.string,
   binarizationMethods: React.PropTypes.arrayOf(React.PropTypes.string),
   selectedMode: React.PropTypes.string,
   dilation: React.PropTypes.number,
-  handleModeChange: React.PropTypes.func,
-  handleDilationChange: React.PropTypes.func,
 };
 
 Skeletonize.defaultProps = {
@@ -108,6 +114,4 @@ Skeletonize.defaultProps = {
   selectedMode: 'combined',
   dilation: 13,
   binarizationMethod: 'li',
-  handleModeChange: () => {},
-  handleDilationChange: () => {},
 };
