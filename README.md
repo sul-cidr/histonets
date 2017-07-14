@@ -66,3 +66,9 @@ Run the JavaScript linting
 ```sh
 $ node_modules/.bin/eslint ./
 ```
+
+## Updating the deployed CLI
+
+```sh
+$ bundle exec cap dev python:update_cli
+```
