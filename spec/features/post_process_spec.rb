@@ -31,13 +31,15 @@ RSpec.describe 'Post process image paths', type: :feature, js: true do
     expect(page).to have_css '#map'
   end
   it 'Should provide the skeletonize form' do
-    select_base = 'select[name="collection_template[skeletonize]'
+    bin_finder = 'select[name="collection_template[skeletonize]'\
+      '[binarization_method]"] option'
+    mode_finder = 'select[name="collection_template[skeletonize]'\
+      '[selected_mode]"] option'
     instruction = 'Select and configure the path matching method'
     expect(page).to have_css 'h3', text: instruction
     expect(page).to have_css 'select', count: 2
-    expect(page).to have_css '#{select_base}[selected_mode]"] option', count: 5
-    bin_select = '#{select_base}[binarizationMethod]"] option'
-    expect(page).to have_css bin_select, count: 4
+    expect(page).to have_css mode_finder, count: 5
+    expect(page).to have_css bin_finder, count: 4
     expect(page).to have_css 'input[type="range"]', count: 1
   end
 end
