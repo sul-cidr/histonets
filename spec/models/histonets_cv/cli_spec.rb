@@ -68,6 +68,22 @@ RSpec.describe HistonetsCv::Cli, type: :model do
       subject.select(*arguments)
     end
   end
+  describe '#skeletonize' do
+    subject { described_class.new('yolo.jpg') }
+    let(:arguments) do
+      [' -m combined -d 13 -b li',
+       'spec/fixtures/images/yolo_tmp.png',
+       'spec/fixtures/images/yolo.png']
+    end
+    it 'executes the skeletonize command with arguments' do
+      expect(subject).to receive(:execute)
+        .with("skeletonize #{arguments[0]}"\
+              ' spec/fixtures/images/yolo.png'\
+              ' -o spec/fixtures/images/yolo_spec'\
+              '/fixtures/images/yolo_tmp.png_tmp.png')
+      subject.skeletonize(*arguments)
+    end
+  end
   describe '#help' do
     it 'returns help text' do
       expect(subject.help)

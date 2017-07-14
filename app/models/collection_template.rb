@@ -76,7 +76,6 @@ class CollectionTemplate < ApplicationRecord
     "#{image_paths_to_hex.join('_')}"
   end
 
-  # The two properties below echo the two above, defining filenames for images related to the processing step
   def postprocessed_image
     "#{image.file_name_no_extension}_"\
     "postprocess_tmp"
