@@ -31,6 +31,8 @@ class CollectionTemplates::BuildController < ApplicationController
       @collection_template.create_image_template_matches
     when 'create_image_paths'
       PathSelectJob.new.perform(@collection_template)
+    when 'post_process_image_paths'
+      PostProcessJob.new.perform(@collection_template)
     end
     render_wizard @collection_template
   end
