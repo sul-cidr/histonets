@@ -65,7 +65,7 @@ class Skeletonize extends React.Component {
           </label>
           <div className="col-sm-6">
             <select
-              name="collection_template[skeletonize][binarizationMethod]"
+              name="collection_template[skeletonize][binarization_method]"
               value={this.state.binarizationMethod}
               onChange={this.handleBinarizationChange}
               className={'form-control'}
