@@ -1,3 +1,4 @@
+/* eslint react/jsx-no-undef: "off" */
 /* global Range */
 
 class Skeletonize extends React.Component {
