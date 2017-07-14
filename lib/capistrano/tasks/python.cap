@@ -1,0 +1,9 @@
+namespace :python do
+  desc 'Update the Python package on server'
+  task :update_cli do
+    on roles(:app), in: :sequence do |host|
+      set :release_version, ask('the release tag:', 'master')
+      execute(:pip3, "install --user -U https://github.com/sul-cidr/histonets-cv/archive/#{fetch(:release_version)}.zip")
+    end
+  end
+end
