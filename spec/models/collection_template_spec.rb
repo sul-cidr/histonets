@@ -92,7 +92,7 @@ RSpec.describe CollectionTemplate, type: :model do
     end
     it 'generates a new filename for the output of the skeletonize step' do
       expect(subject.postprocessed_image)
-      .to eq 'small_map_postprocess_tmp'
+        .to eq 'small_map_postprocess_tmp'
     end
   end
   describe 'formatted_skeletonize_params' do
@@ -113,8 +113,7 @@ RSpec.describe CollectionTemplate, type: :model do
   describe 'pathselected_image_url' do
     subject do
       create(:collection_template,
-             image: create(:image, file_name: 'small_map.jpg')
-            )
+             image: create(:image, file_name: 'small_map.jpg'))
     end
     it 'creates a RIIIF URL to the output of the requisite step' do
       expect(subject.pathselected_image_url)

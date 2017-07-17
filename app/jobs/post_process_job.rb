@@ -1,3 +1,7 @@
+# frozen_string_literal: true.
+
+##
+# Encapsulates the skeletonize process for the job pipeline.
 class PostProcessJob < ApplicationJob
   queue_as :default
 

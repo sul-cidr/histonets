@@ -78,7 +78,7 @@ class CollectionTemplate < ApplicationRecord
 
   def postprocessed_image
     "#{image.file_name_no_extension}_"\
-    "postprocess_tmp"
+    'postprocess_tmp'
   end
 
   def image_paths_to_hex
@@ -116,7 +116,6 @@ class CollectionTemplate < ApplicationRecord
       format: Settings.DEFAULT_IMAGE_EXTENSION
     )}"
   end
-
 
   def fingerprinted_name
     Digest::MD5.hexdigest(
