@@ -19,6 +19,7 @@ class CollectionTemplate < ApplicationRecord
   serialize :image_matches, Array
   serialize :image_paths, Array
   serialize :skeletonize, Hash
+  serialize :ridges, Hash
 
   delegate :manifest, :annotations, to: :manifest_presenter
 

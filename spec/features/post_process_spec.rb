@@ -30,16 +30,34 @@ RSpec.describe 'Post process image paths', type: :feature, js: true do
     expect(page).to have_css 'h1', text: 'Post Process Template Match Results'
     expect(page).to have_css '#map'
   end
+  it 'Should provide the ridge form' do
+    instruction = 'Select parameters for removing ridges from the map'
+    width_finder = 'input[name="collection_template[ridges]'\
+      '[width]"]'
+    th_finder = 'input[name="collection_template[ridges]'\
+        '[threshold]"]'
+    dil_finder = 'input[name="collection_template[ridges]'\
+      '[dilation]"]'
+    within('.ridges') do
+      expect(page).to have_css 'h4', text: instruction
+      expect(page).to have_css width_finder
+      expect(page).to have_css th_finder
+      expect(page).to have_css dil_finder
+      expect(page).to have_css 'input[type="range"]', count: 3
+    end
+  end
   it 'Should provide the skeletonize form' do
     bin_finder = 'select[name="collection_template[skeletonize]'\
       '[binarization_method]"] option'
     mode_finder = 'select[name="collection_template[skeletonize]'\
       '[selected_mode]"] option'
-    instruction = 'Select and configure the path matching method'
-    expect(page).to have_css 'h3', text: instruction
-    expect(page).to have_css 'select', count: 2
-    expect(page).to have_css mode_finder, count: 5
-    expect(page).to have_css bin_finder, count: 4
-    expect(page).to have_css 'input[type="range"]', count: 1
+    instruction = 'Select parameters for extracting the skeleton'
+    within('.skeletonize') do
+      expect(page).to have_css 'h4', text: instruction
+      expect(page).to have_css 'select', count: 2
+      expect(page).to have_css mode_finder, count: 5
+      expect(page).to have_css bin_finder, count: 4
+      expect(page).to have_css 'input[type="range"]', count: 1
+    end
   end
 end
