@@ -32,13 +32,15 @@ en:
     title: 'Create Image Paths'
     instruction: 'Select colors that represent paths you want to generate'
     skeletonize:
-      instruction: 'Select and configure the path matching method'
-      mode_instruction: 'Select and the path matching method'
+      instruction: 'Select parameters for extracting the skeleton of the map'
+      mode_instruction: 'Select the path matching method'
       dilation_instruction: 'Select the strictness of the matching method'
       regular: 'Use the default algorithm to find path centerlines'
       3d: 'Use the 3d algorithm to find the path centerlines'
       medial: 'Find the middle of the path by measuring from its boundaries'
       combined: 'Use a combination of techniques to find the path centerlines'
+    ridges:
+      instruction: 'Select parameters for removing ridges from the map'
   image_templates:
     title: 'Create Image Templates'
     edit:

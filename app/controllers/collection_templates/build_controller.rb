@@ -83,6 +83,9 @@ class CollectionTemplates::BuildController < ApplicationController
                              {
                                skeletonize: [
                                  :selected_mode, :dilation, :binarization_method
+                               ],
+                               ridges: [
+                                 :width, :threshold, :dilation
                                ]
                              }
                            end
