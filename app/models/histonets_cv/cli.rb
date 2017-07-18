@@ -48,6 +48,12 @@ module HistonetsCv
         "#{output(additional_file_name)}")
     end
 
+    # histonets skeletonize -m thin -d 0 -b otsu file://...
+    def skeletonize(skeletonize_params, additional_file_name, image_url = nil)
+      execute("skeletonize #{skeletonize_params} #{input(image_url)} "\
+        "#{output(additional_file_name)}")
+    end
+
     def help
       execute('--help')
     end

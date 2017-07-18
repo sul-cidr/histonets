@@ -76,6 +76,11 @@ class CollectionTemplate < ApplicationRecord
     "#{image_paths_to_hex.join('_')}"
   end
 
+  def postprocessed_image
+    "#{image.file_name_no_extension}_"\
+    'postprocess_tmp'
+  end
+
   def image_paths_to_hex
     image_paths.map do |image_path|
       # split on commas
@@ -95,6 +100,17 @@ class CollectionTemplate < ApplicationRecord
     "#{Settings.HOST_URL}"\
     "#{Riiif::Engine.routes.url_helpers.image_path(
       cleaned_image,
+      region: 'full',
+      size: 'full',
+      format: Settings.DEFAULT_IMAGE_EXTENSION
+    )}"
+  end
+
+  def pathselected_image_url
+    return '' unless pathselected_image.present?
+    "#{Settings.HOST_URL}"\
+    "#{Riiif::Engine.routes.url_helpers.image_path(
+      pathselected_image,
       region: 'full',
       size: 'full',
       format: Settings.DEFAULT_IMAGE_EXTENSION
@@ -141,6 +157,12 @@ class CollectionTemplate < ApplicationRecord
   # A nice formatting that the CLI will like
   def formatted_image_paths
     image_paths.map { |image_path| "[#{image_path}]" }.join(' ')
+  end
+
+  def formatted_skeletonize_params
+    " -m #{skeletonize['selected_mode']}"\
+    " -d #{skeletonize['dilation']}"\
+    " -b #{skeletonize['binarization_method']}"
   end
 
   def manifest_presenter

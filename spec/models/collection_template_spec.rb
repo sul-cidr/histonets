@@ -83,6 +83,43 @@ RSpec.describe CollectionTemplate, type: :model do
         .to eq '0be5efdb4c9b1d2b1ec690cf6b9bc396_ffffff_000000'
     end
   end
+  describe 'postprocessed_image' do
+    subject do
+      create(
+        :collection_template,
+        image: create(:image, file_name: 'small_map.jpg')
+      )
+    end
+    it 'generates a new filename for the output of the skeletonize step' do
+      expect(subject.postprocessed_image)
+        .to eq 'small_map_postprocess_tmp'
+    end
+  end
+  describe 'formatted_skeletonize_params' do
+    subject do
+      create(:collection_template,
+             image: create(:image, file_name: 'small_map.jpg'),
+             skeletonize: {
+               'selected_mode' => 'combined',
+               'dilation' => 13,
+               'binarization_method' => 'li'
+             })
+    end
+    it 'formats the options string for the skeletonize CLI command' do
+      expect(subject.formatted_skeletonize_params)
+        .to eq ' -m combined -d 13 -b li'
+    end
+  end
+  describe 'pathselected_image_url' do
+    subject do
+      create(:collection_template,
+             image: create(:image, file_name: 'small_map.jpg'))
+    end
+    it 'creates a RIIIF URL to the output of the requisite step' do
+      expect(subject.pathselected_image_url)
+        .to eq 'http://localhost:1337/image-service/small_map_0be5efdb4c9b1d2b1ec690cf6b9bc396__tmp/full/full/0/default.png'
+    end
+  end
   describe '#image_paths_to_hex' do
     subject do
       create(
