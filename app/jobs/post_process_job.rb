@@ -1,4 +1,4 @@
-# frozen_string_literal: true.
+# frozen_string_literal: true
 
 ##
 # Encapsulates the skeletonize process for the job pipeline.
