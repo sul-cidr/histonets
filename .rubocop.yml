@@ -10,3 +10,7 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+
+Style/SymbolArray:
+  Exclude:
+    - 'app/controllers/collection_templates/*'
