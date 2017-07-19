@@ -7,10 +7,10 @@ class PostProcessJob < ApplicationJob
 
   def perform(collection_template)
     HistonetsCv::Cli.new(collection_template.image.file_name)
-                    .skeletonize(
-                      collection_template.formatted_skeletonize_params,
-                      collection_template.postprocessed_image,
-                      collection_template.pathselected_image_url
+                    .pipeline(
+                      collection_template.postprocess_params_to_formal_json,
+                      collection_template.pathselected_image_url,
+                      collection_template.postprocessed_image
                     )
   end
 end

@@ -34,9 +34,9 @@
           <div class="skeletonize col-md-12">
             <h4><%= t 'create_image_paths.skeletonize.instruction' %></h4>
             <%= react_component('Skeletonize', {
-              selectedMode: @collection_template.skeletonize['selected_mode'] || 'combined',
+              selectedMode: @collection_template.skeletonize['method'] || 'combined',
               dilation: @collection_template.skeletonize['dilation'] || '13',
-              binarizationMethod: @collection_template.skeletonize['binarization_method'] || 'li'
+              binarizationMethod: @collection_template.skeletonize['binarization-method'] || 'li'
               })%>
           </div>
         </div>

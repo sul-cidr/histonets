@@ -82,7 +82,7 @@ class CollectionTemplates::BuildController < ApplicationController
                            when 'post_process_image_paths'
                              {
                                skeletonize: [
-                                 :selected_mode, :dilation, :binarization_method
+                                 :method, :dilation, :'binarization-method'
                                ],
                                ridges: [
                                  :width, :threshold, :dilation
