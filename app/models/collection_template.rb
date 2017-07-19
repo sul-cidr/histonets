@@ -78,8 +78,8 @@ class CollectionTemplate < ApplicationRecord
   end
 
   def postprocessed_image
-    "#{image.file_name_no_extension}_"\
-    'postprocess_tmp'
+    "#{fingerprint_pathselection}_"\
+    'postprocess'
   end
 
   def image_paths_to_hex
@@ -112,6 +112,17 @@ class CollectionTemplate < ApplicationRecord
     "#{Settings.HOST_URL}"\
     "#{Riiif::Engine.routes.url_helpers.image_path(
       pathselected_image,
+      region: 'full',
+      size: 'full',
+      format: Settings.DEFAULT_IMAGE_EXTENSION
+    )}"
+  end
+
+  def postprocessed_image_url
+    return '' unless pathselected_image.present?
+    "#{Settings.HOST_URL}"\
+    "#{Riiif::Engine.routes.url_helpers.image_path(
+      postprocessed_image,
       region: 'full',
       size: 'full',
       format: Settings.DEFAULT_IMAGE_EXTENSION
@@ -161,9 +172,33 @@ class CollectionTemplate < ApplicationRecord
   end
 
   def formatted_skeletonize_params
-    " -m #{skeletonize['selected_mode']}"\
+    " -m #{skeletonize['method']}"\
     " -d #{skeletonize['dilation']}"\
-    " -b #{skeletonize['binarization_method']}"
+    " -b #{skeletonize['binarization-method']}"
+  end
+
+  def postprocess_params_to_formal_json
+    ridges['run'] = true
+    pipeline_params = []
+    ridges_params = HashWithIndifferentAccess.new(ridges)
+    skeletonize_params = HashWithIndifferentAccess.new(skeletonize)
+    ridge_cli_params = {}
+    skeletonize_cli_params = {}
+    if ridges['run'] == true
+      ridges_params.each do |k, v|
+        ridge_cli_params.merge!(k => v.to_i) if k.to_s != 'run'
+      end
+      pipeline_params.push(action: 'ridges', options: ridge_cli_params)
+    end
+    skeletonize_params.each do |k, v|
+      if k.to_s == 'dilation'
+        skeletonize_cli_params.merge!(k => v.to_i)
+      else
+        skeletonize_cli_params.merge!(k => v)
+      end
+    end
+    pipeline_params.push(action: 'skeletonize', options: skeletonize_cli_params)
+    pipeline_params.to_json
   end
 
   def manifest_presenter
