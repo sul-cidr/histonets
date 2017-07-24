@@ -78,6 +78,11 @@ class CollectionTemplate < ApplicationRecord
   end
 
   def postprocessed_image
+    "#{image.file_name_no_extension}_"\
+    "#{fingerprint_postprocessed}_tmp"
+  end
+
+  def fingerprint_postprocessed
     "#{fingerprint_pathselection}_"\
     'postprocess'
   end
@@ -119,7 +124,7 @@ class CollectionTemplate < ApplicationRecord
   end
 
   def postprocessed_image_url
-    return '' unless pathselected_image.present?
+    return '' unless postprocessed_image.present?
     "#{Settings.HOST_URL}"\
     "#{Riiif::Engine.routes.url_helpers.image_path(
       postprocessed_image,
