@@ -183,15 +183,14 @@ class CollectionTemplate < ApplicationRecord
   end
 
   def postprocess_params_to_formal_json
-    ridges['run'] = true
     pipeline_params = []
     ridges_params = HashWithIndifferentAccess.new(ridges)
     skeletonize_params = HashWithIndifferentAccess.new(skeletonize)
     ridge_cli_params = {}
     skeletonize_cli_params = {}
-    if ridges['run'] == true
+    if ridges['enabled'] == true
       ridges_params.each do |k, v|
-        ridge_cli_params.merge!(k => v.to_i) if k.to_s != 'run'
+        ridge_cli_params.merge!(k => v.to_i) if k.to_s != 'enabled'
       end
       pipeline_params.push(action: 'ridges', options: ridge_cli_params)
     end
