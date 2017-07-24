@@ -4,6 +4,10 @@
   <%= @collection_template.to_json %>
 </div>
 
+<div>
+  <%= image_tag @collection_template.postprocessed_image_url %>
+</div>
+
 <%= link_to t('collection_template.process_images'),
       process_images_collection_template_path(@collection_template),
       method: :post,
