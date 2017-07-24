@@ -188,7 +188,7 @@ class CollectionTemplate < ApplicationRecord
     skeletonize_params = HashWithIndifferentAccess.new(skeletonize)
     ridge_cli_params = {}
     skeletonize_cli_params = {}
-    if ridges['enabled'] == true
+    if ridges['enabled'] == 'true'
       ridges_params.each do |k, v|
         ridge_cli_params.merge!(k => v.to_i) if k.to_s != 'enabled'
       end
