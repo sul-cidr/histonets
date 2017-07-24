@@ -1,14 +1,15 @@
 /* eslint react/jsx-no-undef: "off" */
-/* global $, Range */
+/* global Range */
 
 class Ridges extends React.Component {
   constructor(props) {
     super(props);
+    const enabledBool = props.enabled === 'true';
     this.state = {
-      width: parseInt(this.props.width, 10),
-      threshold: parseInt(this.props.threshold, 10),
+      width: parseInt(props.width, 10),
+      threshold: parseInt(props.threshold, 10),
       dilation: parseInt(props.dilation, 10),
-      enabled: false,
+      enabled: enabledBool,
     };
     this.handleWidthChange = this.handleWidthChange.bind(this);
     this.handleThresholdChange = this.handleThresholdChange.bind(this);
@@ -110,10 +111,14 @@ class Ridges extends React.Component {
               htmlFor="ridges_enabled"
             >
               <input
-                id="ridges_enabled"
-                name="collection_template[ridges][enabled]"
-                type="checkbox"
                 value={this.state.enabled}
+                name="collection_template[ridges][enabled]"
+                readOnly
+                hidden
+              />
+              <input
+                id="ridges_enabled"
+                type="checkbox"
                 checked={this.state.enabled}
                 onChange={this.handleEnableChange}
               />
@@ -137,10 +142,12 @@ Ridges.propTypes = {
   width: React.PropTypes.string,
   threshold: React.PropTypes.string,
   dilation: React.PropTypes.string,
+  enabled: React.PropTypes.string,
 };
 
 Ridges.defaultProps = {
   width: '6',
   threshold: '128',
   dilation: '3',
+  enabled: 'false',
 };

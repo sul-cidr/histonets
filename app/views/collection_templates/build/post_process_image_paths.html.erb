@@ -26,7 +26,8 @@
             <%= react_component('Ridges', {
               width: @collection_template.ridges['width'] || '6',
               threshold: @collection_template.ridges['threshold'] || '128',
-              dilation: @collection_template.ridges['dilation'] || '3'
+              dilation: @collection_template.ridges['dilation'] || '3',
+              enabled: @collection_template.ridges['enabled'] || 'false'
               }) %>
           </div>
         </div>
