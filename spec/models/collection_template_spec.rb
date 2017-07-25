@@ -92,7 +92,7 @@ RSpec.describe CollectionTemplate, type: :model do
     end
     it 'generates a new filename for the output of the skeletonize step' do
       expect(subject.postprocessed_image)
-        .to eq 'small_map_postprocess_tmp'
+        .to eq 'small_map_0be5efdb4c9b1d2b1ec690cf6b9bc396__postprocess_tmp'
     end
   end
   describe 'formatted_skeletonize_params' do
@@ -100,9 +100,9 @@ RSpec.describe CollectionTemplate, type: :model do
       create(:collection_template,
              image: create(:image, file_name: 'small_map.jpg'),
              skeletonize: {
-               'selected_mode' => 'combined',
+               'method' => 'combined',
                'dilation' => 13,
-               'binarization_method' => 'li'
+               'binarization-method' => 'li'
              })
     end
     it 'formats the options string for the skeletonize CLI command' do
