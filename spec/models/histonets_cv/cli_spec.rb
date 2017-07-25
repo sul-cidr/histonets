@@ -84,6 +84,22 @@ RSpec.describe HistonetsCv::Cli, type: :model do
       subject.skeletonize(*arguments)
     end
   end
+  describe '#ridges' do
+    subject { described_class.new('yolo.jpg') }
+    let(:arguments) do
+      [' -w 6 -th 128 -d 3',
+       'spec/fixtures/images/yolo_tmp.png',
+       'spec/fixtures/images/yolo.png']
+    end
+    it 'executes the ridges command with arguments' do
+      expect(subject).to receive(:execute)
+        .with("ridges #{arguments[0]}"\
+              ' spec/fixtures/images/yolo.png'\
+              ' -o spec/fixtures/images/yolo_spec'\
+              '/fixtures/images/yolo_tmp.png_tmp.png')
+      subject.ridges(*arguments)
+    end
+  end
   describe '#help' do
     it 'returns help text' do
       expect(subject.help)

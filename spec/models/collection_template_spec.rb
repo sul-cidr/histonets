@@ -90,9 +90,35 @@ RSpec.describe CollectionTemplate, type: :model do
         image: create(:image, file_name: 'small_map.jpg')
       )
     end
-    it 'generates a new filename for the output of the skeletonize step' do
+    it 'generates a new filename for the output of the postprocess step' do
       expect(subject.postprocessed_image)
         .to eq 'small_map_0be5efdb4c9b1d2b1ec690cf6b9bc396__postprocess_tmp'
+    end
+  end
+  describe 'fingerprint_postprocessed' do
+    subject do
+      create(
+        :collection_template,
+        image: create(:image, file_name: 'small_map.jpg')
+      )
+    end
+    it 'concatenates pathselected fingerprint and postprocess' do
+      expect(subject.fingerprint_postprocessed)
+        .to eq '0be5efdb4c9b1d2b1ec690cf6b9bc396__postprocess'
+    end
+  end
+  describe 'postprocessed_image_url' do
+    subject do
+      create(
+        :collection_template,
+        image: create(:image, file_name: 'small_map.jpg')
+      )
+    end
+    it 'creates a RIIIF URL to the output of the postprocess step' do
+      expect(subject.postprocessed_image_url)
+        .to eq(
+          'http://localhost:1337/image-service/small_map_0be5efdb4c9b1d2b1ec690cf6b9bc396__postprocess_tmp/full/full/0/default.png'
+        )
     end
   end
   describe 'formatted_skeletonize_params' do
@@ -108,6 +134,51 @@ RSpec.describe CollectionTemplate, type: :model do
     it 'formats the options string for the skeletonize CLI command' do
       expect(subject.formatted_skeletonize_params)
         .to eq ' -m combined -d 13 -b li'
+    end
+  end
+  describe 'post_process_params' do
+    subject do
+      create(:collection_template,
+             image: create(:image, file_name: 'small_map.jpg'),
+             skeletonize: {
+               'method' => 'combined',
+               'dilation' => 13,
+               'binarization-method' => 'li'
+             },
+             ridges: {
+               'width' => 6,
+               'threshold' => 128,
+               'dilation' => 3,
+               'enabled' => 'true'
+             })
+    end
+    it 'properly formats skeletonize params' do
+      expect(subject.skeletonize_params).to eq(
+        'method' => 'combined', 'dilation' => 13, 'binarization-method' => 'li'
+      )
+    end
+    it 'properly formats ridges params' do
+      expect(subject.ridges_params).to eq(
+        'width' => 6, 'threshold' => 128, 'dilation' => 3
+      )
+    end
+    context 'with ridges enabled' do
+      it 'properly formats postprocess params' do
+        expect(subject.postprocess_params_to_formal_json).to eq(
+          '[{"action":"ridges","options":{"width":6,"threshold":128,"dilation"'\
+          ':3}},{"action":"skeletonize","options":{"method":"combined",'\
+          '"dilation":13,"binarization-method":"li"}}]'
+        )
+      end
+    end
+    context 'with ridges disabled' do
+      it 'properly formats postprocess params' do
+        subject.ridges['enabled'] = 'false'
+        expect(subject.postprocess_params_to_formal_json).to eq(
+          '[{"action":"skeletonize","options":{"method":"combined",'\
+          '"dilation":13,"binarization-method":"li"}}]'
+        )
+      end
     end
   end
   describe 'pathselected_image_url' do
