@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'collection_templates/show', type: :view do
   before do
-    assign(:collection_template, create(:collection_template))
+    assign(:collection_template, create(:collection_template_with_image))
   end
 
   it 'renders process image link' do

@@ -48,9 +48,9 @@ RSpec.describe 'Post process image paths', type: :feature, js: true do
   end
   it 'Should provide the skeletonize form' do
     bin_finder = 'select[name="collection_template[skeletonize]'\
-      '[binarization_method]"] option'
+      '[binarization-method]"] option'
     mode_finder = 'select[name="collection_template[skeletonize]'\
-      '[selected_mode]"] option'
+      '[method]"] option'
     instruction = 'Select parameters for extracting the skeleton'
     within('.skeletonize') do
       expect(page).to have_css 'h4', text: instruction
