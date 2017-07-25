@@ -38,13 +38,23 @@ RSpec.describe 'Post process image paths', type: :feature, js: true do
         '[threshold]"]'
     dil_finder = 'input[name="collection_template[ridges]'\
       '[dilation]"]'
+    enabled_finder = 'input[name="collection_template[ridges]'\
+      '[enabled]"]'
     within('.ridges') do
       expect(page).to have_css 'h4', text: instruction
       expect(page).to have_css width_finder
       expect(page).to have_css th_finder
       expect(page).to have_css dil_finder
       expect(page).to have_css 'input[type="range"]', count: 3
+      expect(page).to have_css '.switch-light'
+      expect(page).to have_css 'input[type="checkbox"]', visible: false
+      expect(page).to have_css enabled_finder, visible: false
     end
+  end
+  it 'Should enable ridge ranges when the toggle is clicked' do
+    expect(page).to have_css 'input[type="range"][disabled]', count: 3
+    find('[for="ridges_enabled"]').click
+    expect(page).not_to have_css 'input[type="range"][disabled]'
   end
   it 'Should provide the skeletonize form' do
     bin_finder = 'select[name="collection_template[skeletonize]'\
