@@ -76,6 +76,8 @@ en:
       help: 'Smooth image using bilateral filter.'
     posterize:
       help: 'Posterize image by reducing its number of colors.'
+  build_graph:
+    title: 'Build the graph'
   collection_template:
     title: 'Collection Templates'
     navbar: 'Collection Templates'
