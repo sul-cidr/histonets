@@ -85,7 +85,10 @@ class CollectionTemplates::BuildController < ApplicationController
                                  :method, :dilation, :'binarization-method'
                                ],
                                ridges: [
-                                 :width, :threshold, :dilation, :enabled
+                                 :width, :threshold, :dilation
+                               ],
+                               enabled_options: [
+                                 :ridges
                                ]
                              }
                            end

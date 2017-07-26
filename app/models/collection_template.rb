@@ -20,6 +20,7 @@ class CollectionTemplate < ApplicationRecord
   serialize :image_paths, Array
   serialize :skeletonize, Hash
   serialize :ridges, Hash
+  serialize :enabled_options, Hash
 
   delegate :manifest, :annotations, to: :manifest_presenter
 
@@ -186,7 +187,7 @@ class CollectionTemplate < ApplicationRecord
     ridge_cli_params = {}
     ridges_params = HashWithIndifferentAccess.new(ridges)
     ridges_params.each do |k, v|
-      ridge_cli_params.merge!(k => v.to_i) if k.to_s != 'enabled'
+      ridge_cli_params.merge!(k => v.to_i)
     end
     ridge_cli_params
   end
@@ -206,7 +207,7 @@ class CollectionTemplate < ApplicationRecord
 
   def postprocess_params_to_formal_json
     pipeline_params = []
-    if ridges['enabled'] == 'true'
+    if enabled_options['ridges'] == 'true'
       pipeline_params.push(action: 'ridges', options: ridges_params)
     end
     pipeline_params.push(action: 'skeletonize', options: skeletonize_params)

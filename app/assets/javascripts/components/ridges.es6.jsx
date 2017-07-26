@@ -112,7 +112,7 @@ class Ridges extends React.Component {
             >
               <input
                 value={this.state.enabled}
-                name="collection_template[ridges][enabled]"
+                name="collection_template[enabled_options][ridges]"
                 readOnly
                 hidden
               />
