@@ -38,8 +38,8 @@ RSpec.describe 'Post process image paths', type: :feature, js: true do
         '[threshold]"]'
     dil_finder = 'input[name="collection_template[ridges]'\
       '[dilation]"]'
-    enabled_finder = 'input[name="collection_template[ridges]'\
-      '[enabled]"]'
+    enabled_finder = 'input[name="collection_template[enabled_options]'\
+      '[ridges]"]'
     within('.ridges') do
       expect(page).to have_css 'h4', text: instruction
       expect(page).to have_css width_finder
