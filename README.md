@@ -26,10 +26,10 @@ Histonets uses [riiif](https://github.com/curationexperts/riiif) for [IIIF image
 $ brew install imagemagick --with-ghostscript --with-tiff --with-jp2
 ```
 
-Install the [Python library `histonets`](https://github.com/sul-cidr/histonets-cv). Developers may want to install this into a [virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/).
+Install the [Python library `histonets`](https://github.com/sul-cidr/histonets-cv). Developers may want to install this into a [virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/). For now it's only available from its repository. It also needs a Python version 3.4 or higher.
 
 ```sh
-$ pip install -r requirements.txt
+$ pip3 install https://github.com/sul-cidr/histonets-cv/archive/master.zip
 ```
 
 The application also uses redis for background job queueing. Make sure to have redis installed as background jobs get scheduled automatically.
