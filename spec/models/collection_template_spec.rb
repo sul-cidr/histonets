@@ -148,8 +148,10 @@ RSpec.describe CollectionTemplate, type: :model do
              ridges: {
                'width' => 6,
                'threshold' => 128,
-               'dilation' => 3,
-               'enabled' => 'true'
+               'dilation' => 3
+             },
+             enabled_options: {
+               'ridges' => 'true'
              })
     end
     it 'properly formats skeletonize params' do
@@ -173,7 +175,7 @@ RSpec.describe CollectionTemplate, type: :model do
     end
     context 'with ridges disabled' do
       it 'properly formats postprocess params' do
-        subject.ridges['enabled'] = 'false'
+        subject.enabled_options['ridges'] = 'false'
         expect(subject.postprocess_params_to_formal_json).to eq(
           '[{"action":"skeletonize","options":{"method":"combined",'\
           '"dilation":13,"binarization-method":"li"}}]'

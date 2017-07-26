@@ -19,8 +19,10 @@ RSpec.describe PostProcessJob, type: :job do
              ridges: {
                'width' => 6,
                'threshold' => 128,
-               'dilation' => 3,
-               'enabled' => 'true'
+               'dilation' => 3
+             },
+             enabled_options: {
+               'ridges' => 'true'
              })
     end
     it 'calls the HistonetsCv::Cli skeletonize' do
