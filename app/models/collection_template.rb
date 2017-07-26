@@ -35,6 +35,7 @@ class CollectionTemplate < ApplicationRecord
       review_template_match_results
       create_image_paths
       post_process_image_paths
+      build_graph
     )
   end
 
