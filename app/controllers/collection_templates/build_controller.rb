@@ -54,8 +54,6 @@ class CollectionTemplates::BuildController < ApplicationController
   # through.
   def collection_template_params(step)
     permitted_attributes = case step
-                           when 'select_collection'
-                             [:collection_id]
                            when 'select_image'
                              [:image_id]
                            when 'crop_image'

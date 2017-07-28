@@ -15,7 +15,6 @@ RSpec.describe CollectionTemplate, type: :model do
       expect(described_class.form_steps).to contain_exactly(
         *%w(
           create_image_templates
-          select_collection
           select_image
           auto_clean
           crop_image

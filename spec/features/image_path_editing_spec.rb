@@ -11,7 +11,6 @@ RSpec.describe 'Image path editing', type: :feature, js: true do
     click_button 'Create collection template'
     click_button 'Next Step'
     click_button 'Next Step'
-    click_button 'Next Step'
     check 'collection_template_auto_clean'
     click_button 'Next Step'
     # Click somewhere on the map to zoom in
