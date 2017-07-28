@@ -10,7 +10,6 @@ RSpec.describe 'Image clean', type: :feature, js: true do
     click_button 'Create collection template'
     click_button 'Next Step'
     click_button 'Next Step'
-    click_button 'Next Step'
   end
   context 'manual cleaning' do
     before do

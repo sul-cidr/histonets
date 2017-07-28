@@ -9,7 +9,6 @@ RSpec.describe 'Crop image', type: :feature, js: true do
     visit collections_path
     click_button 'Create collection template'
     click_button 'Next Step'
-    click_button 'Next Step'
   end
   it 'has image viewer with crop and saves crop' do
     expect(page).to have_css '[data-react-class="IiifCropper"]'

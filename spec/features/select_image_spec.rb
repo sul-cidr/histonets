@@ -9,7 +9,6 @@ RSpec.describe 'Selecting an image for a template', type: :feature, js: true do
     create(:collection, images: [image, image2])
     visit collections_path
     click_button 'Create collection template'
-    click_button 'Next Step'
   end
   it 'renders the select form' do
     expect(page).to have_content 'Select an Image'

@@ -26,7 +26,6 @@ class CollectionTemplate < ApplicationRecord
 
   cattr_accessor :form_steps do
     %w(
-      select_collection
       select_image
       crop_image
       auto_clean

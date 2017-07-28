@@ -5,10 +5,14 @@ require 'rails_helper'
 RSpec.describe CollectionTemplates::BuildController, type: :controller do
   describe 'GET #show' do
     let(:collection_template) { create(:collection_template) }
+    let(:collection) { create(:collection) }
     it 'returns http success' do
       get :show, params: {
-        id: 'select_collection',
-        collection_template_id: collection_template.id
+        id: 'select_image',
+        collection_template_id: collection_template.id,
+        collection_template: {
+          collection_id: collection.id
+        }
       }
       expect(response).to have_http_status(:success)
     end
@@ -19,7 +23,7 @@ RSpec.describe CollectionTemplates::BuildController, type: :controller do
     let(:collection) { create(:collection) }
     it 'redirects to next step' do
       put :update, params: {
-        id: 'select_collection',
+        id: 'select_image',
         collection_template_id: collection_template.id,
         collection_template: {
           collection_id: collection.id
@@ -27,7 +31,7 @@ RSpec.describe CollectionTemplates::BuildController, type: :controller do
       }
       expect(response).to redirect_to(
         collection_template_build_path(
-          assigns(:collection_template), 'select_image'
+          assigns(:collection_template), 'crop_image'
         )
       )
     end

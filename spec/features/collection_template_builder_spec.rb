@@ -13,7 +13,6 @@ RSpec.describe 'Collection Template Builder', type: :feature, js: true do
       visit collections_path
       click_button 'Create collection template'
       click_button 'Next Step'
-      click_button 'Next Step'
       expect(page).to have_css 'body', text: 'Crop Area of Interest'
       click_button 'Next Step'
       expect(page)
@@ -50,7 +49,6 @@ RSpec.describe 'Collection Template Builder', type: :feature, js: true do
         click_button 'Create collection template'
         click_button 'Next Step'
         click_button 'Next Step'
-        click_button 'Next Step'
         check 'collection_template_auto_clean'
         click_button 'Next Step'
         expect(page).to have_css 'body', text: 'Create Image Templates'
@@ -60,7 +58,6 @@ RSpec.describe 'Collection Template Builder', type: :feature, js: true do
       expect do
         visit collections_path
         click_button 'Create collection template'
-        click_button 'Next Step'
         click_button 'Next Step'
         click_button 'Next Step'
         click_button 'Next Step'

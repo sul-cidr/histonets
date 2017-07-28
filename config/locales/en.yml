@@ -55,8 +55,6 @@ en:
       help: ''
     flip:
       help: 'Whether also match TEMPLATE flipped horizontally. vertically, or both. Defaults to not flipping.'
-  select_collection:
-    title: 'Select a Collection'
   select_image:
     title: 'Select an Image'
   crop_image:

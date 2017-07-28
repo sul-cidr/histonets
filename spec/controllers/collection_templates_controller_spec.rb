@@ -45,7 +45,7 @@ RSpec.describe CollectionTemplatesController, type: :controller do
       post :create, params: { collection: { collection_id: collection.id } }
       expect(subject).to redirect_to(
         collection_template_build_path(
-          assigns(:collection_template), 'select_collection'
+          assigns(:collection_template), 'select_image'
         )
       )
     end
