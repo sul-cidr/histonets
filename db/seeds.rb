@@ -14,3 +14,5 @@ Dir.glob(image_files)
 collection = Collection.find_or_create_by!(name: 'Default Collection')
 collection.images = Image.all
 collection.save!
+collection.create_composite_histogram
+collection.create_palette

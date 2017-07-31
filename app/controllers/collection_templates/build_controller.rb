@@ -20,13 +20,15 @@ class CollectionTemplates::BuildController < ApplicationController
   # PUT/PATCH /collection_templates/:collection_template_id/build/:id
   def update
     @collection_template.update(collection_template_params(step))
+    collection = Collection.find(@collection_template.collection_id)
+    unless collection.palette.to_s.strip.nil?
+      CreatePaletteJob.perform_now(collection)
+    end
     case step
     when 'auto_clean'
       ImageEnhanceJob.new.perform(@collection_template)
-      @collection_template.calculate_histogram
     when 'image_clean'
       ImageCleanJob.new.perform(@collection_template)
-      @collection_template.calculate_histogram
     when 'create_image_templates'
       @collection_template.create_image_template_matches
     when 'create_image_paths'
