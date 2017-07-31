@@ -148,6 +148,6 @@ Ridges.propTypes = {
 Ridges.defaultProps = {
   width: '6',
   threshold: '128',
-  dilation: '3',
+  dilation: '1',
   enabled: 'false',
 };

@@ -26,7 +26,7 @@
             <%= react_component('Ridges', {
               width: @collection_template.ridges['width'] || '6',
               threshold: @collection_template.ridges['threshold'] || '128',
-              dilation: @collection_template.ridges['dilation'] || '3',
+              dilation: @collection_template.ridges['dilation'] || '1',
               enabled: @collection_template.enabled_options['ridges'] || 'false'
               }) %>
           </div>
@@ -36,7 +36,7 @@
             <h4><%= t 'create_image_paths.skeletonize.instruction' %></h4>
             <%= react_component('Skeletonize', {
               selectedMode: @collection_template.skeletonize['method'] || 'combined',
-              dilation: @collection_template.skeletonize['dilation'] || '13',
+              dilation: @collection_template.skeletonize['dilation'] || '6',
               binarizationMethod: @collection_template.skeletonize['binarization-method'] || 'li'
               })%>
           </div>
