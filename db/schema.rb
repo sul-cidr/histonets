@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170726140457) do
+ActiveRecord::Schema.define(version: 20170731221936) do
 
   create_table "collection_templates", force: :cascade do |t|
     t.integer "collection_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170726140457) do
     t.integer "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "palette"
   end
 
   create_table "collections_images", id: false, force: :cascade do |t|
