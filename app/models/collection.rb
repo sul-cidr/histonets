@@ -17,6 +17,7 @@ class Collection < ApplicationRecord
     parsed = {}
     images.each do |image|
       image.calculate_histogram_now if image.histogram.nil?
+      puts "Calculating histogram now"
       # Merge the values together
       parsed = parsed.merge(image.reload.parsed_histogram) do |_k, v1, v2|
         v1.to_i + v2.to_i
@@ -43,7 +44,7 @@ class Collection < ApplicationRecord
   # Creates a palette based on the coomposite histogram, to be used in the
   # image clean process
   def create_palette
-    CreatePaletteJob.perform_later(self)
+    CreatePaletteJob.perform_now(self)
   end
 end
 # rubocop:enable Metrics/MethodLength, Metrics/AbcSize

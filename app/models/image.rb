@@ -5,8 +5,6 @@ class Image < ApplicationRecord
   validates :file_name, uniqueness: true
   delegate :parsed_histogram, to: :histogram
 
-  after_commit :calculate_histogram, on: :create
-
   def file_name_no_extension
     File.basename(file_name, extension)
   end
