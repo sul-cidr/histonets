@@ -55,5 +55,19 @@ RSpec.describe Collection, type: :model do
         .to include('(255,255,255)' => 5)
       expect(subject.histogram.parsed_histogram).to include('(0,0,0)' => 10)
     end
+    it 'creates the correct file name for the histogram file' do
+      expect(subject.histogram_file_name).to eq(
+        'spec/fixtures/data/collection_1_histogram.txt'
+      )
+    end
+  end
+  describe 'creating a palette' do
+    let(:image) { create(:image, file_name: 'small_map.jpg') }
+    subject { create(:collection, images: [image]) }
+    it 'creates the palette' do
+      ActiveJob::Base.queue_adapter = :test
+      subject.create_palette
+      expect(subject.palette).not_to be_nil
+    end
   end
 end

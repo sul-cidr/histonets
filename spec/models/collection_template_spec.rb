@@ -193,6 +193,16 @@ RSpec.describe CollectionTemplate, type: :model do
         .to eq 'http://localhost:1337/image-service/small_map_0be5efdb4c9b1d2b1ec690cf6b9bc396__tmp/full/full/0/default.png'
     end
   end
+  describe 'enhance_params' do
+    subject do
+      create(:collection_template,
+             image: create(:image, file_name: 'small_map.jpg'))
+    end
+    it 'properly formats enhance params' do
+      expect(subject.enhance_params).to eq("-p '[[255, 255, 255]"\
+      ", [254, 254, 254]]'")
+    end
+  end
   describe '#image_paths_to_hex' do
     subject do
       create(

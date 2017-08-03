@@ -49,6 +49,19 @@ RSpec.describe HistonetsCv::Cli, type: :model do
       subject.pipeline(arguments)
     end
   end
+  describe '#enhance' do
+    subject { described_class.new('yolo.png') }
+    let(:arguments) do
+      [' -p "[[255, 255, 255], [254, 254, 254]]"',
+       'spec/fixtures/images/yolo.png']
+    end
+    it 'executes the enhance command with arguments' do
+      expect(subject).to receive(:execute)
+        .with("enhance #{arguments[0]} #{arguments[1]} -o "\
+          'spec/fixtures/images/yolo_spec/fixtures/images/yolo.png_tmp.png')
+      subject.enhance(*arguments)
+    end
+  end
   describe '#match' do
     subject { described_class.new('yolo.jpg') }
     let(:arguments) { 'http://test -th 8' }
@@ -98,6 +111,17 @@ RSpec.describe HistonetsCv::Cli, type: :model do
               ' -o spec/fixtures/images/yolo_spec'\
               '/fixtures/images/yolo_tmp.png_tmp.png')
       subject.ridges(*arguments)
+    end
+  end
+  describe '#palette' do
+    subject { described_class.new }
+    let(:argument) do
+      'spec/fixtures/data/collection_1_histogram.txt'
+    end
+    it 'executes the palette command with arguments' do
+      expect(subject).to receive(:palette)
+        .with(argument.to_s)
+      subject.palette(argument)
     end
   end
   describe '#help' do

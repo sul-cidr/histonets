@@ -41,4 +41,13 @@ RSpec.describe Image, type: :model do
         .to match(%r{.*localhost.*image-service.*full\/full})
     end
   end
+  describe '#calculate_histogram' do
+    let(:image) { create(:image) }
+    it 'queues the calculate histogram job' do
+      ActiveJob::Base.queue_adapter = :test
+      expect do
+        image.send(:calculate_histogram)
+      end.to have_enqueued_job(CalculateHistogramJob)
+    end
+  end
 end

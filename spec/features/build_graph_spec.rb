@@ -18,7 +18,7 @@ RSpec.describe 'Build graph', type: :feature, js: true do
     click_button 'Add template of cropped area'
     click_button 'Next Step'
     click_button 'Next Step'
-    expect(page).to have_css '.histogram-color', count: 8
+    expect(page).to have_css '.histogram-color', count: 2
     first('.media-body').click
     click_button 'Next Step'
     click_button 'Next Step'

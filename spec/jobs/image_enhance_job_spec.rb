@@ -15,7 +15,9 @@ RSpec.describe ImageEnhanceJob, type: :job do
     end
     it 'calls the HistonetsCv::Cli enhance' do
       expect(cli_instance).to receive(:enhance)
-        .with('9d7fc6f4f87c77c73c959ab3d9e0f2d8', '')
+        .with(collection_template.enhance_params.to_s,
+              '9d7fc6f4f87c77c73c959ab3d9e0f2d8',
+              '')
       subject.perform(collection_template)
     end
   end
