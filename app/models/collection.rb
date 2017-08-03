@@ -17,7 +17,6 @@ class Collection < ApplicationRecord
     parsed = {}
     images.each do |image|
       image.calculate_histogram_now if image.histogram.nil?
-      puts "Calculating histogram now"
       # Merge the values together
       parsed = parsed.merge(image.reload.parsed_histogram) do |_k, v1, v2|
         v1.to_i + v2.to_i

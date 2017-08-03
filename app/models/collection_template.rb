@@ -10,6 +10,7 @@ class CollectionTemplate < ApplicationRecord
   has_many :process_trackers, dependent: :destroy, as: :trackable
 
   # Used by Histogram to figure out where the file is
+
   alias_attribute :file_name, :cleaned_file_name
 
   accepts_nested_attributes_for :image_templates,
@@ -181,6 +182,11 @@ class CollectionTemplate < ApplicationRecord
     " -m #{skeletonize['method']}"\
     " -d #{skeletonize['dilation']}"\
     " -b #{skeletonize['binarization-method']}"
+  end
+
+  def enhance_params
+    collection = Collection.find(collection_id)
+    "-p '#{collection.palette}'"
   end
 
   def ridges_params
