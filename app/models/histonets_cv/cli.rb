@@ -35,8 +35,8 @@ module HistonetsCv
     ##
     # @param [String] fingerprint
     # @param [String] image_url url to an image to process
-    def enhance(fingerprint, image_url = nil)
-      execute("enhance #{input(image_url)} #{output(fingerprint)}")
+    def enhance(enhance_params, fingerprint, image_url = nil)
+      execute("enhance #{enhance_params} #{input(image_url)} #{output(fingerprint)}")
     end
 
     def match(image_templates, image_url = nil)

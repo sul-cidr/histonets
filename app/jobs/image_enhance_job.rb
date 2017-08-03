@@ -8,6 +8,7 @@ class ImageEnhanceJob < ApplicationJob
   def perform(collection_template)
     HistonetsCv::Cli.new(collection_template.image.file_name)
                     .enhance(
+                      collection_template.enhance_params,
                       collection_template.fingerprinted_name,
                       collection_template.cropped_image
                     )
