@@ -40,7 +40,7 @@ class Collection < ApplicationRecord
   end
 
   ##
-  # Creates a palette based on the coomposite histogram, to be used in the
+  # Creates a palette based on the composite histogram, to be used in the
   # image clean process
   def create_palette
     CreatePaletteJob.perform_now(self)

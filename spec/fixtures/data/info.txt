@@ -1,0 +1,1 @@
+The data/ dir will contain the saved histograms for each collection, used to compute the palette for the collection 

@@ -23,7 +23,7 @@ RSpec.describe 'Image path editing', type: :feature, js: true do
     ActiveJob::Base.queue_adapter = :test
   end
   it 'Should display the precalculated histograms with persisted image paths' do
-    expect(page).to have_css '.histogram-color', count: 8
+    expect(page).to have_css '.histogram-color', count: 2
     first('.media-body').click
     click_button 'Next Step'
     expect(CollectionTemplate.last.image_paths.count).to eq 1

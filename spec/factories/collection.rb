@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :collection do
+    palette '[[255, 255, 255], [254, 254, 254]]'
     sequence(:name) { |n| "My Collection #{n}" }
     factory :collection_with_images do
       transient do

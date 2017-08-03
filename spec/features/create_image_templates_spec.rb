@@ -36,4 +36,11 @@ RSpec.describe 'Create image templates', type: :feature, js: true do
     click_button 'Add template of cropped area'
     expect(page).to have_css("input[value='100']")
   end
+  it 'enqueues the histogram calculation' do
+    click_button 'Add template of cropped area'
+    ActiveJob::Base.queue_adapter = :test
+    expect do
+      click_button 'Next Step'
+    end.to have_enqueued_job(CalculateHistogramJob)
+  end
 end
