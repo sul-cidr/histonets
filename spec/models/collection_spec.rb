@@ -60,6 +60,25 @@ RSpec.describe Collection, type: :model do
         'spec/fixtures/data/collection_1_histogram.txt'
       )
     end
+    it 'creates an average composite that average all of the counts' do
+      expect(histogram_extractor).to receive(:extract_and_parse_histogram)
+        .and_return(
+          {
+            '(255,255,255)' => '1',
+            '(0,0,0)' => '2'
+          }.to_json
+        ).exactly(5).times
+      subject.save_avg_histogram_file
+      avg_histogram = JSON.parse(File.read(subject.avg_histogram_file_name))
+      expect(avg_histogram)
+        .to include('[255,255,255]' => 1)
+      expect(avg_histogram).to include('[0,0,0]' => 2)
+    end
+    it 'creates the correct file name for the averaged histogram file' do
+      expect(subject.avg_histogram_file_name).to eq(
+        'spec/fixtures/data/collection_1_avg_histogram.json'
+      )
+    end
   end
   describe 'creating a palette' do
     let(:image) { create(:image, file_name: 'small_map.jpg') }
