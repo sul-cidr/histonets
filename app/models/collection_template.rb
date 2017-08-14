@@ -178,12 +178,6 @@ class CollectionTemplate < ApplicationRecord
     image_paths.map { |image_path| "[#{image_path}]" }.join(' ')
   end
 
-  def formatted_skeletonize_params
-    " -m #{skeletonize['method']}"\
-    " -d #{skeletonize['dilation']}"\
-    " -b #{skeletonize['binarization-method']}"
-  end
-
   def enhance_params
     collection = Collection.find(collection_id)
     "-p '#{collection.palette}'"
