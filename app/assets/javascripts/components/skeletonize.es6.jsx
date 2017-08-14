@@ -113,7 +113,7 @@ Skeletonize.propTypes = {
 Skeletonize.defaultProps = {
   formName: 'skeletonize_method',
   selectedMode: 'combined',
-  dilation: '6',
+  dilation: '1',
   binarizationMethod: 'li',
   modes: ['regular', '3d', 'medial', 'combined', 'thin'],
   binarizationMethods: ['sauvola', 'isodata', 'otsu', 'li'],
