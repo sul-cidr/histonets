@@ -121,21 +121,6 @@ RSpec.describe CollectionTemplate, type: :model do
         )
     end
   end
-  describe 'formatted_skeletonize_params' do
-    subject do
-      create(:collection_template,
-             image: create(:image, file_name: 'small_map.jpg'),
-             skeletonize: {
-               'method' => 'combined',
-               'dilation' => 13,
-               'binarization-method' => 'li'
-             })
-    end
-    it 'formats the options string for the skeletonize CLI command' do
-      expect(subject.formatted_skeletonize_params)
-        .to eq ' -m combined -d 13 -b li'
-    end
-  end
   describe 'post_process_params' do
     subject do
       create(:collection_template,
