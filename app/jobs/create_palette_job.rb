@@ -8,7 +8,7 @@ class CreatePaletteJob < ApplicationJob
   def perform(collection)
     temp = HistonetsCv::Cli.new
                            .palette(
-                             collection.histogram_file_name
+                             collection.avg_histogram_file_name
                            )
     collection.palette = temp.strip
     collection.save

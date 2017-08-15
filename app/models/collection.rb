@@ -35,8 +35,24 @@ class Collection < ApplicationRecord
     File.write(histogram_file_name, hist_json)
   end
 
+  def save_avg_histogram_file
+    create_composite_histogram
+    save_histogram_file
+    hist_json = File.read(histogram_file_name)
+    total_images = images.count
+    avg_hist = Hash[JSON.parse(hist_json).map do |color, count|
+      int_count = Integer(count)
+      [color, int_count / total_images] if int_count >= total_images
+    end.compact]
+    File.write(avg_histogram_file_name, avg_hist.to_json)
+  end
+
   def histogram_file_name
     "spec/fixtures/data/collection_#{id}_histogram.txt"
+  end
+
+  def avg_histogram_file_name
+    "spec/fixtures/data/collection_#{id}_avg_histogram.json"
   end
 
   ##
