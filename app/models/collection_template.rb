@@ -56,12 +56,32 @@ class CollectionTemplate < ApplicationRecord
     json_params.each do |k, v|
       if k.to_s == 'posterize'
         pipeline_params.push(action: k, options:
-          { colors: v.to_i, method: json_params[:posterize_method] })
+          {
+            colors: v.to_i,
+            method: json_params[:posterize_method],
+            palette: palette
+          })
       elsif k.to_s != 'posterize_method'
         pipeline_params.push(action: k, options: { value: v.to_i })
       end
     end
     pipeline_params.to_json
+  end
+
+  def palette
+    collection = Collection.find(collection_id)
+    collection.palette
+  end
+
+  def palette_params
+    json_params = HashWithIndifferentAccess.new(image_clean)
+    if json_params.key?(:posterize)
+      palette_params = "-c #{json_params['posterize']} " \
+                       "-m #{json_params['posterize_method']}"
+    else
+      palette_params = ''
+    end
+    palette_params
   end
 
   def cleaned_image

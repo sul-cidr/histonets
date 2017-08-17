@@ -24,6 +24,11 @@ class CollectionTemplates::BuildController < ApplicationController
     when 'auto_clean'
       ImageEnhanceJob.new.perform(@collection_template)
     when 'image_clean'
+      collection = Collection.find(@collection_template.collection_id)
+      CreatePaletteJob.perform_now(
+        @collection_template.palette_params,
+        collection
+      )
       ImageCleanJob.new.perform(@collection_template)
     when 'create_image_templates'
       @collection_template.calculate_histogram

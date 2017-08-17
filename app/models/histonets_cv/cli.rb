@@ -59,8 +59,8 @@ module HistonetsCv
         "#{output(additional_file_name)}")
     end
 
-    def palette(histogram)
-      execute("palette #{histogram}")
+    def palette(palette_params, histogram)
+      execute("palette #{palette_params} #{histogram}")
     end
 
     def help
