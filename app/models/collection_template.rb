@@ -2,6 +2,7 @@
 
 ##
 # ActiveRecord model for the CollectionTemplate
+# rubocop:disable Metrics/MethodLength, Metrics/ClassLength
 class CollectionTemplate < ApplicationRecord
   belongs_to :collection
   belongs_to :image, optional: true
@@ -54,18 +55,17 @@ class CollectionTemplate < ApplicationRecord
     json_params = HashWithIndifferentAccess.new(image_clean)
     pipeline_params = []
     json_params.each do |k, v|
-      if k.to_s == 'posterize'
-        pipeline_params.push(action: k, options:
-          {
-            colors: v.to_i,
-            method: json_params[:posterize_method],
-            palette: palette
-          })
-      elsif k.to_s != 'posterize_method'
+      if k.to_s != 'posterize_method' && k.to_s != 'posterize'
         pipeline_params.push(action: k, options: { value: v.to_i })
       end
     end
     pipeline_params.to_json
+  end
+
+  def posterize_params
+    json_params = HashWithIndifferentAccess.new(image_clean)
+    "-p '#{palette}' -m #{json_params['posterize_method']} " \
+      "#{json_params['posterize']}"
   end
 
   def palette
@@ -107,6 +107,27 @@ class CollectionTemplate < ApplicationRecord
   def fingerprint_postprocessed
     "#{fingerprint_pathselection}_"\
     'postprocess'
+  end
+
+  def fingerprinted_reduced_name
+    "#{fingerprinted_name}_"\
+    'reduced'
+  end
+
+  def reduced_color_image
+    "#{image.file_name_no_extension}_"\
+    "#{fingerprinted_reduced_name}_tmp"
+  end
+
+  def reduced_color_image_url
+    return '' unless reduced_color_image.present?
+    "#{Settings.HOST_URL}"\
+    "#{Riiif::Engine.routes.url_helpers.image_path(
+      reduced_color_image,
+      region: 'full',
+      size: 'full',
+      format: Settings.DEFAULT_IMAGE_EXTENSION
+    )}"
   end
 
   def image_paths_to_hex
@@ -186,7 +207,7 @@ class CollectionTemplate < ApplicationRecord
     temp = HistonetsCv::Cli.new(image.file_name)
                            .match(
                              image_templates.map(&:cli_options).join(' '),
-                             cleaned_image_url
+                             reduced_color_image_url
                            )
     self.image_matches = JSON.parse(temp)
     save
@@ -256,3 +277,4 @@ class CollectionTemplate < ApplicationRecord
   # validates :image_id, presence: true,
   #                      if: -> { required_for_step?(:select_image) }
 end
+# rubocop:enable Metrics/MethodLength, Metrics/ClassLength
