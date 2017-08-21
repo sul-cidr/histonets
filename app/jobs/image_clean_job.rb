@@ -10,7 +10,7 @@ class ImageCleanJob < ApplicationJob
                     .pipeline(
                       collection_template.image_clean_to_formal_json,
                       collection_template.cropped_image,
-                      collection_template.fingerprinted_name
+                      collection_template.fingerprinted_partial_clean_name
                     )
   end
 end

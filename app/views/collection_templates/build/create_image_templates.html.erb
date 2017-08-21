@@ -10,7 +10,7 @@
   <div class="form-group">
     <%= react_component('ImageTemplateContainer', {
         iiifImage: Riiif::Engine.routes.url_helpers.info_path(
-          @collection_template.reduced_color_image
+          @collection_template.cleaned_image
         ),
         imageTemplates: @collection_template.image_templates,
         cropperName: 'collection_template[crop_bounds]',

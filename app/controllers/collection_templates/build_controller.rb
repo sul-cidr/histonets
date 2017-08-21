@@ -29,9 +29,6 @@ class CollectionTemplates::BuildController < ApplicationController
         @collection_template.palette_params,
         collection
       )
-      puts '-------------'
-      puts @collection_template.image_clean_to_formal_json
-      puts '-------------'
       ImageCleanJob.new.perform(@collection_template)
       ReduceColorsJob.perform_now(@collection_template)
     when 'create_image_templates'

@@ -9,8 +9,8 @@ class ReduceColorsJob < ApplicationJob
     HistonetsCv::Cli.new(collection_template.image.file_name)
                     .posterize(
                       collection_template.posterize_params,
-                      collection_template.fingerprinted_reduced_name,
-                      collection_template.cleaned_image_url
+                      collection_template.fingerprinted_name,
+                      collection_template.partial_clean_image_url
                     )
   end
 end

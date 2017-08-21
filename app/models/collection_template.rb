@@ -2,7 +2,7 @@
 
 ##
 # ActiveRecord model for the CollectionTemplate
-# rubocop:disable Metrics/MethodLength, Metrics/ClassLength
+# rubocop:disable Metrics/ClassLength
 class CollectionTemplate < ApplicationRecord
   belongs_to :collection
   belongs_to :image, optional: true
@@ -109,21 +109,21 @@ class CollectionTemplate < ApplicationRecord
     'postprocess'
   end
 
-  def fingerprinted_reduced_name
+  def fingerprinted_partial_clean_name
     "#{fingerprinted_name}_"\
-    'reduced'
+    'partial'
   end
 
-  def reduced_color_image
+  def partial_clean_image
     "#{image.file_name_no_extension}_"\
-    "#{fingerprinted_reduced_name}_tmp"
+    "#{fingerprinted_partial_clean_name}_tmp"
   end
 
-  def reduced_color_image_url
-    return '' unless reduced_color_image.present?
+  def partial_clean_image_url
+    return '' unless partial_clean_image.present?
     "#{Settings.HOST_URL}"\
     "#{Riiif::Engine.routes.url_helpers.image_path(
-      reduced_color_image,
+      partial_clean_image,
       region: 'full',
       size: 'full',
       format: Settings.DEFAULT_IMAGE_EXTENSION
@@ -207,7 +207,7 @@ class CollectionTemplate < ApplicationRecord
     temp = HistonetsCv::Cli.new(image.file_name)
                            .match(
                              image_templates.map(&:cli_options).join(' '),
-                             reduced_color_image_url
+                             cleaned_image_url
                            )
     self.image_matches = JSON.parse(temp)
     save
@@ -277,4 +277,4 @@ class CollectionTemplate < ApplicationRecord
   # validates :image_id, presence: true,
   #                      if: -> { required_for_step?(:select_image) }
 end
-# rubocop:enable Metrics/MethodLength, Metrics/ClassLength
+# rubocop:enable Metrics/ClassLength
