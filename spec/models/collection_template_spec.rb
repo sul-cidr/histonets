@@ -38,9 +38,7 @@ RSpec.describe CollectionTemplate, type: :model do
     it 'creates json used by histonets-cv' do
       expect(subject.image_clean_to_formal_json)
         .to eq '[{"action":"contrast","options":{"value":40}},'\
-               '{"action":"brightness","options":{"value":22}},'\
-               '{"action":"posterize","options":{"colors":3,'\
-               '"method":"linear"}}]'
+               '{"action":"brightness","options":{"value":22}}]'
     end
   end
   describe '#cleaned_image' do
@@ -282,6 +280,76 @@ RSpec.describe CollectionTemplate, type: :model do
       subject.process_all_images
       expect(ProcessImageJob)
         .to have_been_enqueued.at_least(collection.images.count).times
+    end
+  end
+  describe '#palette' do
+    subject do
+      create(:collection_template)
+    end
+    it 'creates string used by histonets-cv' do
+      c = Collection.find(subject.collection_id)
+      c.palette = '[[255, 255, 255], [254, 254, 254]]'
+      expect(subject.palette)
+        .to eq '[[255, 255, 255], [254, 254, 254]]'
+    end
+  end
+  describe '#palette_params' do
+    subject do
+      create(
+        :collection_template
+      )
+    end
+    it 'creates string used by histonets-cv if posterize is on' do
+      subject.image_clean = { posterize: 3, posterize_method: 'linear' }
+      expect(subject.palette_params)
+        .to eq '-c 3 -m linear'
+    end
+    it 'returns an empty string if posterize is off' do
+      expect(subject.palette_params).to eq ''
+    end
+  end
+  describe '#posterize_params' do
+    subject do
+      create(
+        :collection_template,
+        image_clean: { posterize: 3, posterize_method: 'linear' }
+      )
+    end
+    it 'creates string used by histonets-cv' do
+      c = Collection.find(subject.collection_id)
+      c.palette = '[[255, 255, 255], [254, 254, 254]]'
+      expect(subject.posterize_params)
+        .to eq "-p '#{subject.palette}' -m linear 3"
+    end
+  end
+  describe 'partial_clean_image_url' do
+    subject do
+      create(:collection_template,
+             image: create(:image, file_name: 'small_map.jpg'))
+    end
+    it 'creates a RIIIF URL to the output of the requisite step' do
+      expect(subject.partial_clean_image_url)
+        .to eq 'http://localhost:1337/image-service/small_map_0be5efdb4c9b1d2b1ec690cf6b9bc396_partial_tmp/full/full/0/default.png'
+    end
+  end
+  describe 'fingerprinted_partial_clean_name' do
+    subject do
+      create(:collection_template,
+             image: create(:image, file_name: 'small_map.jpg'))
+    end
+    it 'creates a RIIIF URL to the output of the requisite step' do
+      expect(subject.fingerprinted_partial_clean_name)
+        .to eq '0be5efdb4c9b1d2b1ec690cf6b9bc396_partial'
+    end
+  end
+  describe 'partial_clean_image' do
+    subject do
+      create(:collection_template,
+             image: create(:image, file_name: 'small_map.jpg'))
+    end
+    it 'creates a RIIIF URL to the output of the requisite step' do
+      expect(subject.partial_clean_image)
+        .to eq 'small_map_0be5efdb4c9b1d2b1ec690cf6b9bc396_partial_tmp'
     end
   end
 end

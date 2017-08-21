@@ -13,9 +13,10 @@ RSpec.describe CreatePaletteJob, type: :job do
     it 'calls the HistonetsCv::Cli palette' do
       collection.create_composite_histogram
       expect(cli_instance).to receive(:palette)
-        .with('spec/fixtures/data/collection_1_avg_histogram.json')
+        .with('',
+              'spec/fixtures/data/collection_1_avg_histogram.json')
         .and_return('a palette')
-      subject.perform(collection)
+      subject.perform('', collection)
     end
   end
 end

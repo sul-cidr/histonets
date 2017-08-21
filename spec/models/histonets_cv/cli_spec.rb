@@ -115,13 +115,28 @@ RSpec.describe HistonetsCv::Cli, type: :model do
   end
   describe '#palette' do
     subject { described_class.new }
-    let(:argument) do
-      'spec/fixtures/data/collection_1_histogram.txt'
+    let(:arguments) do
+      [' -m kmeans',
+       'spec/fixtures/data/collection_1_histogram.txt']
     end
     it 'executes the palette command with arguments' do
-      expect(subject).to receive(:palette)
-        .with(argument.to_s)
-      subject.palette(argument)
+      expect(subject).to receive(:execute)
+        .with("palette #{arguments[0]} #{arguments[1]}")
+      subject.palette(*arguments)
+    end
+  end
+  describe '#posterize' do
+    subject { described_class.new }
+    let(:arguments) do
+      [' -m kmeans -p "[[255, 255, 255], [254, 254, 254]]" 2',
+       'yolo_tmp.png',
+       'yolo.jpg']
+    end
+    it 'executes the posterize command with arguments' do
+      expect(subject).to receive(:execute)
+        .with("posterize #{arguments[0]} #{arguments[2]}"\
+          ' -o spec/fixtures/images/_yolo_tmp.png_tmp.png')
+      subject.posterize(*arguments)
     end
   end
   describe '#help' do
