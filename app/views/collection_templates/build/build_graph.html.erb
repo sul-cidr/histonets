@@ -21,6 +21,11 @@
         }) %>
       </div>
       <div class='col-md-6'>
+        <%= react_component('Graph', {
+          simplificationMethod: @collection_template.graph['simplification-method'] || 'vw',
+          simplificationTolerance: @collection_template.graph['simplification-tolerance'] || '1',
+          format: @collection_template.graph['format'] || 'graphml'
+          }) %>
       </div>
     </div>
   </div>

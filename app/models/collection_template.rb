@@ -23,6 +23,7 @@ class CollectionTemplate < ApplicationRecord
   serialize :skeletonize, Hash
   serialize :ridges, Hash
   serialize :enabled_options, Hash
+  serialize :graph, Hash
 
   delegate :manifest, :annotations, to: :manifest_presenter
   delegate :palette, to: :collection
@@ -249,6 +250,19 @@ class CollectionTemplate < ApplicationRecord
     end
     pipeline_params.push(action: 'skeletonize', options: skeletonize_params)
     pipeline_params.to_json
+  end
+
+  def graph_params
+    "'#{image_matches}' -sm #{graph['simplification-method']}" \
+      " -st #{graph['simplification-tolerance']} -f #{graph['format']}"
+  end
+
+  # It might be better to do something with the collection id
+  # and the template id here, but it would need to use some
+  # fingerprint to dist btw multiple templates for same coll
+  def graph_name
+    "#{fingerprint_postprocessed}_"\
+    'graph'
   end
 
   def manifest_presenter
