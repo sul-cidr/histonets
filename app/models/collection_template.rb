@@ -25,6 +25,7 @@ class CollectionTemplate < ApplicationRecord
   serialize :enabled_options, Hash
 
   delegate :manifest, :annotations, to: :manifest_presenter
+  delegate :palette, to: :collection
 
   cattr_accessor :form_steps do
     %w(
@@ -66,11 +67,6 @@ class CollectionTemplate < ApplicationRecord
     json_params = HashWithIndifferentAccess.new(image_clean)
     "-p '#{palette}' -m #{json_params['posterize_method']} " \
       "#{json_params['posterize']}"
-  end
-
-  def palette
-    collection = Collection.find(collection_id)
-    collection.palette
   end
 
   def palette_params
