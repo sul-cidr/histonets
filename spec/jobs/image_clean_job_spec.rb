@@ -19,7 +19,7 @@ RSpec.describe ImageCleanJob, type: :job do
         .with(
           '[{"action":"contrast","options":{"value":42}}]',
           'http://localhost:1337/image-service/small_map/0,0,100,100/full/0/default.png',
-          '338221af315f9de7056ef3d9b751200f'
+          '338221af315f9de7056ef3d9b751200f_partial'
         )
       subject.perform(collection_template)
     end

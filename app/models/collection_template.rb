@@ -2,6 +2,7 @@
 
 ##
 # ActiveRecord model for the CollectionTemplate
+# rubocop:disable Metrics/ClassLength
 class CollectionTemplate < ApplicationRecord
   belongs_to :collection
   belongs_to :image, optional: true
@@ -24,6 +25,7 @@ class CollectionTemplate < ApplicationRecord
   serialize :enabled_options, Hash
 
   delegate :manifest, :annotations, to: :manifest_presenter
+  delegate :palette, to: :collection
 
   cattr_accessor :form_steps do
     %w(
@@ -54,14 +56,28 @@ class CollectionTemplate < ApplicationRecord
     json_params = HashWithIndifferentAccess.new(image_clean)
     pipeline_params = []
     json_params.each do |k, v|
-      if k.to_s == 'posterize'
-        pipeline_params.push(action: k, options:
-          { colors: v.to_i, method: json_params[:posterize_method] })
-      elsif k.to_s != 'posterize_method'
+      if k.to_s != 'posterize_method' && k.to_s != 'posterize'
         pipeline_params.push(action: k, options: { value: v.to_i })
       end
     end
     pipeline_params.to_json
+  end
+
+  def posterize_params
+    json_params = HashWithIndifferentAccess.new(image_clean)
+    "-p '#{palette}' -m #{json_params['posterize_method']} " \
+      "#{json_params['posterize']}"
+  end
+
+  def palette_params
+    json_params = HashWithIndifferentAccess.new(image_clean)
+    if json_params.key?(:posterize)
+      palette_params = "-c #{json_params['posterize']} " \
+                       "-m #{json_params['posterize_method']}"
+    else
+      palette_params = ''
+    end
+    palette_params
   end
 
   def cleaned_image
@@ -87,6 +103,27 @@ class CollectionTemplate < ApplicationRecord
   def fingerprint_postprocessed
     "#{fingerprint_pathselection}_"\
     'postprocess'
+  end
+
+  def fingerprinted_partial_clean_name
+    "#{fingerprinted_name}_"\
+    'partial'
+  end
+
+  def partial_clean_image
+    "#{image.file_name_no_extension}_"\
+    "#{fingerprinted_partial_clean_name}_tmp"
+  end
+
+  def partial_clean_image_url
+    return '' unless partial_clean_image.present?
+    "#{Settings.HOST_URL}"\
+    "#{Riiif::Engine.routes.url_helpers.image_path(
+      partial_clean_image,
+      region: 'full',
+      size: 'full',
+      format: Settings.DEFAULT_IMAGE_EXTENSION
+    )}"
   end
 
   def image_paths_to_hex
@@ -236,3 +273,4 @@ class CollectionTemplate < ApplicationRecord
   # validates :image_id, presence: true,
   #                      if: -> { required_for_step?(:select_image) }
 end
+# rubocop:enable Metrics/ClassLength

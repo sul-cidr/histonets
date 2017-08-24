@@ -57,9 +57,9 @@ class Collection < ApplicationRecord
 
   ##
   # Creates a palette based on the composite histogram, to be used in the
-  # image clean process
+  # image clean process. Uses all default params.
   def create_palette
-    CreatePaletteJob.perform_now(self)
+    CreatePaletteJob.perform_now('', self)
   end
 end
 # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
