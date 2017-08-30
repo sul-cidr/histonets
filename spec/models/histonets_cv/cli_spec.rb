@@ -139,6 +139,20 @@ RSpec.describe HistonetsCv::Cli, type: :model do
       subject.posterize(*arguments)
     end
   end
+  describe '#graph' do
+    subject { described_class.new }
+    let(:arguments) do
+      ["'[[[0, 0], [5, 5]], [[1, 1], [6, 6]]]' -sm vw -st 0 -f graphml",
+       'yolo_tmp.png',
+       'yolo.jpg']
+    end
+    it 'executes the graph command with arguments' do
+      expect(subject).to receive(:execute)
+        .with("graph #{arguments[0]} #{arguments[2]}"\
+          ' -o spec/fixtures/data/yolo_tmp.png')
+      subject.graph(*arguments)
+    end
+  end
   describe '#help' do
     it 'returns help text' do
       expect(subject.help)
