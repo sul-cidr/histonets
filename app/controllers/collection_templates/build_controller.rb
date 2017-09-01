@@ -38,7 +38,7 @@ class CollectionTemplates::BuildController < ApplicationController
     when 'post_process_image_paths'
       PostProcessJob.new.perform(@collection_template)
     when 'build_graph'
-      BuildGraphJob.new.perform(@collection_template)
+      BuildGraphJob.perform_later(@collection_template)
     end
     render_wizard @collection_template
   end
