@@ -10,6 +10,7 @@ class BuildGraphJob < ApplicationJob
                     .graph(
                       collection_template.graph_params,
                       collection_template.graph_name,
+                      collection_template.graph['format'],
                       collection_template.postprocessed_image_url
                     )
   end
