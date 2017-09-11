@@ -143,13 +143,14 @@ RSpec.describe HistonetsCv::Cli, type: :model do
     subject { described_class.new }
     let(:arguments) do
       ["'[[[0, 0], [5, 5]], [[1, 1], [6, 6]]]' -sm vw -st 0 -f graphml",
-       'yolo_tmp.png',
+       'yolo_tmp',
+       'graphml',
        'yolo.jpg']
     end
     it 'executes the graph command with arguments' do
       expect(subject).to receive(:execute)
-        .with("graph #{arguments[0]} #{arguments[2]}"\
-          ' -o spec/fixtures/data/yolo_tmp.png')
+        .with("graph #{arguments[0]} #{arguments[3]}"\
+          ' -o spec/fixtures/data/yolo_tmp.graphml')
       subject.graph(*arguments)
     end
   end
