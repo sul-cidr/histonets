@@ -68,9 +68,9 @@ module HistonetsCv
         "#{output(additional_file_name)}")
     end
 
-    def graph(graph_params, additional_file_name, image_url = nil)
+    def graph(graph_params, additional_file_name, extension, image_url = nil)
       execute("graph #{graph_params} #{input(image_url)} "\
-        "#{output_data(additional_file_name)}")
+        "#{output_data(additional_file_name, extension)}")
     end
 
     def help
@@ -118,10 +118,10 @@ module HistonetsCv
     ##
     # @param [String] additional_file_name often times could just be the
     # fingerprint
-    def output_data(additional_file_name)
+    def output_data(additional_file_name, extension)
       # Not sure what the extension here needs to be yet, but it
       # might need to depend up on the file type
-      "-o spec/fixtures/data/#{additional_file_name}"
+      "-o spec/fixtures/data/#{additional_file_name}.#{extension}"
     end
   end
 end
