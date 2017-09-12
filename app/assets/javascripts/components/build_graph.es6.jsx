@@ -1,6 +1,10 @@
 /* eslint react/jsx-no-undef: "off" */
 /* global Range */
 
+function simplificationMethodName(abbrev) {
+  return (abbrev === 'vw') ? 'Visvalingam-Whyatt' : 'Ramer-Douglas-Peucker';
+}
+
 class Graph extends React.Component {
   constructor(props) {
     super(props);
@@ -49,7 +53,9 @@ class Graph extends React.Component {
               className={'form-control'}
             >
               { this.props.simplificationMethods.map(method =>
-                <option value={method.toLowerCase()} key={Math.random()}>{method}</option>,
+                (<option value={method.toLowerCase()} key={Math.random()}>
+                  {simplificationMethodName(method)}
+                </option>),
                 )}
             </select>
           </div>
