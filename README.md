@@ -38,6 +38,14 @@ The application also uses redis for background job queueing. Make sure to have r
 $ brew install redis
 ```
 
+## Setup
+
+Histonets uses two commands to seed the application with collections of images. Make sure that all images are contained with directories within the `data/` directory. Each subdirectory within `data` should be flat, i.e., should contain no further subdirectories of images.
+
+`bundle exec rails db:seed` will iterate over `data`, creating a new collection in the application for each subdirectory. It will also iterate over the images in each subdirectory, creating an image model for each and associating it with the proper collection.
+
+`bundle exec rake histogram` will iterate over all collections in the application, calculating the composite histogram and palette of each. Before running this command, make sure all of the images from the subdirectories in `data` have been copied over to `spec/fixtures/images` where the image server points. Due to the restrictions of the image server, all images should exist at the same level within `spec/fixtures/images`.  
+
 ## Running the application
 
 Run the application

@@ -5,14 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-image_files = Rails.root.join(Settings.IMAGE_PATH, '*.{jpg, tif, tiff, png}')
 
-Dir.glob(image_files)
-  .reject{ |f| f[/.*_tmp.*/] }
-  .map { |path| Image.from_file_path(path) }
-
-collection = Collection.find_or_create_by!(name: 'Default Collection')
-collection.images = Image.all
-collection.save!
-collection.create_composite_histogram
-collection.create_palette
+Dir.chdir(Rails.root.join('data'))
+collections = Dir.glob('*').select { |fn| File.directory?(fn) }
+collections.each do |folder|
+  collection = Collection.find_or_create_by!(name: folder)
+  image_files = File.join(folder, "*.{jpg,tif,tiff,png}")
+  images = Dir.glob(image_files)
+  images.each do |image_path|
+    puts image_path
+    puts '------'
+    image = Image.from_file_path(image_path)
+    filenames = collection.images.map(&:file_name)
+    collection.images.push(image) if not filenames.include? image.file_name
+  end
+  collection.save!
+end
