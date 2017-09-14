@@ -24,6 +24,7 @@ class CollectionTemplate < ApplicationRecord
   serialize :ridges, Hash
   serialize :enabled_options, Hash
   serialize :graph, Hash
+  serialize :blobs, Hash
 
   delegate :manifest, :annotations, to: :manifest_presenter
   delegate :palette, to: :collection
@@ -230,6 +231,15 @@ class CollectionTemplate < ApplicationRecord
     ridge_cli_params
   end
 
+  def blobs_params
+    blobs_cli_params = {}
+    blobs_params = HashWithIndifferentAccess.new(blobs)
+    blobs_params.each do |k, v|
+      blobs_cli_params.merge!(k => v.to_i)
+    end
+    blobs_cli_params
+  end
+
   def skeletonize_params
     skeletonize_cli_params = {}
     skeletonize_params = HashWithIndifferentAccess.new(skeletonize)
@@ -247,6 +257,9 @@ class CollectionTemplate < ApplicationRecord
     pipeline_params = []
     if enabled_options['ridges'] == 'true'
       pipeline_params.push(action: 'ridges', options: ridges_params)
+    end
+    if enabled_options['blobs'] == 'true'
+      pipeline_params.push(action: 'blobs', options: blobs_params)
     end
     pipeline_params.push(action: 'skeletonize', options: skeletonize_params)
     pipeline_params.to_json

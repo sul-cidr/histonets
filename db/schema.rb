@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170824165902) do
+ActiveRecord::Schema.define(version: 20170914193701) do
 
   create_table "collection_templates", force: :cascade do |t|
     t.integer "collection_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20170824165902) do
     t.text "ridges"
     t.text "enabled_options"
     t.text "graph"
+    t.text "blobs"
     t.index ["collection_id"], name: "index_collection_templates_on_collection_id"
     t.index ["image_id"], name: "index_collection_templates_on_image_id"
   end
