@@ -32,6 +32,17 @@
           </div>
         </div>
         <div class="row">
+          <div class="blobs col-md-12">
+            <h4><%= t 'create_image_paths.blobs.instruction' %></h4>
+            <%= react_component('Blobs', {
+              maximumArea: @collection_template.blobs['maximum-area'] || '100',
+              threshold: @collection_template.blobs['threshold'] || '128',
+              connectivity: @collection_template.blobs['connectivity'] || '8',
+              enabled: @collection_template.enabled_options['blobs'] || 'false'
+              }) %>
+          </div>
+        </div>
+        <div class="row">
           <div class="skeletonize col-md-12">
             <h4><%= t 'create_image_paths.skeletonize.instruction' %></h4>
             <%= react_component('Skeletonize', {

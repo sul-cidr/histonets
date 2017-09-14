@@ -88,11 +88,14 @@ class CollectionTemplates::BuildController < ApplicationController
                                skeletonize: [
                                  :method, :dilation, :'binarization-method'
                                ],
+                               blobs: [
+                                 :'maximum-area', :threshold, :connectivity
+                               ],
                                ridges: [
                                  :width, :threshold, :dilation
                                ],
                                enabled_options: [
-                                 :ridges
+                                 :ridges, :blobs
                                ]
                              }
                            when 'build_graph'

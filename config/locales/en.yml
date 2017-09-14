@@ -41,6 +41,8 @@ en:
       combined: 'Use a combination of techniques to find the path centerlines'
     ridges:
       instruction: 'Select parameters for removing ridges from the map'
+    blobs:
+      instruction: 'Select parameters for removing blobs from the map'
   image_templates:
     title: 'Create Image Templates'
     edit:
