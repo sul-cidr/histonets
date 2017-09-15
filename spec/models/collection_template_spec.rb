@@ -352,4 +352,31 @@ RSpec.describe CollectionTemplate, type: :model do
         .to eq 'small_map_0be5efdb4c9b1d2b1ec690cf6b9bc396_partial_tmp'
     end
   end
+  describe '#graph_params' do
+    subject do
+      create(
+        :collection_template,
+        graph: {
+          'simplification-method' => 'vw',
+          'simplification-tolerance' => 0,
+          'format' => 'graphml'
+        },
+        image_matches: [[[0, 0], [5, 5]], [[1, 1], [6, 6]]]
+      )
+    end
+    it 'creates string used by histonets-cv' do
+      expect(subject.graph_params)
+        .to eq "'[[[0, 0], [5, 5]], [[1, 1], [6, 6]]]' -sm vw -st 0 -f graphml"
+    end
+  end
+  describe '#graph_name' do
+    subject do
+      create(:collection_template,
+             image: create(:image, file_name: 'small_map.jpg'))
+    end
+    it 'creates the proper name for the graph output' do
+      expect(subject.graph_name)
+        .to eq '0be5efdb4c9b1d2b1ec690cf6b9bc396__postprocess_graph'
+    end
+  end
 end

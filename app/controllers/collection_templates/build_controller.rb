@@ -37,6 +37,8 @@ class CollectionTemplates::BuildController < ApplicationController
       PathSelectJob.new.perform(@collection_template)
     when 'post_process_image_paths'
       PostProcessJob.new.perform(@collection_template)
+    when 'build_graph'
+      BuildGraphJob.perform_later(@collection_template)
     end
     render_wizard @collection_template
   end
@@ -91,6 +93,14 @@ class CollectionTemplates::BuildController < ApplicationController
                                ],
                                enabled_options: [
                                  :ridges
+                               ]
+                             }
+                           when 'build_graph'
+                             {
+                               graph: [
+                                 :'simplification-method',
+                                 :'simplification-tolerance',
+                                 :format
                                ]
                              }
                            end
