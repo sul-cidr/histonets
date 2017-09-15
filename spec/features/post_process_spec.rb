@@ -50,9 +50,40 @@ RSpec.describe 'Post process image paths', type: :feature, js: true do
     end
   end
   it 'Should enable ridge ranges when the toggle is clicked' do
-    expect(page).to have_css 'input[type="range"][disabled]', count: 3
-    find('[for="ridges_enabled"]').click
-    expect(page).not_to have_css 'input[type="range"][disabled]'
+    within('.ridges') do
+      expect(page).to have_css 'input[type="range"][disabled]', count: 3
+      find('[for="ridges_enabled"]').click
+      expect(page).not_to have_css 'input[type="range"][disabled]'
+    end
+  end
+  it 'Should provide the blobs form' do
+    instruction = 'Select parameters for removing blobs from the map'
+    max_finder = 'input[name="collection_template[blobs]'\
+      '[maximum-area]"]'
+    th_finder = 'input[name="collection_template[blobs]'\
+        '[threshold]"]'
+    conn_finder = 'select[name="collection_template[blobs]'\
+      '[connectivity]"] option'
+    enabled_finder = 'input[name="collection_template[enabled_options]'\
+      '[blobs]"]'
+    within('.blobs') do
+      expect(page).to have_css 'h4', text: instruction
+      expect(page).to have_css max_finder
+      expect(page).to have_css th_finder
+      expect(page).to have_css 'input[type="range"]', count: 2
+      expect(page).to have_css 'select', count: 1
+      expect(page).to have_css conn_finder, count: 3
+      expect(page).to have_css '.switch-light'
+      expect(page).to have_css 'input[type="checkbox"]', visible: false
+      expect(page).to have_css enabled_finder, visible: false
+    end
+  end
+  it 'Should enable blobs ranges when the toggle is clicked' do
+    within('.blobs') do
+      expect(page).to have_css 'input[type="range"][disabled]', count: 2
+      find('[for="blobs_enabled"]').click
+      expect(page).not_to have_css 'input[type="range"][disabled]'
+    end
   end
   it 'Should provide the skeletonize form' do
     bin_finder = 'select[name="collection_template[skeletonize]'\

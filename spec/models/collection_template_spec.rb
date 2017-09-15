@@ -133,8 +133,14 @@ RSpec.describe CollectionTemplate, type: :model do
                'threshold' => 128,
                'dilation' => 3
              },
+             blobs: {
+               'maximum-area' => 100,
+               'threshold' => 128,
+               'connectivity' => 8
+             },
              enabled_options: {
-               'ridges' => 'true'
+               'ridges' => 'true',
+               'blobs' => 'true'
              })
     end
     it 'properly formats skeletonize params' do
@@ -147,8 +153,14 @@ RSpec.describe CollectionTemplate, type: :model do
         'width' => 6, 'threshold' => 128, 'dilation' => 3
       )
     end
+    it 'properly formats blobs params' do
+      expect(subject.blobs_params).to eq(
+        'maximum-area' => 100, 'threshold' => 128, 'connectivity' => 8
+      )
+    end
     context 'with ridges enabled' do
       it 'properly formats postprocess params' do
+        subject.enabled_options['blobs'] = 'false'
         expect(subject.postprocess_params_to_formal_json).to eq(
           '[{"action":"ridges","options":{"width":6,"threshold":128,"dilation"'\
           ':3}},{"action":"skeletonize","options":{"method":"combined",'\
@@ -159,6 +171,27 @@ RSpec.describe CollectionTemplate, type: :model do
     context 'with ridges disabled' do
       it 'properly formats postprocess params' do
         subject.enabled_options['ridges'] = 'false'
+        subject.enabled_options['blobs'] = 'false'
+        expect(subject.postprocess_params_to_formal_json).to eq(
+          '[{"action":"skeletonize","options":{"method":"combined",'\
+          '"dilation":13,"binarization-method":"li"}}]'
+        )
+      end
+    end
+    context 'with blobs enabled' do
+      it 'properly formats postprocess params' do
+        subject.enabled_options['ridges'] = 'false'
+        expect(subject.postprocess_params_to_formal_json).to eq(
+          '[{"action":"blobs","options":{"maximum-area":100,"threshold":128,'\
+          '"connectivity":8}},{"action":"skeletonize","options":{"method":'\
+          '"combined","dilation":13,"binarization-method":"li"}}]'
+        )
+      end
+    end
+    context 'with blobs disabled' do
+      it 'properly formats postprocess params' do
+        subject.enabled_options['ridges'] = 'false'
+        subject.enabled_options['blobs'] = 'false'
         expect(subject.postprocess_params_to_formal_json).to eq(
           '[{"action":"skeletonize","options":{"method":"combined",'\
           '"dilation":13,"binarization-method":"li"}}]'
