@@ -2,14 +2,12 @@ language: ruby
 rvm:
   - 2.3.4
 dist: trusty
-sudo: false
-addons:
-  apt:
-    packages:
-      - "python3"
-      - "python3-pip"
+python: 3.5
 before_script:
-  - pip3 install https://github.com/sul-cidr/histonets-cv/archive/master.zip
+  - pyenv version
+  - pyenv versions
+  - pyenv global 3.5
+  - pip install https://github.com/sul-cidr/histonets-cv/archive/master.zip
   - RAILS_ENV=test bundle exec rake db:migrate
   - RAILS_ENV=test bundle exec rake assets:precompile
 # sudo: false Leaving this commented out, as we may need this to install the correct python version etc.
