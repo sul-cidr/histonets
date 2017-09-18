@@ -90,12 +90,15 @@ RSpec.describe 'Post process image paths', type: :feature, js: true do
       '[binarization-method]"] option'
     mode_finder = 'select[name="collection_template[skeletonize]'\
       '[method]"] option'
+    invert_finder = 'select[name="collection_template[skeletonize]'\
+        '[invert]"] option'
     instruction = 'Select parameters for extracting the skeleton'
     within('.skeletonize') do
       expect(page).to have_css 'h4', text: instruction
-      expect(page).to have_css 'select', count: 2
+      expect(page).to have_css 'select', count: 3
       expect(page).to have_css mode_finder, count: 5
       expect(page).to have_css bin_finder, count: 4
+      expect(page).to have_css invert_finder, count: 2
       expect(page).to have_css 'input[type="range"]', count: 1
     end
   end

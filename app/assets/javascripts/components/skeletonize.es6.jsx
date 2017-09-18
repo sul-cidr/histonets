@@ -8,12 +8,13 @@ class Skeletonize extends React.Component {
       modes: props.modes,
       selectedMode: props.selectedMode,
       binarizationMethod: props.binarizationMethod,
-      formName: 'skeletonize_method',
       dilation: parseInt(props.dilation, 10),
+      invert: props.invert,
     };
     this.handleModeChange = this.handleModeChange.bind(this);
     this.handleBinarizationChange = this.handleBinarizationChange.bind(this);
     this.handleDilationChange = this.handleDilationChange.bind(this);
+    this.handleInvertChange = this.handleInvertChange.bind(this);
   }
 
   handleModeChange(event) {
@@ -26,6 +27,10 @@ class Skeletonize extends React.Component {
 
   handleDilationChange(dilation) {
     this.setState({ dilation: parseInt(dilation, 10) });
+  }
+
+  handleInvertChange(event) {
+    this.setState({ invert: event.target.value });
   }
 
   render() {
@@ -97,6 +102,27 @@ class Skeletonize extends React.Component {
             {this.state.dilation}
           </div>
         </div>
+        <div className="form-group row">
+          <label
+            className="col-sm-3 form-text text-capitalize"
+            data-toggle="tooltip"
+            htmlFor="invert"
+          >
+            Invert
+          </label>
+          <div className="col-sm-6">
+            <select
+              name="collection_template[skeletonize][invert]"
+              value={this.state.invert}
+              onChange={this.handleInvertChange}
+              className={'form-control'}
+            >
+              { this.props.invertOptions.map(
+                  mode => <option value={mode.toLowerCase()} key={Math.random()}>{mode}</option>,
+                )}
+            </select>
+          </div>
+        </div>
       </div>
     );
   }
@@ -108,13 +134,16 @@ Skeletonize.propTypes = {
   binarizationMethods: React.PropTypes.arrayOf(React.PropTypes.string),
   selectedMode: React.PropTypes.string,
   dilation: React.PropTypes.string,
+  invert: React.PropTypes.string,
+  invertOptions: React.PropTypes.arrayOf(React.PropTypes.string),
 };
 
 Skeletonize.defaultProps = {
-  formName: 'skeletonize_method',
   selectedMode: 'combined',
   dilation: '1',
   binarizationMethod: 'li',
   modes: ['regular', '3d', 'medial', 'combined', 'thin'],
   binarizationMethods: ['sauvola', 'isodata', 'otsu', 'li'],
+  invert: 'false',
+  invertOptions: ['true', 'false'],
 };

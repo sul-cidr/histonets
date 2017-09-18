@@ -48,8 +48,10 @@
             <%= react_component('Skeletonize', {
               selectedMode: @collection_template.skeletonize['method'] || 'combined',
               dilation: @collection_template.skeletonize['dilation'] || '1',
-              binarizationMethod: @collection_template.skeletonize['binarization-method'] || 'li'
-              })%>
+              binarizationMethod: @collection_template.skeletonize['binarization-method'] || 'li',
+              invert: @collection_template.skeletonize['invert'] || 'false'
+              })
+              %>
           </div>
         </div>
       </div>
