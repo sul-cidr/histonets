@@ -86,7 +86,10 @@ class CollectionTemplates::BuildController < ApplicationController
                            when 'post_process_image_paths'
                              {
                                skeletonize: [
-                                 :method, :dilation, :'binarization-method'
+                                 :method,
+                                 :dilation,
+                                 :'binarization-method',
+                                 :invert
                                ],
                                blobs: [
                                  :'maximum-area', :threshold, :connectivity

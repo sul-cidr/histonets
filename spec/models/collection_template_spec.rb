@@ -126,7 +126,8 @@ RSpec.describe CollectionTemplate, type: :model do
              skeletonize: {
                'method' => 'combined',
                'dilation' => 13,
-               'binarization-method' => 'li'
+               'binarization-method' => 'li',
+               'invert' => 'true'
              },
              ridges: {
                'width' => 6,
@@ -145,7 +146,10 @@ RSpec.describe CollectionTemplate, type: :model do
     end
     it 'properly formats skeletonize params' do
       expect(subject.skeletonize_params).to eq(
-        'method' => 'combined', 'dilation' => 13, 'binarization-method' => 'li'
+        'method' => 'combined',
+        'dilation' => 13,
+        'binarization-method' => 'li',
+        'invert' => 'true'
       )
     end
     it 'properly formats ridges params' do
@@ -164,7 +168,7 @@ RSpec.describe CollectionTemplate, type: :model do
         expect(subject.postprocess_params_to_formal_json).to eq(
           '[{"action":"ridges","options":{"width":6,"threshold":128,"dilation"'\
           ':3}},{"action":"skeletonize","options":{"method":"combined",'\
-          '"dilation":13,"binarization-method":"li"}}]'
+          '"dilation":13,"binarization-method":"li","invert":"true"}}]'
         )
       end
     end
@@ -174,7 +178,7 @@ RSpec.describe CollectionTemplate, type: :model do
         subject.enabled_options['blobs'] = 'false'
         expect(subject.postprocess_params_to_formal_json).to eq(
           '[{"action":"skeletonize","options":{"method":"combined",'\
-          '"dilation":13,"binarization-method":"li"}}]'
+          '"dilation":13,"binarization-method":"li","invert":"true"}}]'
         )
       end
     end
@@ -184,7 +188,8 @@ RSpec.describe CollectionTemplate, type: :model do
         expect(subject.postprocess_params_to_formal_json).to eq(
           '[{"action":"blobs","options":{"maximum-area":100,"threshold":128,'\
           '"connectivity":8}},{"action":"skeletonize","options":{"method":'\
-          '"combined","dilation":13,"binarization-method":"li"}}]'
+          '"combined","dilation":13,"binarization-method":"li","invert":'\
+          '"true"}}]'
         )
       end
     end
@@ -194,7 +199,7 @@ RSpec.describe CollectionTemplate, type: :model do
         subject.enabled_options['blobs'] = 'false'
         expect(subject.postprocess_params_to_formal_json).to eq(
           '[{"action":"skeletonize","options":{"method":"combined",'\
-          '"dilation":13,"binarization-method":"li"}}]'
+          '"dilation":13,"binarization-method":"li","invert":"true"}}]'
         )
       end
     end
