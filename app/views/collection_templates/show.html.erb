@@ -1,9 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<div>
-  <%= @collection_template.to_json %>
-</div>
-
 <%= link_to t('collection_template.process_images'),
       process_images_collection_template_path(@collection_template),
       method: :post,
@@ -11,6 +7,11 @@
       data: {
         confirm: t('collection_template.process_confirm')
       }
+%>
+
+<%= link_to t('collection_template.download_graph'),
+      download_path(@collection_template),
+      class: 'btn btn-primary'
 %>
 
 <h2> Track Processing Progress </h2>

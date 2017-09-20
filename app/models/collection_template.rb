@@ -278,6 +278,13 @@ class CollectionTemplate < ApplicationRecord
     'graph'
   end
 
+  def graph_url
+    file_path = File.join('spec/fixtures/data',
+                          graph_name + '.' + graph['format'])
+    return '' unless graph_name.present?
+    file_path
+  end
+
   def manifest_presenter
     ManifestPresenter.new(self)
   end

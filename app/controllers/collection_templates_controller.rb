@@ -3,7 +3,8 @@
 ##
 # Controller for CollectionTemplate resources
 class CollectionTemplatesController < ApplicationController
-  before_action :set_collection_template, only: %i[show destroy process_images]
+  before_action :set_collection_template,
+                only: %i[show destroy process_images download]
 
   # GET /collection_templates
   # GET /collection_templates.json
@@ -13,8 +14,7 @@ class CollectionTemplatesController < ApplicationController
 
   # GET /collection_templates/1
   # GET /collection_templates/1.json
-  def show
-  end
+  def show; end
 
   # GET /collection_templates/new
   def new
@@ -49,6 +49,10 @@ class CollectionTemplatesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @collection_template }
     end
+  end
+
+  def download
+    send_file @collection_template.graph_url
   end
 
   private
