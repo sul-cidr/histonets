@@ -14,13 +14,15 @@ RSpec.describe BuildGraphJob, type: :job do
              graph: {
                'simplification-method' => 'vw',
                'simplification-tolerance' => 0,
-               'format' => 'graphml'
+               'format' => 'graphml',
+               'pathfinding-method' => 'astar'
              },
              image_matches: [[[0, 0], [5, 5]], [[1, 1], [6, 6]]])
     end
     it 'calls the HistonetsCv::Cli graph' do
       expect(cli_instance).to receive(:graph)
-        .with("'[[[0, 0], [5, 5]], [[1, 1], [6, 6]]]' -sm vw -st 0 -f graphml",
+        .with("'[[[0, 0], [5, 5]], [[1, 1], [6, 6]]]' -sm vw -st 0 -f graphml"\
+              ' -pm astar',
               '0be5efdb4c9b1d2b1ec690cf6b9bc396__postprocess_graph',
               'graphml',
               'http://localhost:1337/image-service/small_map_0be5efdb4c9b1d2b1ec690cf6b9bc396__postprocess_tmp/full/full/0/default.png')

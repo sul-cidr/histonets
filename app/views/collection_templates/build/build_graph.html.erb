@@ -24,7 +24,8 @@
         <%= react_component('Graph', {
           simplificationMethod: @collection_template.graph['simplification-method'] || 'vw',
           simplificationTolerance: @collection_template.graph['simplification-tolerance'] || '1',
-          format: @collection_template.graph['format'] || 'graphml'
+          format: @collection_template.graph['format'] || 'graphml',
+          pathfindingMethod: @collection_template.graph['pathfinding-method'] || 'astar'
           }) %>
       </div>
     </div>

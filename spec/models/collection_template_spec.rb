@@ -397,14 +397,16 @@ RSpec.describe CollectionTemplate, type: :model do
         graph: {
           'simplification-method' => 'vw',
           'simplification-tolerance' => 0,
-          'format' => 'graphml'
+          'format' => 'graphml',
+          'pathfinding-method' => 'astar'
         },
         image_matches: [[[0, 0], [5, 5]], [[1, 1], [6, 6]]]
       )
     end
     it 'creates string used by histonets-cv' do
       expect(subject.graph_params)
-        .to eq "'[[[0, 0], [5, 5]], [[1, 1], [6, 6]]]' -sm vw -st 0 -f graphml"
+        .to eq "'[[[0, 0], [5, 5]], [[1, 1], [6, 6]]]' -sm vw -st 0 -f"\
+        ' graphml -pm astar'
     end
   end
   describe '#graph_name' do

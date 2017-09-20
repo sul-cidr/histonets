@@ -106,7 +106,8 @@ class CollectionTemplates::BuildController < ApplicationController
                                graph: [
                                  :'simplification-method',
                                  :'simplification-tolerance',
-                                 :format
+                                 :format,
+                                 :'pathfinding-method'
                                ]
                              }
                            end

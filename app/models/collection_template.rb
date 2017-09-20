@@ -267,7 +267,8 @@ class CollectionTemplate < ApplicationRecord
 
   def graph_params
     "'#{image_matches}' -sm #{graph['simplification-method']}" \
-      " -st #{graph['simplification-tolerance']} -f #{graph['format']}"
+      " -st #{graph['simplification-tolerance']} -f #{graph['format']}"\
+      " -pm #{graph['pathfinding-method']}"
   end
 
   # It might be better to do something with the collection id

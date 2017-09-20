@@ -5,6 +5,10 @@ function simplificationMethodName(abbrev) {
   return (abbrev === 'vw') ? 'Visvalingam-Whyatt' : 'Ramer-Douglas-Peucker';
 }
 
+function pathfindingMethodName(abbrev) {
+  return (abbrev === 'astar') ? 'A*' : 'Floyd-Warshall';
+}
+
 class Graph extends React.Component {
   constructor(props) {
     super(props);
@@ -12,10 +16,12 @@ class Graph extends React.Component {
       simplificationMethod: props.simplificationMethod,
       simplificationTolerance: parseInt(props.simplificationTolerance, 10),
       format: props.format,
+      pathfindingMethod: props.pathfindingMethod,
     };
     this.handleMethodChange = this.handleMethodChange.bind(this);
     this.handleToleranceChange = this.handleToleranceChange.bind(this);
     this.handleFormatChange = this.handleFormatChange.bind(this);
+    this.handlePathfindingMethodChange = this.handlePathfindingMethodChange.bind(this);
   }
 
   handleMethodChange(event) {
@@ -30,12 +36,40 @@ class Graph extends React.Component {
     this.setState({ format: event.target.value });
   }
 
+  handlePathfindingMethodChange(event) {
+    this.setState({ pathfindingMethod: event.target.value });
+  }
+
   render() {
     if (!this.props) {
       return null;
     }
     return (
       <div>
+        <div className="form-group row">
+          <label
+            className="col-sm-3 form-text text-capitalize"
+            data-toggle="tooltip"
+            htmlFor="pathfinding-method"
+          >
+            Pathfinding Method
+          </label>
+
+          <div className="col-sm-6">
+            <select
+              name="collection_template[graph][pathfinding-method]"
+              value={this.state.pathfindingMethod}
+              onChange={this.handlePathfindingMethodChange}
+              className={'form-control'}
+            >
+              { this.props.pathfindingMethods.map(method =>
+                (<option value={method.toLowerCase()} key={Math.random()}>
+                  {pathfindingMethodName(method)}
+                </option>),
+                )}
+            </select>
+          </div>
+        </div>
         <div className="form-group row">
           <label
             className="col-sm-3 form-text text-capitalize"
@@ -113,6 +147,8 @@ Graph.propTypes = {
   simplificationTolerance: React.PropTypes.string,
   format: React.PropTypes.string,
   formats: React.PropTypes.arrayOf(React.PropTypes.string),
+  pathfindingMethod: React.PropTypes.string,
+  pathfindingMethods: React.PropTypes.arrayOf(React.PropTypes.string),
 };
 
 Graph.defaultProps = {
@@ -121,4 +157,6 @@ Graph.defaultProps = {
   simplificationTolerance: '0',
   format: 'graphml',
   formats: ['edgelist', 'gexf', 'gml', 'graphml', 'nodelink'],
+  pathfindingMethod: 'astar',
+  pathfindingMethods: ['astar', 'floyd-warshall'],
 };
