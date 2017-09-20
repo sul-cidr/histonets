@@ -36,9 +36,12 @@ RSpec.describe 'Build graph', type: :feature, js: true do
       '[simplification-method]"] option'
     format_finder = 'select[name="collection_template[graph]'\
       '[format]"] option'
-    expect(page).to have_css 'select', count: 2
+    pm_finder = 'select[name="collection_template[graph]'\
+      '[pathfinding-method]"] option'
+    expect(page).to have_css 'select', count: 3
     expect(page).to have_css meth_finder, count: 2
     expect(page).to have_css format_finder, count: 5
+    expect(page).to have_css pm_finder, count: 2
     expect(page).to have_css 'input[type="range"]', count: 1
   end
   it 'clicks through the next step without error' do
