@@ -85,6 +85,7 @@ en:
     build: 'Build a Collection Template'
     process_images: 'Process Images in this Collection'
     process_confirm: Are you sure? This process can take a long time.
+    download_graph: Download Graph
   collections:
     title: 'Collections'
     navbar: 'Collections'

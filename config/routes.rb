@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   # Resourceful routes for Collections
   resources :collections
 
+  get 'collection_templates/:id/download',
+      to: 'collection_templates#download',
+      as: :download
+
   # Resourceful routes for CollectionTemplates
   resources :collection_templates, only: [:new, :create, :show, :index, :destroy] do
     resources :build,

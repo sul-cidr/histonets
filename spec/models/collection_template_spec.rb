@@ -419,4 +419,16 @@ RSpec.describe CollectionTemplate, type: :model do
         .to eq '0be5efdb4c9b1d2b1ec690cf6b9bc396__postprocess_graph'
     end
   end
+  describe '#graph_url' do
+    subject do
+      create(:collection_template,
+             image: create(:image, file_name: 'small_map.jpg'),
+             graph: { 'format' => 'graphml' })
+    end
+    it 'creates the proper path for the graph data' do
+      expect(subject.graph_url)
+        .to eq 'spec/fixtures/data/0be5efdb4c9b1d2b1ec690cf6b9bc396__'\
+          'postprocess_graph.graphml'
+    end
+  end
 end
