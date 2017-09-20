@@ -58,7 +58,7 @@ RSpec.describe HistonetsCv::Cli, type: :model do
     it 'executes the enhance command with arguments' do
       expect(subject).to receive(:execute)
         .with("enhance #{arguments[0]} #{arguments[1]} -o "\
-          'spec/fixtures/images/yolo_spec/fixtures/images/yolo.png_tmp.png')
+          'spec/fixtures/images/yolo_spec-fixtures-images-yolo-png_tmp.png')
       subject.enhance(*arguments)
     end
   end
@@ -93,7 +93,7 @@ RSpec.describe HistonetsCv::Cli, type: :model do
         .with("skeletonize #{arguments[0]}"\
               ' spec/fixtures/images/yolo.png'\
               ' -o spec/fixtures/images/yolo_spec'\
-              '/fixtures/images/yolo_tmp.png_tmp.png')
+              '-fixtures-images-yolo_tmp-png_tmp.png')
       subject.skeletonize(*arguments)
     end
   end
@@ -109,7 +109,7 @@ RSpec.describe HistonetsCv::Cli, type: :model do
         .with("ridges #{arguments[0]}"\
               ' spec/fixtures/images/yolo.png'\
               ' -o spec/fixtures/images/yolo_spec'\
-              '/fixtures/images/yolo_tmp.png_tmp.png')
+              '-fixtures-images-yolo_tmp-png_tmp.png')
       subject.ridges(*arguments)
     end
   end
@@ -135,7 +135,7 @@ RSpec.describe HistonetsCv::Cli, type: :model do
     it 'executes the posterize command with arguments' do
       expect(subject).to receive(:execute)
         .with("posterize #{arguments[0]} #{arguments[2]}"\
-          ' -o spec/fixtures/images/_yolo_tmp.png_tmp.png')
+          ' -o spec/fixtures/images/_yolo_tmp-png_tmp.png')
       subject.posterize(*arguments)
     end
   end
