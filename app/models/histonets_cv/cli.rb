@@ -109,9 +109,12 @@ module HistonetsCv
     # @param [String] additional_file_name often times could just be the
     # fingerprint
     def output(additional_file_name)
+      file_name_clean = File.basename(file_name,
+                                      File.extname(file_name)).to_s.parameterize
+      additional_file_name_clean = additional_file_name.parameterize
       "-o #{Settings.IMAGE_PATH}/"\
-      "#{File.basename(file_name, File.extname(file_name))}_"\
-      "#{additional_file_name}_tmp"\
+      "#{file_name_clean}_"\
+      "#{additional_file_name_clean}_tmp"\
       ".#{extension}"
     end
 
@@ -121,7 +124,9 @@ module HistonetsCv
     def output_data(additional_file_name, extension)
       # Not sure what the extension here needs to be yet, but it
       # might need to depend up on the file type
-      "-o spec/fixtures/data/#{additional_file_name}.#{extension}"
+      additional_file_name_clean = additional_file_name.parameterize
+      "-o spec/fixtures/data/#{additional_file_name_clean}"\
+      ".#{extension}"
     end
   end
 end
