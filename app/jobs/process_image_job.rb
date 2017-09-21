@@ -25,6 +25,7 @@ class ProcessImageJob < ApplicationJob
     if collection_template.auto_clean
       HistonetsCv::Cli.new(image.file_name)
                       .enhance(
+                        collection_template.enhance_params,
                         "#{collection_template.id}_imageclean",
                         image.full_image_path
                       )
